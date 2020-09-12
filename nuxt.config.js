@@ -29,7 +29,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['~assets/styles/_buefy.scss', '~assets/styles/_global.scss'],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
