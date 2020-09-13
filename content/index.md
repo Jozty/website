@@ -1,8 +1,7 @@
 ---
-title: Introduction
-description: Learn how to use @nuxt/content.
+title: Fae
+description: A functional Library for Deno
 ---
-
 # FAE- A functional Library!
 <br/>
 

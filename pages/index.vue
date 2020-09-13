@@ -40,7 +40,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css';
 .main-card {
   margin: 32px auto;
   max-width: 780px;
