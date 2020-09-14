@@ -18,23 +18,8 @@ export default {
     return { article }
   },
 
-  data() {
-    return {
-      customIconPacks: {
-        fas: {
-          sizes: {
-            default: '',
-            'is-small': 'fa-xs',
-            'is-medium': 'fa-lg',
-            'is-large': 'fa-2x',
-          },
-        },
-      },
-    }
-  },
-
   created() {
-    this.$buefy.config.setOptions(this.customIconConfig)
+    // this.$buefy.config.setOptions(this.customIconConfig)
   },
 }
 </script>
