@@ -17,9 +17,10 @@ export default {
 
     return { article }
   },
-
-  created() {
-    // this.$buefy.config.setOptions(this.customIconConfig)
+  mounted() {
+    document.querySelectorAll('.icon').forEach((e) => {
+      e.className = e.className.replace(/icon/g, 'fa')
+    })
   },
 }
 </script>
@@ -33,16 +34,6 @@ export default {
   @media (max-width: 980px) {
     max-width: unset;
     margin: 32px;
-  }
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  a {
-    display: none;
   }
 }
 </style>

@@ -2,13 +2,13 @@
 title: Docs
 description: All functions
 ---
-[add]: https://github.com/Jozty/Fae/blob/v0.6.1/add.ts
-[addIndex]: https://github.com/Jozty/Fae/blob/v0.6.1/addIndex.ts
-[adjust]: https://github.com/Jozty/Fae/blob/v0.6.1/adjust.ts
-[all]: https://github.com/Jozty/Fae/blob/v0.6.1/all.ts
+[add]: https://deno.land/x/fae/add.ts
+[addIndex]: https://deno.land/x/fae/addIndex.ts
+[adjust]: https://deno.land/x/fae/adjust.ts
+[all]: https://deno.land/x/fae/all.ts 
 
-### add <span> <span class="full-docs">[[full-docs]](/add)</span>[[src]][add]</span>
-###### since v0.1.0
+### add
+###### since v0.1.0  <span> <span class="full-docs">[[full-docs]](/add)</span>[[src]][add]</span>
 ```typescript
 (a: number, b: number) => number
 ```
@@ -20,8 +20,8 @@ const a = add5(4) // 9
 
 ***
 
-### addIndex <span> <span class="full-docs">[[full-docs]](/addIndex)</span>[[src]][addIndex]</span>
-###### since v0.1.0
+### addIndex
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/addIndex)</span>[[src]][addIndex]</span>
 ```typescript
 (fn: Func) => Func
 ```
@@ -35,8 +35,8 @@ indexedMap((val, idx) => idx + '-' + val, ['f', 'o', 'o', 'b', 'a', 'r'])
 
 ***
 
-### adjust <span> <span class="full-docs">[[full-docs]](/adjust)</span>[[src]][adjust]</span>
-###### since v0.1.0
+### adjust
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/adjust)</span>[[src]][adjust]</span>
 ```typescript
 (index: number, fn: Func, list: T[]) => T[]
 ```
@@ -48,8 +48,8 @@ Fae.adjust(-3, Fae.add(1), [0, 1, 2, 3]) // [0, 2, 2, 3]
 
 ***
 
-### all <span> <span class="full-docs">[[full-docs]](/all)</span>[[src]][all]</span>
-###### Since - v0.1.0
+### all
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/all)</span>[[src]][all]</span>
 ```typescript
 (predicate: Predicate1<T>, functor: ArrayLike <T>) => boolean
 ```

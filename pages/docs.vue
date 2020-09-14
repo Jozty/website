@@ -15,6 +15,11 @@ export default {
 
     return { article }
   },
+  mounted() {
+    document.querySelectorAll('.icon').forEach((e) => {
+      e.className = e.className.replace(/icon/g, 'fa')
+    })
+  },
 }
 </script>
 
@@ -29,17 +34,7 @@ export default {
     margin: 32px;
   }
 }
-h1,
-h2,
-h3,
-h4,
-h5,
 h6 {
-  a {
-    display: none;
-  }
-}
-h3 {
   display: flex;
   span {
     margin-left: auto;
@@ -55,15 +50,7 @@ h3 {
     }
   }
 }
-pre.language-typescript {
-  border-radius: 4px;
-  font-size: 12px;
-  margin: 8px 0;
-}
 p {
   font-size: 16px;
-}
-code {
-  border-radius: 2px;
 }
 </style>

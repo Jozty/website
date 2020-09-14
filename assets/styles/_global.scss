@@ -19,3 +19,37 @@ body {
     font-size: inherit;
   }
 }
+h1,
+h2,
+h3 {
+  a {
+    margin-right: 8px;
+    color: gray;
+    span {
+      transform: scale(0.8);
+    }
+  }
+}
+
+h4,
+h5,
+h6 {
+  a {
+    display: none;
+  }
+}
+
+ul {
+  list-style: disc;
+  margin: 16px 0;
+  padding-left: 40px;
+}
+
+pre.language-typescript {
+  border-radius: 4px;
+  font-size: 12px !important;
+  margin: 8px 0 !important;
+}
+code {
+  border-radius: 2px;
+}
