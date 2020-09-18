@@ -11,7 +11,9 @@ Adds two numbers
 
 **Non curried type declaration**
 ```typescript
-(a: number, b: number) => number
+function add(a: number, b: number): number {
+  // ...
+}
 ```
 <br>
 
