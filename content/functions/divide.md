@@ -1,6 +1,6 @@
 ---
-title: add function
-description: a thorough tour of add function
+title: divide function
+description: a thorough tour of divide function
 ---
 
 ## Divide
@@ -50,4 +50,14 @@ divide(_, 5)(25)            // 5
 const reciprocal = divide(1)
 reciprocal(4)               // 0.25
             
+```
+```typescript
+// Expression - (5+15-10)*3/2
+const triple = multiply(3);
+const half = divide(_,2);
+const add5 = add(5);
+const subtract10 = subtract(_,10);
+half(triple(subtract10(add5(15))))          // 15
+compose(half, triple, subtract10, add5)(15) // 15
+pipe(add5, subtract10, triple, half)(15)    // 15
 ```

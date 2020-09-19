@@ -1,6 +1,6 @@
 ---
-title: add function
-description: a thorough tour of add function
+title: subtract function
+description: a thorough tour of subtract function
 ---
 
 ## Subtract
@@ -47,4 +47,14 @@ const subtract5 = subtract(_,5)
 subtract5(-10)                 // -15
 subtract(_, 25)(50)            // 25
             
+```
+```typescript
+// Expression - (2*5+5-10)/2
+const double = multiply(2);
+const half = divide(_,2);
+const add5 = add(5);
+const subtract10 = subtract(_,10);
+half(subtract10(add5(double(5))))          // 2.5
+compose(half, subtract10, add5, double)(5) // 2.5
+pipe(double, add5, subtract10, half)(5)    // 2.5
 ```
