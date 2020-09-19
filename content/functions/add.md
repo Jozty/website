@@ -48,12 +48,7 @@ add5(-32)                 // -27
 add5(_)(12)               // 17
 ```
 ```typescript
-import { add, _ } from 'https://deno.land/x/fae/mod.ts'
-import { subtract, _ } from 'https://deno.land/x/fae/mod.ts'
-import { multiply, _ } from 'https://deno.land/x/fae/mod.ts'
-import { divide, _ } from 'https://deno.land/x/fae/mod.ts'
-import { pipe } from 'https://deno.land/x/fae/mod.ts'
-import { compose } from 'https://deno.land/x/fae/mod.ts'
+import { add,subtract,multiply,divide,pipe,compose, _ } from 'https://deno.land/x/fae/mod.ts'
 // Expression - (2*5+5-10)/2
 const double = multiply(2)
 const half = divide(_,2)
