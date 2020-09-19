@@ -77,7 +77,7 @@ Return `true` if all the elements of the functor match `predicate` `false` other
 
 ### divide
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/add)</span>[[src]][add]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/divide)</span>[[src]][add]</span>
 
 ```typescript
 (a: number, b: number) => number
@@ -98,7 +98,7 @@ Fae.divide(20)(5) //4
 
 ### multiply
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/all)</span>[[src]][all]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/multiply)</span>[[src]][all]</span>
 
 ```typescript
 (a: number, b: number) => number
@@ -117,7 +117,7 @@ Fae.multiply(6)(7) // 42
 
 ### subtract
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/all)</span>[[src]][all]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/subtract)</span>[[src]][all]</span>
 
 ```typescript
 (a: number, b: number) => number
