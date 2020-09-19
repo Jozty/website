@@ -15,7 +15,10 @@ This module is designed in functional programming style that provides many benef
 To import and use the client in your file, add the following import statement:
 
 ```typescript
+// for lates version
 import * as Fae from 'https://deno.land/x/fae/mod.ts'
+// for specific version
+import * as Fae from 'https://deno.land/x/fae@v0.5.0/mod.ts'
 ```
 Function usage and documentation can be found <nuxt-link to="/docs">here</nuxt-link>.  
 <br/>
@@ -24,14 +27,14 @@ Function usage and documentation can be found <nuxt-link to="/docs">here</nuxt-l
 To see the test results you can use the following statement:
 
 ```shell script
-deno run --allow-read --allow-net specs/_run.ts
+deno test
 ```  
 <br/>
 
 ## Usage with Examples
 This module is very easy to use, just import as guided above and that’s it. For reference please see the below example.  
 
-```javascript
+```typescript
 import * as Fae from "https://deno.land/x/fae/mod.ts";
 Fae.add(10, 20) // = 30
 Fae.add(10)(20) // = 30

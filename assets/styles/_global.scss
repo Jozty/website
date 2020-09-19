@@ -55,11 +55,18 @@ ul {
   padding-left: 40px;
 }
 
-pre.language-typescript {
-  border-radius: 4px;
-  font-size: 12px !important;
-  margin: 8px 0 !important;
+pre {
+  &.language-typescript,
+  &.language-shell {
+    border-radius: 4px;
+    font-size: 12px !important;
+    margin: 8px 0 !important;
+  }
 }
 code {
   border-radius: 2px;
+}
+
+.token.operator {
+  background: none !important;
 }
