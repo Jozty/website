@@ -7,7 +7,10 @@ description: a thorough tour of add function
 
 Adds two numbers
 
-* Curried
+&check; Curried
+<!---
+&#10539; Not curred
+-->
 
 **Non curried type declaration**
 ```typescript
