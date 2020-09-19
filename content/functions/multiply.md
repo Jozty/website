@@ -14,7 +14,7 @@ Multiplies two numbers
 
 **Non curried type declaration**
 ```typescript
-function subtract(a: number, b: number): number {
+function multiply(a: number, b: number): number {
   // ...
 }
 ```
@@ -49,6 +49,10 @@ multiply(_, 25)(2)            // 50
             
 ```
 ```typescript
+import { add, _ } from 'https://deno.land/x/fae/mod.ts'
+import { subtract, _ } from 'https://deno.land/x/fae/mod.ts'
+import { multiply, _ } from 'https://deno.land/x/fae/mod.ts'
+import { divide, _ } from 'https://deno.land/x/fae/mod.ts'
 // Expression - (5+25-10)*3/2
 const triple = multiply(3);
 const half = divide(_,2);

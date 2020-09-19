@@ -14,7 +14,7 @@ Divides two numbers
 
 **Non curried type declaration**
 ```typescript
-function dividet(a: number, b: number): number {
+function divide(a: number, b: number): number {
   // ...
 }
 ```
@@ -52,6 +52,10 @@ reciprocal(4)               // 0.25
             
 ```
 ```typescript
+import { add, _ } from 'https://deno.land/x/fae/mod.ts'
+import { subtract, _ } from 'https://deno.land/x/fae/mod.ts'
+import { multiply, _ } from 'https://deno.land/x/fae/mod.ts'
+import { divide, _ } from 'https://deno.land/x/fae/mod.ts'
 // Expression - (5+15-10)*3/2
 const triple = multiply(3);
 const half = divide(_,2);
