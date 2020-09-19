@@ -53,6 +53,8 @@ import { add, _ } from 'https://deno.land/x/fae/mod.ts'
 import { subtract, _ } from 'https://deno.land/x/fae/mod.ts'
 import { multiply, _ } from 'https://deno.land/x/fae/mod.ts'
 import { divide, _ } from 'https://deno.land/x/fae/mod.ts'
+import { pipe } from 'https://deno.land/x/fae/mod.ts'
+import { compose } from 'https://deno.land/x/fae/mod.ts'
 // Expression - (2*5+5-10)/2
 const double = multiply(2)
 const half = divide(_,2)
