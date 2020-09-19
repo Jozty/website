@@ -13,14 +13,14 @@ description: All functions
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/add)</span>[[src]][add]</span>
 
 ```typescript
-;(a: number, b: number) => number
+(a: number, b: number) => number
 ```
 
 Adds two numbers
 
 ```typescript
 Fae.add(3, 4) //7
-const add5 = Fae.add(5, Fae._)
+const add5 = Fae.add(5)
 add5(4) // 9
 Fae.add(4)(3) // 8
 ```
@@ -32,7 +32,7 @@ Fae.add(4)(3) // 8
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/addIndex)</span>[[src]][addindex]</span>
 
 ```typescript
-;(fn: Func) => Func
+(fn: Func) => Func
 ```
 
 Returns a new iteration function from the passed function by adding two more parameters to its callback function 1.
@@ -68,7 +68,7 @@ Fae.adjust(-3, Fae.add(1), [0, 1, 2, 3]) // [0, 2, 2, 3]
 ###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/all)</span>[[src]][all]</span>
 
 ```typescript
-;(predicate: Predicate1<T>, functor: ArrayLike<T>) => boolean
+(predicate: Predicate1<T>, functor: ArrayLike<T>) => boolean
 ```
 
 Return `true` if all the elements of the functor match `predicate` `false` otherwise . Acts as a transducer if a transformer is passed in place of `functor`
@@ -80,7 +80,7 @@ Return `true` if all the elements of the functor match `predicate` `false` other
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/add)</span>[[src]][add]</span>
 
 ```typescript
-;(a: number, b: number) => number
+(a: number, b: number) => number
 ```
 
 Divides two numbers
@@ -89,7 +89,7 @@ Divides two numbers
 Fae.divide(10, 2) //5
 const divideBy10 = Fae.divide(Fae._, 10)
 divideBy10(30) // 3
-const reciprocal = Fae.divide(1, Fae._)
+const reciprocal = Fae.divide(1)
 reciprocal(2) // 0.5
 Fae.divide(20)(5) //4
 ```
@@ -101,14 +101,14 @@ Fae.divide(20)(5) //4
 ###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/all)</span>[[src]][all]</span>
 
 ```typescript
-;(a: number, b: number) => number
+(a: number, b: number) => number
 ```
 
 Multiplies two numbers
 
 ```typescript
 Fae.multiply(3, 4) // 12
-const multiply3 = Fae.multiply(3, Fae._)
+const multiply3 = Fae.multiply(3)
 multiply3(6) // 18
 Fae.multiply(6)(7) // 42
 ```
@@ -120,7 +120,7 @@ Fae.multiply(6)(7) // 42
 ###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/all)</span>[[src]][all]</span>
 
 ```typescript
-;(a: number, b: number) => number
+(a: number, b: number) => number
 ```
 
 Subtracts two numbers
