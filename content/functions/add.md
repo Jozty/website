@@ -47,3 +47,13 @@ const add5 = add(5)
 add5(-32)                 // -27
 add5(_)(12)               // 17
 ```
+```typescript
+// Expression - (2*5+5-10)/2
+const double = multiply(2);
+const half = divide(_,2);
+const add5 = add(5);
+const subtract10 = subtract(_,10);
+half(subtract10(add5(double(15))))          // 12.5
+compose(half, subtract10, add5, double)(15) // 12.5
+pipe(double, add5, subtract10, half)(15)    // 12.5
+```
