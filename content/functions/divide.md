@@ -43,7 +43,7 @@ import { divide, _ } from 'https://deno.land/x/fae/mod.ts'
 divide(25, 5)                 // 5
 divide(25)(5)                 // 5
 
-const divideBy10 = divide(_,10)
+const divideBy10 = divide(_, 10)
 divideBy10(50)               // 5
 divide(_, 5)(25)             // 5
 

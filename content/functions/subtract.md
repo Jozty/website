@@ -43,7 +43,7 @@ import { subtract, _ } from 'https://deno.land/x/fae/mod.ts'
 subtract(1, 2)                 // -1
 subtract(1)(2)                 // -1
 
-const subtract5 = subtract(_,5)
+const subtract5 = subtract(_, 5)
 subtract5(-10)                 // -15
 subtract(_, 25)(50)            // 25
             
