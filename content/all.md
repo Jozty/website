@@ -7,6 +7,11 @@ description: All functions
 [addindex]: https://deno.land/x/fae/addIndex.ts
 [adjust]: https://deno.land/x/fae/adjust.ts
 [all]: https://deno.land/x/fae/all.ts
+[divide]: https://deno.land/x/fae/divide.ts
+[multiply]: https://deno.land/x/fae/multiply.ts
+[subtract]: https://deno.land/x/fae/subtract.ts
+[zip]: https://deno.land/x/fae/zip.ts
+[zipwith]: https://deno.land/x/fae/zipWith.ts
 
 ### add
 
@@ -77,7 +82,7 @@ Return `true` if all the elements of the functor match `predicate` `false` other
 
 ### divide
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/divide)</span>[[src]][add]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/divide)</span>[[src]][divide]</span>
 
 ```typescript
 (a: number, b: number) => number
@@ -98,7 +103,7 @@ Fae.divide(20)(5) //4
 
 ### multiply
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/multiply)</span>[[src]][all]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/multiply)</span>[[src]][multiply]</span>
 
 ```typescript
 (a: number, b: number) => number
@@ -117,7 +122,7 @@ Fae.multiply(6)(7) // 42
 
 ### subtract
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/subtract)</span>[[src]][all]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/subtract)</span>[[src]][subtract]</span>
 
 ```typescript
 (a: number, b: number) => number
@@ -130,6 +135,60 @@ Fae.subtract(3, 4) // -1
 const subtract5 = Fae.subtract(Fae._, 5)
 subtract5(12) // 7
 Fae.subtract(6)(3) // 3
+```
+
+---
+
+### zip
+
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/zip)</span>[[src]][zip]</span>
+
+```typescript
+(list1: T1[], list2: T2[]) =>  [T1, T2][]
+```
+
+Creates a new list out of two passed lists by pairing up equally-positioned pair in both the lists.The returned is truncated to the length of the shorter of the two input lists.
+
+```typescript
+Fae.zip([1, 2, 3], [100, 200, 300]) // [[1, 100],[2, 200],[3, 300]]
+Fae.zip([1, 2, 3, 4], [100, 200, 300]) // [[1, 100],[2, 200],[3, 300]]
+Fae.zip([1, 2, 3], [100, 200, 300, 400]) // [[1, 100],[2, 200],[3, 300]]
+```
+
+---
+
+### zipWith
+
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/zipeWith)</span>[[src]][zipwith]</span>
+
+```typescript
+(fn: (a: T1, b: T2) => R, list1: T1[], list2: T2[]) => R[]
+```
+
+Creates a new list out of two passed lists. Each item of new list is calculated by applying equally-positioned pair in both the lists.The returned is truncated to the length of the shorter of the two input lists.
+
+```typescript
+Fae.zipWith((a: any, b: String) => a + ' ' + b)([10, 20, 30])([
+  'Cow',
+  'Horse',
+  'Dog',
+]) // [ "10 Cow", "20 Horse", "30 Dog" ]
+Fae.zipWith((a: any, b: String) => a + ' ' + b)([10, 20, 30, 40, 50, 60])([
+  'Cow',
+  'Horse',
+  'Dog',
+]) // [ "10 Cow", "20 Horse", "30 Dog" ]
+Fae.zipWith((a: any, b: String) => a + ' ' + b)([10, 20])([
+  'Cow',
+  'Horse',
+  'Dog',
+]) // [ "10 Cow", "20 Horse" ]
+Fae.zipWith((a: any, b: String) => a + ' ' + b)([10, 20, 30])([
+  'Cow',
+  'Horse',
+  'Dog',
+  'Cat',
+]) // [ "10 Cow", "20 Horse", "30 Dog" ]
 ```
 
 ---
