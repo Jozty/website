@@ -168,22 +168,25 @@ Fae.zip([1, 2, 3], [100, 200, 300, 400]) // [[1, 100],[2, 200],[3, 300]]
 Creates a new list out of two passed lists. Each item of new list is calculated by applying equally-positioned pair in both the lists.The returned is truncated to the length of the shorter of the two input lists.
 
 ```typescript
-Fae.zipWith((a: any, b: String) => a + ' ' + b)([10, 20, 30])([
+Fae.zipWith((a: number, b: String) => a + ' ' + b)([10, 20, 30])([
   'Cow',
   'Horse',
   'Dog',
 ]) // [ "10 Cow", "20 Horse", "30 Dog" ]
-Fae.zipWith((a: any, b: String) => a + ' ' + b)([10, 20, 30, 40, 50, 60])([
+
+Fae.zipWith((a: number, b: String) => a + ' ' + b)([10, 20, 30, 40, 50, 60])([
   'Cow',
   'Horse',
   'Dog',
 ]) // [ "10 Cow", "20 Horse", "30 Dog" ]
-Fae.zipWith((a: any, b: String) => a + ' ' + b)([10, 20])([
+
+Fae.zipWith((a: number, b: String) => a + ' ' + b)([10, 20])([
   'Cow',
   'Horse',
   'Dog',
 ]) // [ "10 Cow", "20 Horse" ]
-Fae.zipWith((a: any, b: String) => a + ' ' + b)([10, 20, 30])([
+
+Fae.zipWith((a: number, b: String) => a + ' ' + b)([10, 20, 30])([
   'Cow',
   'Horse',
   'Dog',
