@@ -3,7 +3,7 @@ title: zipWith function
 description: a thorough tour of zipWith function
 ---
 
-## Zip
+## ZipWith
 
 Creates a new list out of two passed lists. Each item of new list is calculated by applying equally-positioned pair in both the lists.The returned is truncated to the length of the shorter of the two input lists.
 
