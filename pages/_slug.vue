@@ -30,14 +30,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main-card {
-  margin: 32px auto;
-  max-width: 780px;
-  border: none;
-  border-radius: 16px;
-  @media (max-width: 980px) {
-    max-width: unset;
-    margin: 32px;
-  }
-}
 </style>

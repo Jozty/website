@@ -1,11 +1,19 @@
 @import "fonts";
+@import "buefy";
 
 * {
   box-sizing: border-box;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: Jost;
+  padding-bottom: 1px !important;
+  background-color: $primary-100;
 }
 
 .token {
@@ -49,6 +57,10 @@ h6 {
   }
 }
 
+hr {
+  background-color: $primary-200 !important;
+}
+
 ul {
   list-style: disc;
   margin: 16px 0;
@@ -69,4 +81,16 @@ code {
 
 .token.operator {
   background: none !important;
+}
+
+.main-card {
+  margin: 32px auto;
+  max-width: 780px !important;
+  border: none;
+  border-radius: 16px;
+  background-color: $primary-50 !important;
+  @media (max-width: 980px) {
+    max-width: unset;
+    margin: 32px;
+  }
 }
