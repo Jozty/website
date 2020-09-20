@@ -159,7 +159,7 @@ Fae.zip([1, 2, 3], [100, 200, 300, 400]) // [[1, 100],[2, 200],[3, 300]]
 
 ### zipWith
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/zipeWith)</span>[[src]][zipwith]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/zipWith)</span>[[src]][zipwith]</span>
 
 ```typescript
 (fn: (a: T1, b: T2) => R, list1: T1[], list2: T2[]) => R[]
