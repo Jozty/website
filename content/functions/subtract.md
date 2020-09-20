@@ -49,13 +49,13 @@ subtract(_, 25)(50)            // 25
             
 ```
 ```typescript
-import { add,subtract,multiply,divide,pipe,compose, _ } from 'https://deno.land/x/fae/mod.ts'
+import { add, subtract, multiply, divide, pipe, compose, _ } from 'https://deno.land/x/fae/mod.ts'
 // Expression - (2*5+5-10)/2
 const double = multiply(2)
-const half = divide(_,2)
+const half = divide(_, 2)
 const add5 = add(5)
-const subtract10 = subtract(_,10)
-half(subtract10(add5(double(5))))          // 2.5
-compose(half, subtract10, add5, double)(5) // 2.5
-pipe(double, add5, subtract10, half)(5)    // 2.5
+const subtract10 = subtract(_, 10)
+half(subtract10(add5(double(5))))           // 2.5
+compose(half, subtract10, add5, double)(5)  // 2.5
+pipe(double, add5, subtract10, half)(5)     // 2.5
 ```
