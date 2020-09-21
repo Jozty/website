@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="columns">
+    <div class="columns is-gapless">
       <div class="column is-narrow">
         <side-bar class="side-bar" />
       </div>

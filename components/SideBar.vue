@@ -4,11 +4,24 @@
     :class="{ sticky: isSticky }"
     :style="{ height }"
   >
-    <input v-model="searchQuery" />
-    <div class="typ-h3">Functions</div>
-    <div v-for="(func, i) in functions" :key="i">
-      {{ func }}
+    <div ref="searchBox">
+      <b-field label="Search" type="is-secondary">
+        <b-input v-model="searchQuery"></b-input>
+      </b-field>
+
+      <b-field type="is-secondary">
+        <b-select placeholder="version" expanded>
+          <option value="v0.6.2">v0.6.2</option>
+        </b-select>
+      </b-field>
     </div>
+
+    <ul class="functions-list" :style="{height: listHeight}">
+      <div class="typ-h2">Functions</div>
+      <li v-for="(func, i) in functions" :key="i">
+        <nuxt-link :to="{ hash: func.toLowerCase() }">{{ func }}</nuxt-link>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -23,6 +36,7 @@ export default class SideBar extends Vue {
   public posY: number
   public functions: string[] = []
   public searchQuery = ''
+  public listHeight = 'calc(100% - 116px)'
 
   constructor() {
     super()
@@ -53,6 +67,7 @@ export default class SideBar extends Vue {
       window.addEventListener('resize', this.onResize)
       window.addEventListener('scroll', this.onScroll)
     })
+    this.listHeight = `calc(100% - ${this.$refs.searchBox.scrollHeight}px)`
 
     await this.getFunctions('')
   }
@@ -93,6 +108,22 @@ export default class SideBar extends Vue {
   &.sticky {
     position: sticky;
     top: 0;
+  }
+}
+.functions-list {
+  height: calc(100% - 72px);
+  overflow-y: scroll;
+  border-top: 2px solid $primary-200;
+  margin: 8px -16px 0;
+  padding: 12px 0 12px 16px;
+  li {
+    padding-left: 8px;
+  }
+  a {
+    color: $text;
+    &:hover {
+      color: lighten($text, 10);
+    }
   }
 }
 </style>
