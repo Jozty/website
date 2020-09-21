@@ -12,7 +12,7 @@
 import { Vue, Component } from 'nuxt-property-decorator'
 
 @Component
-export default class _slug extends Vue {
+export default class Slug extends Vue {
   transition() {
     return 'home'
   }

@@ -1,8 +1,15 @@
 <template>
   <div>
-    <div class="main-card card">
-      <div class="card-content">
-        <nuxt-content :document="article" />
+    <div class="columns">
+      <div class="column is-narrow">
+        <side-bar class="side-bar" />
+      </div>
+      <div class="column">
+        <div class="main-card card">
+          <div class="card-content">
+            <nuxt-content :document="article" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -10,8 +17,10 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-
-@Component
+import SideBar from '~/components/SideBar.vue'
+@Component({
+  components: { SideBar },
+})
 export default class Docs extends Vue {
   transition() {
     return 'home'
@@ -50,5 +59,8 @@ h6 {
 }
 p {
   font-size: 16px;
+}
+.side-bar {
+  width: 280px;
 }
 </style>

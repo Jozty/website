@@ -4,6 +4,7 @@
       type="is-primary-50"
       class="is-fullhd"
       wrapper-class="container is-widescreen"
+      :class="{ 'border-bottom': !hasHero }"
     >
       <template slot="brand">
         <nuxt-link to="/">
@@ -30,8 +31,24 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+import { Vue, Component, Watch } from 'nuxt-property-decorator'
 
 @Component
-export default class Default extends Vue {}
+export default class Default extends Vue {
+  public hasHero = false
+  @Watch('$route')
+  updateClass() {
+    this.hasHero = this.$route.path === '/'
+  }
+
+  mounted() {
+    this.hasHero = this.$route.path === '/'
+  }
+}
 </script>
+<style lang="scss" scoped>
+@import 'assets/styles/buefy';
+.border-bottom {
+  border-bottom: 2px solid $primary-200;
+}
+</style>
