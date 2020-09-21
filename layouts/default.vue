@@ -16,7 +16,11 @@
         <b-navbar-item tag="a" target="_blank" href="https://deno.land/x/fae">
           <img src="~assets/images/deno.png" alt="logo" />
         </b-navbar-item>
-        <b-navbar-item tag="a" target="_blank" href="https://github.com/Jozty/fae">
+        <b-navbar-item
+          tag="a"
+          target="_blank"
+          href="https://github.com/Jozty/fae"
+        >
           <img src="~assets/images/github.png" alt="logo" />
         </b-navbar-item>
       </template>
@@ -25,23 +29,9 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      items: [
-        {
-          title: 'Home',
-          icon: 'home',
-          to: { name: 'index' },
-        },
-        {
-          title: 'Inspire',
-          icon: 'lightbulb',
-          to: { name: 'inspire' },
-        },
-      ],
-    }
-  },
-}
+<script lang="ts">
+import { Vue, Component } from 'nuxt-property-decorator'
+
+@Component
+export default class Default extends Vue {}
 </script>

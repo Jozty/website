@@ -28,21 +28,25 @@ body {
     font-size: inherit;
   }
 }
+
 h1,
 h2,
 h3 {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
+
   a {
     margin-left: 8px;
     color: gray;
     opacity: 0;
     transition: opacity 0.24s ease;
+
     span {
       transform: scale(0.8);
     }
   }
+
   &:hover {
     a {
       opacity: 1;
@@ -106,4 +110,12 @@ code {
     max-width: unset;
     margin: 32px;
   }
+}
+
+.home-enter-active, .home-leave-active {
+  transition: opacity .12s;
+}
+
+.home-enter, .home-leave-active {
+  opacity: 0;
 }

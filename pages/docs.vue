@@ -8,18 +8,26 @@
   </div>
 </template>
 
-<script>
-export default {
-  async asyncData({ $content, params }) {
+<script lang="ts">
+import { Vue, Component } from 'nuxt-property-decorator'
+
+@Component
+export default class Docs extends Vue {
+  transition() {
+    return 'home'
+  }
+
+  async asyncData({ $content, params }: any) {
     const article = await $content('all', params.slug).fetch()
 
     return { article }
-  },
+  }
+
   mounted() {
     document.querySelectorAll('.icon').forEach((e) => {
       e.className = e.className.replace(/icon/g, 'fa')
     })
-  },
+  }
 }
 </script>
 

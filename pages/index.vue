@@ -9,21 +9,31 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component } from 'nuxt-property-decorator'
 import Hero from '@/components/Hero'
-export default {
-  name: 'HomePage',
-  components: { Hero },
-  async asyncData({ $content, params }) {
+
+@Component({
+  components: {
+    Hero,
+  },
+})
+export default class HomePage extends Vue {
+  transition() {
+    return 'home'
+  }
+
+  async asyncData({ $content, params }: any) {
     const article = await $content('index', params.slug).fetch()
 
     return { article }
-  },
+  }
+
   mounted() {
     document.querySelectorAll('.icon').forEach((e) => {
       e.className = e.className.replace(/icon/g, 'fa')
     })
-  },
+  }
 }
 </script>
 
