@@ -67,6 +67,7 @@ export default class SideBar extends Vue {
       window.addEventListener('resize', this.onResize)
       window.addEventListener('scroll', this.onScroll)
     })
+    // @ts-ignore
     this.listHeight = `calc(100% - ${this.$refs.searchBox.scrollHeight}px)`
 
     await this.getFunctions('')
@@ -78,6 +79,7 @@ export default class SideBar extends Vue {
   }
 
   async getFunctions(searchQuery: string) {
+    // @ts-ignore
     const functionsData = await this.$content('functions').fetch()
     const functions: string[] = functionsData.map((f: any) => f.slug)
     if (!searchQuery) {
