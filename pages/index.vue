@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import Hero from '@/components/Hero'
+import Hero from '~/components/Hero.vue'
 
 @Component({
   components: {
