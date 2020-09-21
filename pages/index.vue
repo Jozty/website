@@ -1,5 +1,6 @@
 <template>
   <div>
+    <hero />
     <div class="main-card card">
       <div class="card-content">
         <nuxt-content :document="article" />
@@ -9,9 +10,10 @@
 </template>
 
 <script>
+import Hero from '@/components/Hero'
 export default {
   name: 'HomePage',
-
+  components: { Hero },
   async asyncData({ $content, params }) {
     const article = await $content('index', params.slug).fetch()
 

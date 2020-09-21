@@ -22,7 +22,8 @@
     "@nuxt/content": "^1.5.0",
     "@nuxt/typescript-runtime": "^1.0.0",
     "nuxt": "^2.14.0",
-    "nuxt-buefy": "^0.3.31"
+    "nuxt-buefy": "^0.3.31",
+    "nuxt-property-decorator": "^2.8.3"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.0",
@@ -39,6 +40,7 @@
     "lint-staged": "^10.2.11",
     "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
-    "sass-loader": "^10.0.2"
+    "sass-loader": "^10.0.2",
+    "ts-loader": "^8.0.4"
   }
 }

@@ -1,8 +1,7 @@
 <template>
   <div>
     <b-navbar
-      type="is-primary-300"
-      :shadow="true"
+      type="is-primary-50"
       class="is-fullhd"
       wrapper-class="container is-widescreen"
     >
@@ -11,11 +10,9 @@
           <img src="~assets/logo-80x80-2.png" alt="logo" />
         </nuxt-link>
       </template>
-      <template slot="start">
+      <template slot="end">
         <b-navbar-item tag="router-link" to="/"> Home </b-navbar-item>
         <b-navbar-item tag="router-link" to="/docs"> Docs </b-navbar-item>
-      </template>
-      <template slot="end">
         <b-navbar-item tag="a" target="_blank" href="https://deno.land/x/fae">
           <img src="~assets/images/deno.png" alt="logo" />
         </b-navbar-item>
