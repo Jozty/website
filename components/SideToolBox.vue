@@ -16,7 +16,7 @@
       </b-field>
     </div>
 
-    <ul class="functions-list" :style="{height: listHeight}">
+    <ul class="functions-list" :style="{ height: listHeight }">
       <div class="typ-h2">Functions</div>
       <li v-for="(func, i) in functions" :key="i">
         <nuxt-link :to="{ hash: func.toLowerCase() }">{{ func }}</nuxt-link>
@@ -29,7 +29,7 @@
 import { Vue, Component, Prop, Watch } from 'nuxt-property-decorator'
 
 @Component
-export default class SideBar extends Vue {
+export default class SideToolBox extends Vue {
   @Prop({ default: true }) readonly isSticky = true
 
   public windowHeight: number
@@ -85,7 +85,9 @@ export default class SideBar extends Vue {
     if (!searchQuery) {
       this.functions = functions
     } else {
-      this.functions = functions.filter((f) => f.includes(searchQuery))
+      this.functions = functions.filter((f) =>
+        f.includes(searchQuery.toLowerCase())
+      )
     }
   }
 
@@ -126,6 +128,20 @@ export default class SideBar extends Vue {
     &:hover {
       color: lighten($text, 10);
     }
+  }
+}
+</style>
+<style lang="scss">
+@import 'assets/styles/buefy';
+.b-sidebar {
+  .side-bar {
+    width: unset !important;
+    height: unset !important;
+    position: unset !important;
+    top: unset !important;
+  }
+  .sidebar-content {
+    background-color: $primary-50;
   }
 }
 </style>

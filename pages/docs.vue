@@ -1,8 +1,11 @@
 <template>
   <div>
+    <b-sidebar :open="isSideToolBoxOpen" :overlay="true" :fullheight="true">
+      <side-tool-box />
+    </b-sidebar>
     <div class="columns is-gapless">
       <div class="column is-narrow">
-        <side-bar class="side-bar" />
+        <side-tool-box v-if="$device.isDesktop" class="side-bar" />
       </div>
       <div class="column">
         <div class="main-card card">
@@ -17,11 +20,13 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import SideBar from '~/components/SideBar.vue'
+import SideToolBox from '~/components/SideToolBox.vue'
 @Component({
-  components: { SideBar },
+  components: { SideToolBox },
 })
 export default class Docs extends Vue {
+  isSideToolBoxOpen = false
+
   transition() {
     return 'home'
   }
@@ -36,6 +41,13 @@ export default class Docs extends Vue {
     document.querySelectorAll('.icon').forEach((e) => {
       e.className = e.className.replace(/icon/g, 'fa')
     })
+
+    this.$nuxt.$on('toggleSideToolBox', this.toggleSideToolBox)
+  }
+
+  toggleSideToolBox(value: boolean) {
+    console.log(value)
+    this.isSideToolBoxOpen = value
   }
 }
 </script>

@@ -49,6 +49,7 @@ export default {
     'nuxt-buefy',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
+    '@nuxtjs/device',
   ],
   /*
    ** Content module configuration
