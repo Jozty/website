@@ -1,39 +1,46 @@
 <template>
   <div>
-    <div class="main-card card">
-      <div class="card-content">
-        <nuxt-content :document="article" />
+    <div class="columns is-gapless">
+      <div class="column is-narrow">
+        <side-bar class="side-bar" />
+      </div>
+      <div class="column">
+        <div class="main-card card">
+          <div class="card-content">
+            <nuxt-content :document="article" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  async asyncData({ $content, params }) {
+<script lang="ts">
+import { Vue, Component } from 'nuxt-property-decorator'
+import SideBar from '~/components/SideBar.vue'
+@Component({
+  components: { SideBar },
+})
+export default class Docs extends Vue {
+  transition() {
+    return 'home'
+  }
+
+  async asyncData({ $content, params }: any) {
     const article = await $content('all', params.slug).fetch()
 
     return { article }
-  },
+  }
+
   mounted() {
     document.querySelectorAll('.icon').forEach((e) => {
       e.className = e.className.replace(/icon/g, 'fa')
     })
-  },
+  }
 }
 </script>
 
 <style lang="scss">
-.main-card {
-  margin: 32px auto;
-  max-width: 780px;
-  border: none;
-  border-radius: 16px;
-  @media (max-width: 980px) {
-    max-width: unset;
-    margin: 32px;
-  }
-}
 h6 {
   display: flex;
   span {
@@ -52,5 +59,8 @@ h6 {
 }
 p {
   font-size: 16px;
+}
+.side-bar {
+  width: 280px;
 }
 </style>

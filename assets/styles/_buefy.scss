@@ -12,6 +12,10 @@ $primary-700: #8C3E2B;
 $primary-800: #692E20;
 $primary-900: #461F16;
 
+$secondary: #209cee;
+
+$text: #1c0903;
+
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: (
   "white": ($white, $black),
@@ -19,7 +23,9 @@ $colors: (
   "light": ($light, $light-invert),
   "dark": ($dark, $dark-invert),
   "primary": ($primary-500, $primary-900),
+  "primary-50": ($primary-50, $primary-600),
   "primary-300": ($primary-300, $primary-900),
+  "secondary": ($secondary, black),
   "info": ($info, $info-invert),
   "success": ($success, $success-invert),
   "warning": ($warning, $warning-invert),

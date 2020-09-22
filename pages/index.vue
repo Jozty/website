@@ -1,5 +1,6 @@
 <template>
   <div>
+    <hero />
     <div class="main-card card">
       <div class="card-content">
         <nuxt-content :document="article" />
@@ -8,32 +9,34 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'HomePage',
+<script lang="ts">
+import { Vue, Component } from 'nuxt-property-decorator'
+import Hero from '~/components/Hero.vue'
 
-  async asyncData({ $content, params }) {
+@Component({
+  components: {
+    Hero,
+  },
+})
+export default class HomePage extends Vue {
+  transition() {
+    return 'home'
+  }
+
+  async asyncData({ $content, params }: any) {
     const article = await $content('index', params.slug).fetch()
 
     return { article }
-  },
+  }
+
   mounted() {
     document.querySelectorAll('.icon').forEach((e) => {
       e.className = e.className.replace(/icon/g, 'fa')
     })
-  },
+  }
 }
 </script>
 
 <style lang="scss">
-.main-card {
-  margin: 32px auto;
-  max-width: 780px;
-  border: none;
-  border-radius: 16px;
-  @media (max-width: 980px) {
-    max-width: unset;
-    margin: 32px;
-  }
-}
+@import 'assets/styles/buefy';
 </style>
