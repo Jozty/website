@@ -23,12 +23,7 @@ function _zipWith<T1, T2, R>(
   list1: T1[],
   list2: T2[]
 ) {
-  const len = Math.min(list1.length, list2.length)
-  const result = new Array<R>(len)
-  for (let i = 0; i < len; i++) {
-    result[i] = fn(list1[i], list2[i])
-  }
-  return result
+  // ...
 }
 ```
 

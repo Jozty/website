@@ -18,7 +18,7 @@ The returned is truncated to the length of the shorter of the two input lists.
 **Non curried type declaration**
 ```typescript
 function _zip<T1, T2>(list1: T1[], list2: T2[]): [T1, T2][] {
-  return zipWith((a, b) => [a, b], list1, list2)
+  // ...
 }
 ```
 <br>
