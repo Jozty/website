@@ -23,16 +23,13 @@ function _whereEq<T>(spec: Obj<T>, testObj: Obj<T>) {
 **Curried type declaration**
 
 ```typescript
-type WhereEq_2<T> =
-  & ((testObj: Obj<T>) => boolean)
+type WhereEq_2<T> = ((testObj: Obj<T>) => boolean)
   & ((testObj?: PH) => WhereEq_2<T>)
 
-type WhereEq_1<T> =
-  & ((spec: Obj<T>) => boolean)
+type WhereEq_1<T> = ((spec: Obj<T>) => boolean)
   & ((spec?: PH) => WhereEq_1<T>)
 
-type WhereEq =
-  & (<T>(spec: Obj<T>, testObj: Obj<T>) => boolean)
+type WhereEq = (<T>(spec: Obj<T>, testObj: Obj<T>) => boolean)
   & (<T>(spec: Obj<T>, testObj?: PH) => WhereEq_2<T>)
   & (<T>(spec: PH, testObj: Obj<T>) => WhereEq_1<T>)
   & ((spec?: PH, testObj?: PH) => WhereEq)
