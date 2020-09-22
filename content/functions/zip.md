@@ -15,7 +15,7 @@ Creates a new list out of two passed lists by pairing up equally-positioned pair
 **Non curried type declaration**
 ```typescript
 function _zip<T1, T2>(list1: T1[], list2: T2[]): [T1, T2][] {
-  return zipWith((a, b) => [a, b], list1, list2)
+  // ...
 }
 ```
 <br>
