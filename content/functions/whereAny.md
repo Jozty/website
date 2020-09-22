@@ -1,9 +1,9 @@
 ---
-title: add function
-description: a thorough tour of add function
+title: whereAny function
+description: a thorough tour of whereAny function
 ---
 
-## Add
+## WhereAny
 
 Adds two numbers
 
@@ -14,7 +14,7 @@ Adds two numbers
 
 **Non curried type declaration**
 ```typescript
-function add(a: number, b: number): number {
+function _whereAny<T>(specs: Tests<T> , testObj: Obj<T>) {
   // ...
 }
 ```
@@ -23,38 +23,31 @@ function add(a: number, b: number): number {
 **Curried type declaration**
 
 ```typescript
-type Add_2 = ((b: number) => number)
-  & ((b?: PH) => Add_2)
+type WhereAny_2<T> = ((testObj: Obj<T>) => boolean)
+  & ((testObj?: PH) => WhereAny_2<T>)
 
-type Add_1 = ((a: number) => number)
-  & ((a?: PH) => Add_1)
+type WhereAny_1<T> = ((specs: Tests<T>) => boolean)
+  & ((specs?: PH) => WhereAny_1<T>)
 
-type Add = ((a: number, b: number) => number)
-  & ((a: number, b?: PH) => Add_2)
-  & ((a: PH, b: number) => Add_1)
-  & ((a?: PH, b?: PH) => Add)
+type WhereAny = (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
+  & (<T>(specs: Tests<T>, testObj?: PH) => WhereAny_2<T>)
+  & (<T>(specs: PH, testObj: Obj<T>) => WhereAny_1<T>)
+  & ((specs?: PH, testObj?: PH) => WhereAny)
 ```
 <br>
 
 **Examples**
 ```typescript
-import { add, _ } from 'https://deno.land/x/fae/mod.ts'
+import { whereAny, equals, _ } from 'https://deno.land/x/fae/mod.ts'
 
-add(1, 2)                 // 3
-add(1)(2)                 // 3
+const spec = { x: equals(0), y: equals(2) }
+const test1 = { x: 0, y: 200 }
+const test2 = { x: 0, y: 10 }
+const test3 = { x: 1, y: 101 }
+const test4 = { x: 1, y: 2 }
+whereAny(spec)(test1)      // true
+whereAny(_, test2)(spec)   // true)
+whereAny(spec, test3)      // false)
+whereAny(spec, test4)      // true)
+```
 
-const add5 = add(5)
-add5(-32)                 // -27
-add5(_)(12)               // 17
-```
-```typescript
-import { add, subtract, multiply, divide, pipe, compose, _ } from 'https://deno.land/x/fae/mod.ts'
-// Expression - (2*5+5-10)/2
-const double = multiply(2)
-const half = divide(_, 2)
-const add5 = add(5)
-const subtract10 = subtract(_, 10)
-half(subtract10(add5(double(15))))          // 12.5
-compose(half, subtract10, add5, double)(15) // 12.5
-pipe(double, add5, subtract10, half)(15)    // 12.5
-```

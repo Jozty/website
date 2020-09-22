@@ -1,11 +1,12 @@
 ---
-title: add function
-description: a thorough tour of add function
+title: whereAll function
+description: a thorough tour of whereAll function
 ---
 
-## Add
+## WhereAll
 
-Adds two numbers
+Takes a specs objects whose property is a predicate function. Each predicate is applied to the value of the corresponding property of the test object. Returns `true` if all the predicates are satisfied, `false` otherwise.
+**NOTE** returns `false` if there is no predicated functions
 
 &check; Curried
 <!---
@@ -14,7 +15,7 @@ Adds two numbers
 
 **Non curried type declaration**
 ```typescript
-function add(a: number, b: number): number {
+function _whereAll<T>(specs: Tests<T>, testObj: Obj<T>) {
   // ...
 }
 ```
@@ -23,38 +24,43 @@ function add(a: number, b: number): number {
 **Curried type declaration**
 
 ```typescript
-type Add_2 = ((b: number) => number)
-  & ((b?: PH) => Add_2)
+type WhereAll_2<T> = ((testObj: Obj<T>) => boolean)
+  & ((testObj?: PH) => WhereAll_2<T>)
 
-type Add_1 = ((a: number) => number)
-  & ((a?: PH) => Add_1)
+type WhereAll_1<T> = ((specs: Tests<T>) => boolean)
+  & ((specs?: PH) => WhereAll_1<T>)
 
-type Add = ((a: number, b: number) => number)
-  & ((a: number, b?: PH) => Add_2)
-  & ((a: PH, b: number) => Add_1)
-  & ((a?: PH, b?: PH) => Add)
+type WhereAll = (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
+  & (<T>(specs: Tests<T>, testObj?: PH) => WhereAll_2<T>)
+  & (<T>(specs: PH, testObj: Obj<T>) => WhereAll_1<T>)
+  & ((specs?: PH, testObj?: PH) => WhereAll)
+
 ```
 <br>
 
 **Examples**
 ```typescript
-import { add, _ } from 'https://deno.land/x/fae/mod.ts'
+import { whereAll, equals _ } from 'https://deno.land/x/fae/mod.ts'
 
-add(1, 2)                 // 3
-add(1)(2)                 // 3
+const spec = { x: Fae.equals(0), y: Fae.equals(2) }
+const spec2 = { x: Fae.equals(20) }
+const test1 = { x: 0, y: 2, z: 100 }
+const test2 = { w: 0, x: 0, y: 1, z: 100 }
+const test3 = { x: 0, y: 2 }
+const test4 = { w: 10, x: 20 }
+const test5 = { x: 0 }
+const test6 = { x: 20 }
 
-const add5 = add(5)
-add5(-32)                 // -27
-add5(_)(12)               // 17
-```
-```typescript
-import { add, subtract, multiply, divide, pipe, compose, _ } from 'https://deno.land/x/fae/mod.ts'
-// Expression - (2*5+5-10)/2
-const double = multiply(2)
-const half = divide(_, 2)
-const add5 = add(5)
-const subtract10 = subtract(_, 10)
-half(subtract10(add5(double(15))))          // 12.5
-compose(half, subtract10, add5, double)(15) // 12.5
-pipe(double, add5, subtract10, half)(15)    // 12.5
+whereAll(spec)(test1)   // true
+whereAll(_, test2)(spec)// false
+whereAll(spec, test3)   // true 
+whereAll(spec, test4)   // false   
+whereAll(spec, test5)   // false
+whereAll(spec, test6)   // false
+whereAll(spec2, test1)  // false
+whereAll(spec2, test2)  // false
+whereAll(spec2, test3)  // false
+whereAll(spec2, test4)  // true
+whereAll(spec2, test5)  // false
+whereAll(spec2, test6)  // true
 ```

@@ -1,11 +1,11 @@
 ---
-title: add function
+title: whereEq function
 description: a thorough tour of add function
 ---
 
-## Add
+## WhereEq
 
-Adds two numbers
+Takes a spec object and a test object, returns true if the test satisfies the spec, false otherwise.`whereEq` is a specialization of [`where`].
 
 &check; Curried
 <!---
@@ -14,7 +14,7 @@ Adds two numbers
 
 **Non curried type declaration**
 ```typescript
-function add(a: number, b: number): number {
+function _whereEq<T>(spec: Obj<T>, testObj: Obj<T>) {
   // ...
 }
 ```
@@ -23,38 +23,38 @@ function add(a: number, b: number): number {
 **Curried type declaration**
 
 ```typescript
-type Add_2 = ((b: number) => number)
-  & ((b?: PH) => Add_2)
+type WhereEq_2<T> =
+  & ((testObj: Obj<T>) => boolean)
+  & ((testObj?: PH) => WhereEq_2<T>)
 
-type Add_1 = ((a: number) => number)
-  & ((a?: PH) => Add_1)
+type WhereEq_1<T> =
+  & ((spec: Obj<T>) => boolean)
+  & ((spec?: PH) => WhereEq_1<T>)
 
-type Add = ((a: number, b: number) => number)
-  & ((a: number, b?: PH) => Add_2)
-  & ((a: PH, b: number) => Add_1)
-  & ((a?: PH, b?: PH) => Add)
+type WhereEq =
+  & (<T>(spec: Obj<T>, testObj: Obj<T>) => boolean)
+  & (<T>(spec: Obj<T>, testObj?: PH) => WhereEq_2<T>)
+  & (<T>(spec: PH, testObj: Obj<T>) => WhereEq_1<T>)
+  & ((spec?: PH, testObj?: PH) => WhereEq)
 ```
 <br>
 
 **Examples**
 ```typescript
-import { add, _ } from 'https://deno.land/x/fae/mod.ts'
+import { whereEq, _ } from 'https://deno.land/x/fae/mod.ts'
 
-add(1, 2)                 // 3
-add(1)(2)                 // 3
+spec = { x: 100 }
+spec2 = { w: 1, x: 100, y: 200 }
+test1 = { x: 20, y: 100, z: 100 }
+test2 = { w: 1, x: 100, y: 100, z: 100 }
+test3 = {}
+test4 = { w: 1, x: 100 }
+test5 = { w: 1, x: 100, y: 200 }
 
-const add5 = add(5)
-add5(-32)                 // -27
-add5(_)(12)               // 17
+whereEq(spec)(test1)    // false
+whereEq(_, test2)(spec) // true
+whereEq(spec, test3)    // false
+whereEq(spec2, test4)   // false
+whereEq(spec2, test5)   // true
 ```
-```typescript
-import { add, subtract, multiply, divide, pipe, compose, _ } from 'https://deno.land/x/fae/mod.ts'
-// Expression - (2*5+5-10)/2
-const double = multiply(2)
-const half = divide(_, 2)
-const add5 = add(5)
-const subtract10 = subtract(_, 10)
-half(subtract10(add5(double(15))))          // 12.5
-compose(half, subtract10, add5, double)(15) // 12.5
-pipe(double, add5, subtract10, half)(15)    // 12.5
-```
+
