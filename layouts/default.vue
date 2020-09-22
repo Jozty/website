@@ -50,6 +50,7 @@ export default class Default extends Vue {
   updateClass() {
     this.hasHero = this.$route.path === '/'
     this.isMoreIconVisible =
+      // @ts-ignore
       !this.$device.isDesktop && this.$route.path === '/docs'
   }
 

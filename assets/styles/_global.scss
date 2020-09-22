@@ -110,6 +110,9 @@ code {
   @media (max-width: 980px) {
     max-width: unset;
     margin: 32px 8px;
+    .card-content {
+      padding: 8px;
+    }
   }
 }
 
