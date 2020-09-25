@@ -6,7 +6,7 @@ description: a thorough tour of add function
 ## WhereEq
 <br>
 
-Takes a spec object and a test object, returns true if the test satisfies the spec, false otherwise.`whereEq` is a specialization of [`where`].
+Takes a spec object and a test object, returns true if the test satisfies the spec, false otherwise.`whereEq` is a specialization of `whereAll`.
 
 <br>
 
@@ -45,13 +45,13 @@ type WhereEq = (<T>(spec: Obj<T>, testObj: Obj<T>) => boolean)
 ```typescript
 import { whereEq, _ } from 'https://deno.land/x/fae/mod.ts'
 
-spec = { x: 100 }
-spec2 = { w: 1, x: 100, y: 200 }
-test1 = { x: 20, y: 100, z: 100 }
-test2 = { w: 1, x: 100, y: 100, z: 100 }
-test3 = {}
-test4 = { w: 1, x: 100 }
-test5 = { w: 1, x: 100, y: 200 }
+const spec = { x: 100 }
+const spec2 = { w: 1, x: 100, y: 200 }
+const test1 = { x: 20, y: 100, z: 100 }
+const test2 = { w: 1, x: 100, y: 100, z: 100 }
+const test3 = {}
+const test4 = { w: 1, x: 100 }
+const test5 = { w: 1, x: 100, y: 200 }
 
 whereEq(spec)(test1)    // false
 whereEq(_, test2)(spec) // true

@@ -3,7 +3,7 @@ title: when function
 description: a thorough tour of when function
 ---
 
-## when
+## When
 <br>
 
 Applies `func` on `value` if the test `predicate` is true and returns it; returns `value` otherwise.
@@ -71,7 +71,7 @@ import { isNumber} from 'https://deno.land/x/fae/utils/is.ts'
 const ifIsNumber = when(isNumber)
 const add1 = add(1) as (a: number) => number
 function g(x: number) {
-    return multiply(3)(x)
+  return multiply(3)(x)
 }
 
 ifIsNumber(add(1))(15) // 16

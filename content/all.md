@@ -157,13 +157,16 @@ Applies `func` on `value` if the test `predicate` is true and returns it; return
 ```typescript
 const equals = Fae.curry(2, (x: number, y: number) => x === y)
 const add1 = Fae.add(1) as (a: number) => number
+
 function g(x: number) {
   return Fae.multiply(3)(x)
 }
+
 const spec = { x: equals('foo'), y: equals(7) }
 const test1 = { x: 12, y: 200 }
 const test2 = { x: 'foo', y: 7 }
 const isEven = (n:number) => n % 2 === 0;
+
 Fae.when(isNumber, add1)(10)  //11
 Fae.when(equals(Fae._, 5), g)(5)  // 15
 Fae.when(isNumber, add1 as Func)('hello') // 'hello'
@@ -189,20 +192,19 @@ const equals = Fae.curry(2, (x: number, y: number) => x === y)
 const spec = { x: Fae.equals(0), y: Fae.equals(2) }
 const spec2 = { x: Fae.equals(20) }
 const test1 = { x: 0, y: 2, z: 100 }
-const test2 = { w: 0, x: 0, y: 1, z: 100 }
-const test3 = { x: 0, y: 2 }
-const test4 = { w: 10, x: 20 }
-const test5 = { x: 0 }
-const test6 = { x: 20 }
+const test2 = { x: 0, y: 2 }
+const test3 = { w: 10, x: 20 }
+const test4 = { x: 0 }
+const test5 = { x: 20 }
 
 Fae.whereAll(spec)(test1)     // true
-Fae.whereAll(spec, test3)     // true 
-Fae.whereAll(spec, test4)     // false   
-Fae.whereAll(spec, test5)     // false
+Fae.whereAll(spec, test2)     // true 
+Fae.whereAll(spec, test3)     // false   
+Fae.whereAll(spec, test4)     // false
 Fae.whereAll(spec2, test1)    // false
-Fae.whereAll(spec2, test3)    // false
-Fae.whereAll(spec2, test4)    // true
-Fae.whereAll(spec2, test6)    // true
+Fae.whereAll(spec2, test2)    // false
+Fae.whereAll(spec2, test3)    // true
+Fae.whereAll(spec2, test5)    // true
 
 ```
 
@@ -225,14 +227,17 @@ const specP = {
   name: { firstName: equals('Bob'), lastname: equals('Hanks') },
   address: { city: equals('LA'), state: equals('California') },
 }
+
 const person1 = {
   name: { firstName: 'Bob', lastname: 'South' },
   address: { city: 'LA', state: 'California' },
 }
-  const person2 = {
+
+const person2 = {
   name: { firstName: 'Tom', lastname: 'Root' },
   address: { city: 'New York City', state: 'New York' },
 }
+
 Fae.whereAny(specP.name, person1.name) // true
 Fae.whereAny(specP.name, person2.name) // false
 Fae.whereAny(specP.address, person2.name)) //false
@@ -250,25 +255,29 @@ Fae.whereAny(specP.name, person2.address) //false
 (spec: Obj<T>, testObj: Obj<T>) => boolean
 ```
 
-Takes a spec object and a test object, returns true if the test satisfies the spec, false otherwise.`whereEq` is a specialization of [`where`].
+Takes a spec object and a test object, returns true if the test satisfies the spec, false otherwise.`whereEq` is a specialization of `whereAll`.
 
 ```typescript
 const person1 = {
   name: { firstName: 'Bob', lastname: 'Hanks' },
   address: { city: 'LA', state: 'California' },
 }
+
 const person2 = {
   name: { firstName: 'Bob', lastname: 'South' },
   address: { city: 'LA', state: 'California' },
 }
+
 const person3 = {
   name: { firstName: 'Tom', lastname: 'Hanks' },
   address: { city: 'New York City', state: 'New York' },
 }
+
 const spec = { x: 1, y: 2 }
 const test1 = { x: 0, y: 200 }
 const test2 = { x: 1, y: 101 }
 const test3 = { x: 1, y: 2 }
+
 Fae.whereEq(spec, test1) // false
 Fae.whereEq(spec, test2) // false
 Fae.whereEq(spec, test3) // true

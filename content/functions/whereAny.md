@@ -51,6 +51,7 @@ const test1 = { x: 0, y: 200 }
 const test2 = { x: 0, y: 10 }
 const test3 = { x: 1, y: 101 }
 const test4 = { x: 1, y: 2 }
+
 whereAny(spec)(test1)      // true
 whereAny(_, test2)(spec)   // true
 whereAny(spec, test3)      // false
