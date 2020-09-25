@@ -4,10 +4,16 @@ description: a thorough tour of whereAny function
 ---
 
 ## WhereAny
+<br>
 
-Adds two numbers
+Takes a specs objects whose property is a predicate function. Each predicate is applied to the value of the corresponding property of the test object. Returns `true` if any of the predicates is satisfied, `false` otherwise.
+**NOTE** returns `false` if there is no predicated functions.
+
+<br>
 
 &check; Curried
+
+<br>
 <!---
 &#10539; Not curred
 -->
@@ -46,8 +52,8 @@ const test2 = { x: 0, y: 10 }
 const test3 = { x: 1, y: 101 }
 const test4 = { x: 1, y: 2 }
 whereAny(spec)(test1)      // true
-whereAny(_, test2)(spec)   // true)
-whereAny(spec, test3)      // false)
-whereAny(spec, test4)      // true)
+whereAny(_, test2)(spec)   // true
+whereAny(spec, test3)      // false
+whereAny(spec, test4)      // true
 ```
 

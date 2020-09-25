@@ -4,10 +4,15 @@ description: a thorough tour of add function
 ---
 
 ## WhereEq
+<br>
 
 Takes a spec object and a test object, returns true if the test satisfies the spec, false otherwise.`whereEq` is a specialization of [`where`].
 
+<br>
+
 &check; Curried
+
+<br>
 <!---
 &#10539; Not curred
 -->

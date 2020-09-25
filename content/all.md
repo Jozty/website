@@ -10,6 +10,10 @@ description: All functions
 [divide]: https://deno.land/x/fae/divide.ts
 [multiply]: https://deno.land/x/fae/multiply.ts
 [subtract]: https://deno.land/x/fae/subtract.ts
+[when]: https://deno.land/x/fae/when.ts
+[whereAll]: https://deno.land/x/fae/whereAll.ts
+[whereAny]: https://deno.land/x/fae/whereAny.ts
+[whereEq]: https://deno.land/x/fae/whereEq.ts
 [zip]: https://deno.land/x/fae/zip.ts
 [zipwith]: https://deno.land/x/fae/zipWith.ts
 
@@ -78,6 +82,7 @@ Fae.adjust(-3, Fae.add(1), [0, 1, 2, 3]) // [0, 2, 2, 3]
 
 Return `true` if all the elements of the functor match `predicate` `false` otherwise . Acts as a transducer if a transformer is passed in place of `functor`
 
+
 ---
 
 ### divide
@@ -135,6 +140,142 @@ Fae.subtract(3, 4) // -1
 const subtract5 = Fae.subtract(Fae._, 5)
 subtract5(12) // 7
 Fae.subtract(6)(3) // 3
+```
+
+---
+
+### when
+
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/when)</span>[[src]][when]</span>
+
+```typescript
+(predicate: Predicate1<T>, func: FuncArr1<T, R>, value: T) => T | R
+```
+
+Applies `func` on `value` if the test `predicate` is true and returns it; returns `value` otherwise.
+
+```typescript
+const equals = Fae.curry(2, (x: number, y: number) => x === y)
+const add1 = Fae.add(1) as (a: number) => number
+function g(x: number) {
+  return Fae.multiply(3)(x)
+}
+const spec = { x: equals('foo'), y: equals(7) }
+const test1 = { x: 12, y: 200 }
+const test2 = { x: 'foo', y: 7 }
+const isEven = (n:number) => n % 2 === 0;
+Fae.when(isNumber, add1)(10)  //11
+Fae.when(equals(Fae._, 5), g)(5)  // 15
+Fae.when(isNumber, add1 as Func)('hello') // 'hello'
+Fae.when(equals([1,2,4,5,6]))(Fae.filter(isEven))([1,2,3,5,6])  // [1, 2, 3, 5, 6]
+
+```
+
+---
+
+### whereAll
+
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/whereAll)</span>[[src]][whereAll]</span>
+
+```typescript
+(specs: Tests<T>, testObj: Obj<T>) => boolean
+```
+
+Takes a specs objects whose properties are predicate functions. Each predicate is applied to the value of the corresponding property of the test object. Returns `true` if all the predicates are satisfied, `false` otherwise.
+**NOTE** returns `false` if there is no predicated functions.
+
+```typescript
+const equals = Fae.curry(2, (x: number, y: number) => x === y)
+const spec = { x: Fae.equals(0), y: Fae.equals(2) }
+const spec2 = { x: Fae.equals(20) }
+const test1 = { x: 0, y: 2, z: 100 }
+const test2 = { w: 0, x: 0, y: 1, z: 100 }
+const test3 = { x: 0, y: 2 }
+const test4 = { w: 10, x: 20 }
+const test5 = { x: 0 }
+const test6 = { x: 20 }
+
+Fae.whereAll(spec)(test1)     // true
+Fae.whereAll(spec, test3)     // true 
+Fae.whereAll(spec, test4)     // false   
+Fae.whereAll(spec, test5)     // false
+Fae.whereAll(spec2, test1)    // false
+Fae.whereAll(spec2, test3)    // false
+Fae.whereAll(spec2, test4)    // true
+Fae.whereAll(spec2, test6)    // true
+
+```
+
+---
+
+### whereAny
+
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/whereAny)</span>[[src]][whereAny]</span>
+
+```typescript
+(specs: Tests<T>, testObj: Obj<T>) => boolean
+```
+
+Takes a specs objects whose property is a predicate function. Each predicate is applied to the value of the corresponding property of the test object. Returns `true` if any of the predicates is satisfied, `false` otherwise.
+**NOTE** returns `false` if there is no predicated functions.
+
+```typescript
+const equals = Fae.curry(2, (x: number, y: number) => x === y)
+const specP = {
+  name: { firstName: equals('Bob'), lastname: equals('Hanks') },
+  address: { city: equals('LA'), state: equals('California') },
+}
+const person1 = {
+  name: { firstName: 'Bob', lastname: 'South' },
+  address: { city: 'LA', state: 'California' },
+}
+  const person2 = {
+  name: { firstName: 'Tom', lastname: 'Root' },
+  address: { city: 'New York City', state: 'New York' },
+}
+Fae.whereAny(specP.name, person1.name) // true
+Fae.whereAny(specP.name, person2.name) // false
+Fae.whereAny(specP.address, person2.name)) //false
+Fae.whereAny(specP.name, person2.address) //false
+
+```
+
+---
+
+### whereEq
+
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/whereEq)</span>[[src]][whereEq]</span>
+
+```typescript
+(spec: Obj<T>, testObj: Obj<T>) => boolean
+```
+
+Takes a spec object and a test object, returns true if the test satisfies the spec, false otherwise.`whereEq` is a specialization of [`where`].
+
+```typescript
+const person1 = {
+  name: { firstName: 'Bob', lastname: 'Hanks' },
+  address: { city: 'LA', state: 'California' },
+}
+const person2 = {
+  name: { firstName: 'Bob', lastname: 'South' },
+  address: { city: 'LA', state: 'California' },
+}
+const person3 = {
+  name: { firstName: 'Tom', lastname: 'Hanks' },
+  address: { city: 'New York City', state: 'New York' },
+}
+const spec = { x: 1, y: 2 }
+const test1 = { x: 0, y: 200 }
+const test2 = { x: 1, y: 101 }
+const test3 = { x: 1, y: 2 }
+Fae.whereEq(spec, test1) // false
+Fae.whereEq(spec, test2) // false
+Fae.whereEq(spec, test3) // true
+Fae.whereEq(person1.address, person3.address) // false
+Fae.whereEq(person1, person3) // false
+Fae.whereEq(person1.address, person2.address) // true
+
 ```
 
 ---

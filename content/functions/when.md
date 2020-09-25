@@ -4,10 +4,15 @@ description: a thorough tour of when function
 ---
 
 ## when
+<br>
 
 Applies `func` on `value` if the test `predicate` is true and returns it; returns `value` otherwise.
 
+<br>
+
 &check; Curried
+
+<br>
 <!---
 &#10539; Not curred
 -->
@@ -69,10 +74,10 @@ function g(x: number) {
     return multiply(3)(x)
 }
 
-ifIsNumber(add(1))(15)										// 16
-ifIsNumber(add(1))('hello')								// 'hello'
-eq(when(equals(_, 5))(g)(5)								// 15
-eq(when(equals(_, 5), _, 5)(g)						// 15
-eq(when(equals(_, 5), _, 5)(add1 as Func)	// 6
+ifIsNumber(add(1))(15) // 16
+ifIsNumber(add(1))('hello')	// 'hello'
+eq(when(equals(_, 5))(g)(5)	// 15
+eq(when(equals(_, 5), _, 5)(g) // 15
+eq(when(equals(_, 5), _, 5)(add1 as Func) // 6
 ```
 

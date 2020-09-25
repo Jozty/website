@@ -4,11 +4,16 @@ description: a thorough tour of whereAll function
 ---
 
 ## WhereAll
+<br>
 
-Takes a specs objects whose property is a predicate function. Each predicate is applied to the value of the corresponding property of the test object. Returns `true` if all the predicates are satisfied, `false` otherwise.
-**NOTE** returns `false` if there is no predicated functions
+Takes a specs objects whose properties are predicate functions. Each predicate is applied to the value of the corresponding property of the test object. Returns `true` if all the predicates are satisfied, `false` otherwise.
+**NOTE** returns `false` if there is no predicated functions.
+
+<br>
 
 &check; Curried
+
+<br>
 <!---
 &#10539; Not curred
 -->
@@ -51,16 +56,16 @@ const test4 = { w: 10, x: 20 }
 const test5 = { x: 0 }
 const test6 = { x: 20 }
 
-whereAll(spec)(test1)   // true
-whereAll(_, test2)(spec)// false
-whereAll(spec, test3)   // true 
-whereAll(spec, test4)   // false   
-whereAll(spec, test5)   // false
-whereAll(spec, test6)   // false
-whereAll(spec2, test1)  // false
-whereAll(spec2, test2)  // false
-whereAll(spec2, test3)  // false
-whereAll(spec2, test4)  // true
-whereAll(spec2, test5)  // false
-whereAll(spec2, test6)  // true
+whereAll(spec)(test1)     // true
+whereAll(_, test2)(spec)  // false
+whereAll(spec, test3)     // true 
+whereAll(spec, test4)     // false   
+whereAll(spec, test5)     // false
+whereAll(spec, test6)     // false
+whereAll(spec2, test1)    // false
+whereAll(spec2, test2)    // false
+whereAll(spec2, test3)    // false
+whereAll(spec2, test4)    // true
+whereAll(spec2, test5)    // false
+whereAll(spec2, test6)    // true
 ```
