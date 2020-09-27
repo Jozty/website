@@ -76,8 +76,8 @@ function g(x: number) {
 
 ifIsNumber(add(1))(15) // 16
 ifIsNumber(add(1))('hello')	// 'hello'
-eq(when(equals(_, 5))(g)(5)	// 15
-eq(when(equals(_, 5), _, 5)(g) // 15
-eq(when(equals(_, 5), _, 5)(add1 as Func) // 6
+when(equals(_, 5))(g)(5)	// 15
+when(equals(_, 5), _, 5)(g) // 15
+when(equals(_, 5), _, 5)(add1 as Func) // 6
 ```
 
