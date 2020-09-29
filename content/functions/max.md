@@ -28,23 +28,27 @@ function _max<T extends number | string | Date>(a: T, b: T) {
 **Curried type declaration**
 
 ```typescript
-type Max_2<T extends number | string | Date> = ((b: T) => T)
-  & ((b?: PH) => Max_2<T>)
+type Max_2<T extends number | string | Date> = (b: T) => T
 
-type Max_1<T extends number | string | Date> = ((a: T) => T)
-  & ((a?: PH) => Max_1<T>)
+type Max_1<T extends number | string | Date> = (a: T) => T
 
-type Max = (<T extends number | string | Date>(a: T, b: T) => T)
-  & (<T extends number | string | Date>(a: T, b?: PH) => Max_2<T>)
-  & (<T extends number | string | Date>(a: PH, b: T) => Max_1<T>)
-  & ((a?: PH, b?: PH) => Max)
+type _Max<T extends number | string | Date> =
+  & ((a: T, b?: PH) => Max_2<T>)
+  & ((a: PH, b: T) => Max_1<T>)
+  & ((a: T, b: T) => T)
+
+type Max = _Max<number> & _Max<string> & _Max<Date>
 ```
 <br>
 
 **Examples**
 ```typescript
 import { max } from 'https://deno.land/x/fae/mod.ts'
+let d1: Date = new Date('2001-01-01')
+let d2: Date = new Date('2002-02-02')
 
+max(d1, d2)             // d2
+max(d2, d1)             // d2
 max(-10, 8)             // 8
 max(10, -8)             // 10
 max(-10.888, -8.635)    // -8.635

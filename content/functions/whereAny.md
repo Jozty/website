@@ -30,15 +30,13 @@ function _whereAny<T>(specs: Tests<T> , testObj: Obj<T>) {
 
 ```typescript
 type WhereAny_2<T> = ((testObj: Obj<T>) => boolean)
-  & ((testObj?: PH) => WhereAny_2<T>)
 
 type WhereAny_1<T> = ((specs: Tests<T>) => boolean)
-  & ((specs?: PH) => WhereAny_1<T>)
 
-type WhereAny = (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
+type WhereAny = 
   & (<T>(specs: Tests<T>, testObj?: PH) => WhereAny_2<T>)
   & (<T>(specs: PH, testObj: Obj<T>) => WhereAny_1<T>)
-  & ((specs?: PH, testObj?: PH) => WhereAny)
+  & (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
 ```
 <br>
 

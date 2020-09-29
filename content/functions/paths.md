@@ -25,19 +25,23 @@ function _paths<T, R>(pathsArr: Path[], obj: ObjRec<T> | null): R[] {
 ```
 <br>
 
+**Used types**
+* [Path](/types/Path)
+* [ObjRec](/types/ObjRec)
+
+<br>
+
 **Curried type declaration**
 
 ```typescript
 type Paths_2 = (<T, R>(obj: ObjRec<T> | null) => R[])
-  & ((obj?: PH) => Paths_2)
 
 type Paths_1<T, R> = ((pathsArr: Path[]) => R[])
-  & ((pathsArr?: PH) => Paths_1<T, R>)
 
-type Paths = (<T, R>(pathsArr: Path[], obj: ObjRec<T> | null) => R[])
+type Paths = 
   & ((pathsArr: Path[], obj?: PH) => Paths_2)
   & (<T, R>(pathsArr: PH, obj: ObjRec<T> | null) => Paths_1<T, R>)
-  & ((pathsArr?: PH, obj?: PH) => Paths)
+  & (<T, R>(pathsArr: Path[], obj: ObjRec<T> | null) => R[])
 ```
 <br>
 

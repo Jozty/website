@@ -26,15 +26,13 @@ function _divide(a: number, b: number): number {
 
 ```typescript
 type Divide_2 = ((b: number) => number)
-  & ((b?: PH) => Divide_2)
 
 type Divide_1 = ((a: number) => number)
-  & ((a?: PH) => Divide_1)
 
-type Divide = ((a: number, b: number) => number)
+type Divide = 
   & ((a: number, b?: PH) => Divide_2)
   & ((a: PH, b: number) => Divide_1)
-  & ((a?: PH, b?: PH) => Divide)
+  & ((a: number, b: number) => number)
 ```
 <br>
 

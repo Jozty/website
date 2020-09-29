@@ -26,15 +26,13 @@ function _multiply(a: number, b: number): number {
 
 ```typescript
 type Multiply_2 = ((b: number) => number)
-  & ((b?: PH) => Multiply_2)
 
 type Multiply_1 = ((a: number) => number)
-  & ((a?: PH) => Multiply_1)
 
-type Multiply = ((a: number, b: number) => number)
+type Multiply = 
   & ((a: number, b?: PH) => Multiply_2)
   & ((a: PH, b: number) => Multiply_1)
-  & ((a?: PH, b?: PH) => Multiply)
+  & ((a: number, b: number) => number)
 ```
 <br>
 

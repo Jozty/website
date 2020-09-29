@@ -8,7 +8,14 @@ description: All functions
 [adjust]: https://deno.land/x/fae/adjust.ts
 [all]: https://deno.land/x/fae/all.ts
 [divide]: https://deno.land/x/fae/divide.ts
+[max]: https://deno.land/x/fae/max.ts
+[median]: https://deno.land/x/fae/median.ts
+[min]: https://deno.land/x/fae/min.ts
 [multiply]: https://deno.land/x/fae/multiply.ts
+[nth]: https://deno.land/x/fae/nth.ts
+[path]: https://deno.land/x/fae/path.ts
+[pathOr]: https://deno.land/x/fae/pathOr.ts
+[paths]: https://deno.land/x/fae/paths.ts
 [subtract]: https://deno.land/x/fae/subtract.ts
 [when]: https://deno.land/x/fae/when.ts
 [whereAll]: https://deno.land/x/fae/whereAll.ts
@@ -28,7 +35,7 @@ description: All functions
 Adds two numbers
 
 ```typescript
-Fae.add(3, 4) //7
+Fae.add(3, 4) // 7
 const add5 = Fae.add(5)
 add5(4) // 9
 Fae.add(4)(3) // 8
@@ -96,12 +103,76 @@ Return `true` if all the elements of the functor match `predicate` `false` other
 Divides two numbers
 
 ```typescript
-Fae.divide(10, 2) //5
+Fae.divide(10, 2) // 5
 const divideBy10 = Fae.divide(Fae._, 10)
 divideBy10(30) // 3
 const reciprocal = Fae.divide(1)
 reciprocal(2) // 0.5
-Fae.divide(20)(5) //4
+Fae.divide(20)(5) // 4
+```
+
+---
+
+### max
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/max)</span>[[src]][max]</span>
+
+```typescript
+(a: T, b: T) => T
+```
+
+Returns the larger of its two arguments.
+
+```typescript
+Fae.max(10, -2) // 10
+Fae.max(30.89)(10.56) // 30.89
+Fae.divide(Fae._, 10)(5) // 10
+Fae.max('aaa', 'ab')  // 'ab'
+Fae.max('aa', 'aab')  // 'aab'
+Fae.max(0, Infinity)  // Infinity
+```
+
+---
+
+### median
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/median</span>[[src]][median]</span>
+
+```typescript
+(list: number[]) => number
+```
+
+Returns the median of the given list of numbers. NaNs are filtered out, if present. Returns NaN if the list is empty.
+
+```typescript
+Fae.median([9, 3, -5, -2, 0]) // 0
+Fae.median([7.5, 2.8, -10.2, 8]) // 5.15
+Fae.median([2, 6, NaN]) // 4
+Fae.median([Infinity, -Infinity]) // 5
+Fae.median([]) // NaN
+Fae.median([Infinity, Infinity]) // Infinity
+
+```
+
+---
+
+### min
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/min)</span>[[src]][min]</span>
+
+```typescript
+(a: T, b: T) => T
+```
+
+Returns the smaller of its two arguments.
+
+```typescript
+Fae.max(10, -2) // -2
+Fae.max(30.89)(10.56) // 10.56
+Fae.divide(Fae._, 10)(5) // 5
+Fae.max('aaa', 'ab')  // 'aaa'
+Fae.max('aa', 'aab')  // 'aa'
+Fae.max(0, Infinity)  // 0
 ```
 
 ---
@@ -121,6 +192,85 @@ Fae.multiply(3, 4) // 12
 const multiply3 = Fae.multiply(3)
 multiply3(6) // 18
 Fae.multiply(6)(7) // 42
+```
+
+---
+
+### nth
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/nth)</span>[[src]][nth]</span>
+
+```typescript
+(index: number, functor: F) => NthReturnType<F>
+```
+
+Returns `index`th element of `functor`. Returns element counting from right end if `index` is -ve. Works in array-like/string/iterable/iterator.
+
+```typescript
+Fae.nth(3, [1, 5, 3, 7, 9]) // 7
+Fae.nth(1, ['as', 'df', 'ef', 'qw']) // 'df'
+Fae.nth(5)(['as', 'df', 'ef', 'qw']) // undefined
+Fae.nth(-3, [1, 5, 3, 7, 9]) // 3
+Fae.nth(Fae._, 'hello')(-3) // 'l'
+```
+
+---
+
+### path
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/path)</span>[[src]][path]</span>
+
+```typescript
+(ps: Path, obj: ObjRec<T> | null) => R
+```
+
+Retrieve the value at a given path. The path may be any array of keys or string of keys separated by `/` or `.` .
+
+```typescript
+Fae.path('a')({a: 2, b: 3, c: {k: [1, 2, 3]}})  // 2
+Fae.path(Fae._, {a: 2, b: 3, c: {k: [1, 2, 3]}})('c.k') // [1, 2, 3]
+Fae.path('c.k.0', Fae._)({a: 2, b: 3, c: {k: [1, 2, 3]}}) // 1
+Fae.path('c.k.e', Fae._)({a: 2, b: 3, c: {k: [1, 2, 3]}}) // undefined
+
+```
+
+---
+
+### pathOr
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/pathOr)</span>[[src]][pathOr]</span>
+
+```typescript
+(d: D, p: Path, obj: ObjRec<T> | null) => D | P
+```
+
+If the given, non-null object has a value at the given path, returns the value at that path. Otherwise returns the provided default value.
+
+```typescript
+Fae.path('Unknown', 'a')({a: 2, b: 3, c: {k: [1, 2, 3]}})  // 2
+Fae.path('Default', Fae._, {a: 2, b: 3, c: {k: [1, 2, 3]}})('c.k') // [1, 2, 3]
+Fae.path('Default', 'c.k.0', Fae._)({a: 2, b: 3, c: {k: [1, 2, 3]}}) // 1
+Fae.path(Fae._, 'c.k.e', Fae._)('Default')({a: 2, b: 3, c: {k: [1, 2, 3]}}) // 'Default'
+```
+
+---
+
+### paths
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/paths)</span>[[src]][paths]</span>
+
+```typescript
+(pathsArr: Path[], obj: ObjRec<T> | null) => R[]
+```
+
+Retrieves the values at given paths `pathsArr` of `obj`. Each path in the `pathsArr` may be any array of keys or string of keys separated by `/` or `.` .
+
+```typescript
+Fae.pathOr('Undefined', Fae._, {a: 2, b: 3, c: {k: [1, 2, 3]}})('c.k.e')  // 'Undefined'
+Fae.pathOr('Default', 'c.k.0', Fae._)({a: 2, b: 3, c: {k: [1, 2, 3]}})  // 1
+Fae.pathOr('Default', Fae._, Fae._)('c/k/-1')({a: 2, b: 3, c: {k: [1, 2, 3]}})  // 3
+Fae.pathOr('Default')('a')({a: 2, b: 3, c: {k: [1, 2, 3]}}) // 2
+Fae.pathOr(Fae._, Fae._, {a: 2, b: 3, c: {k: [1, 2, 3]}})('Undefined')('c.k.e') // 'Undefined'
 ```
 
 ---

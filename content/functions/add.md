@@ -26,15 +26,13 @@ function _add(a: number, b: number): number {
 
 ```typescript
 type Add_2 = ((b: number) => number)
-  & ((b?: PH) => Add_2)
 
 type Add_1 = ((a: number) => number)
-  & ((a?: PH) => Add_1)
 
-type Add = ((a: number, b: number) => number)
+type Add = 
   & ((a: number, b?: PH) => Add_2)
   & ((a: PH, b: number) => Add_1)
-  & ((a?: PH, b?: PH) => Add)
+  & ((a: number, b: number) => number)
 ```
 <br>
 
