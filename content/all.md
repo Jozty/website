@@ -126,7 +126,7 @@ Returns the larger of its two arguments.
 ```typescript
 Fae.max(10, -2) // 10
 Fae.max(30.89)(10.56) // 30.89
-Fae.divide(Fae._, 10)(5) // 10
+Fae.max(Fae._, 10)(5) // 10
 Fae.max('aaa', 'ab')  // 'ab'
 Fae.max('aa', 'aab')  // 'aab'
 Fae.max(0, Infinity)  // Infinity
@@ -136,7 +136,7 @@ Fae.max(0, Infinity)  // Infinity
 
 ### median
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/median</span>[[src]][median]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/median)</span>[[src]][median]</span>
 
 ```typescript
 (list: number[]) => number
@@ -148,7 +148,7 @@ Returns the median of the given list of numbers. NaNs are filtered out, if prese
 Fae.median([9, 3, -5, -2, 0]) // 0
 Fae.median([7.5, 2.8, -10.2, 8]) // 5.15
 Fae.median([2, 6, NaN]) // 4
-Fae.median([Infinity, -Infinity]) // 5
+Fae.median([Infinity, -Infinity]) // NaN
 Fae.median([]) // NaN
 Fae.median([Infinity, Infinity]) // Infinity
 
@@ -167,12 +167,12 @@ Fae.median([Infinity, Infinity]) // Infinity
 Returns the smaller of its two arguments.
 
 ```typescript
-Fae.max(10, -2) // -2
-Fae.max(30.89)(10.56) // 10.56
-Fae.divide(Fae._, 10)(5) // 5
-Fae.max('aaa', 'ab')  // 'aaa'
-Fae.max('aa', 'aab')  // 'aa'
-Fae.max(0, Infinity)  // 0
+Fae.min(10, -2) // -2
+Fae.min(30.89)(10.56) // 10.56
+Fae.min(Fae._, 10)(5) // 5
+Fae.min('aaa', 'ab')  // 'aaa'
+Fae.min('aa', 'aab')  // 'aa'
+Fae.min(0, Infinity)  // 0
 ```
 
 ---
@@ -247,10 +247,11 @@ Fae.path('c.k.e', Fae._)({a: 2, b: 3, c: {k: [1, 2, 3]}}) // undefined
 If the given, non-null object has a value at the given path, returns the value at that path. Otherwise returns the provided default value.
 
 ```typescript
-Fae.path('Unknown', 'a')({a: 2, b: 3, c: {k: [1, 2, 3]}})  // 2
-Fae.path('Default', Fae._, {a: 2, b: 3, c: {k: [1, 2, 3]}})('c.k') // [1, 2, 3]
-Fae.path('Default', 'c.k.0', Fae._)({a: 2, b: 3, c: {k: [1, 2, 3]}}) // 1
-Fae.path(Fae._, 'c.k.e', Fae._)('Default')({a: 2, b: 3, c: {k: [1, 2, 3]}}) // 'Default'
+Fae.pathOr('Undefined', Fae._, {a: 2, b: 3, c: {k: [1, 2, 3]}})('c.k.e')  // 'Undefined'
+Fae.pathOr('Default', 'c.k.0', Fae._)({a: 2, b: 3, c: {k: [1, 2, 3]}})  // 1
+Fae.pathOr('Default', Fae._, Fae._)('c/k/-1')({a: 2, b: 3, c: {k: [1, 2, 3]}})  // 3
+Fae.pathOr('Default')('a')({a: 2, b: 3, c: {k: [1, 2, 3]}}) // 2
+Fae.pathOr(Fae._, Fae._, {a: 2, b: 3, c: {k: [1, 2, 3]}})('Undefined')('c.k.e') // 'Undefined'
 ```
 
 ---
@@ -266,11 +267,11 @@ Fae.path(Fae._, 'c.k.e', Fae._)('Default')({a: 2, b: 3, c: {k: [1, 2, 3]}}) // '
 Retrieves the values at given paths `pathsArr` of `obj`. Each path in the `pathsArr` may be any array of keys or string of keys separated by `/` or `.` .
 
 ```typescript
-Fae.pathOr('Undefined', Fae._, {a: 2, b: 3, c: {k: [1, 2, 3]}})('c.k.e')  // 'Undefined'
-Fae.pathOr('Default', 'c.k.0', Fae._)({a: 2, b: 3, c: {k: [1, 2, 3]}})  // 1
-Fae.pathOr('Default', Fae._, Fae._)('c/k/-1')({a: 2, b: 3, c: {k: [1, 2, 3]}})  // 3
-Fae.pathOr('Default')('a')({a: 2, b: 3, c: {k: [1, 2, 3]}}) // 2
-Fae.pathOr(Fae._, Fae._, {a: 2, b: 3, c: {k: [1, 2, 3]}})('Undefined')('c.k.e') // 'Undefined'
+Fae.paths(['', ['p', 0, 'q']], { a: { b: 2 }, p: [{ q: 3 }] })  // [{ a: { b: 2 }, p: [{ q: 3 }] }, 3]
+Fae.paths([[], ['p', 0, 'q']], { a: { b: 2 }, p: [{ q: 3 }] })  // [{ a: { b: 2 }, p: [{ q: 3 }] }, 3]
+Fae.paths([['p'], ['p', 0]], { a: { b: 2 }, p: [{ q: 3 }] })  // [[{ q: 3 } ], { q: 3 }]
+Fae.paths([['a', ''], ['p', 0, 'q']], { a: { b: 2 }, p: [{ q: 3 }]})  // [undefined, 3]
+
 ```
 
 ---

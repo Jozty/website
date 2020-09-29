@@ -25,12 +25,6 @@ function _pathOr<T, D, P>(d: D, p: Path, obj: ObjRec<T> | null) {
 ```
 <br>
 
-**Used types**
-* [Path](/types/Path)
-* [ObjRec](/types/ObjRec)
-
-<br>
-
 **Curried type declaration**
 
 ```typescript
@@ -64,6 +58,12 @@ type PathOr =
   & (<T>(d: PH, p: Path, obj: ObjRec<T> | null) => PathOr_1)
   & (<T, D, P>(d: D, p: Path, obj: ObjRec<T> | null) => D | P)
 ```
+<br>
+
+**Used types**
+* [Path](/types/Path)
+* [ObjRec](/types/ObjRec)
+
 <br>
 
 **Examples**

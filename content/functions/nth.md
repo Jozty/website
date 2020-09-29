@@ -72,7 +72,6 @@ nthArr3(2)    // undefined
 nthArr4(0)    // undefined
 nthArr4(5)    // undefined
 
-
 nthChar(0)    // 'h'
 nthChar(5)    // ''
 nthChar(-3)   // 'l'

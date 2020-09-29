@@ -81,7 +81,7 @@ export default class SideToolBox extends Vue {
   async getFunctions(searchQuery: string) {
     // @ts-ignore
     const functionsData = await this.$content('functions').fetch()
-    const functions: string[] = functionsData.map((f: any) => f.slug)
+    const functions: string[] = functionsData.map((f: any) => f.slug).sort()
     if (!searchQuery) {
       this.functions = functions
     } else {
