@@ -28,16 +28,16 @@ function _min(a: number | string, b: number | string) {
 **Curried type declaration**
 
 ```typescript
-type Min_2<T extends number | string | Date> = ((b: T) => T)
-  & ((b?: PH) => Min_2<T>)
+type Min_2<T extends number | string | Date> = (b: T) => T
 
-type Min_1<T extends number | string | Date> = ((a: T) => T)
-  & ((a?: PH) => Min_1<T>)
+type Min_1<T extends number | string | Date> = (a: T) => T
 
-type Min = (<T extends number | string | Date>(a: T, b: T) => T)
-  & (<T extends number | string | Date>(a: T, b?: PH) => Min_2<T>)
-  & (<T extends number | string | Date>(a: PH, b: T) => Min_1<T>)
-  & ((a?: PH, b?: PH) => Min)
+type _Min<T extends number | string | Date> =
+  & ((a: T, b?: PH) => Min_2<T>)
+  & ((a: PH, b: T) => Min_1<T>)
+  & ((a: T, b: T) => T)
+
+type Min = _Min<number> & _Min<string> & _Min<Date>
 ```
 <br>
 
@@ -45,6 +45,11 @@ type Min = (<T extends number | string | Date>(a: T, b: T) => T)
 ```typescript
 import { min } from 'https://deno.land/x/fae/mod.ts'
 
+let d1: Date = new Date('01-01-2001')
+let d2: Date = new Date('01-01-2002')
+
+min(d1, d2)             // d1
+min(d2, d1)             // d1
 min(-10, 8)             // -10
 min(10, -8)             // -8
 min(-10.888, -8.635)    // -10.888

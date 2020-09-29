@@ -6,7 +6,7 @@ description: a thorough tour of nth function
 ## Nth
 <br>
 
-Returns `index`th element of `functor`. Returns element counting from right end if `index` is -ve. Works in array-like/string/iterable/iterator
+Returns `index`th element of `functor`. Returns element counting from right end if `index` is -ve. Works in array-like/string/iterable/iterator.
 
 <br>
 
@@ -28,16 +28,18 @@ function _nth<F extends FunctorWithArLk<T> | string, T> {
 **Curried type declaration**
 
 ```typescript
-type Nth_2 = (<F extends FunctorWithArLk<T> | string, T>(functor: F) => T)
-  & ((functor?: PH) => Nth_2)
+type NthReturnType<F> = F extends FunctorWithArLk<infer U>
+  ? U
+  : string
 
-type Nth_1<F extends FunctorWithArLk<T> | string, T> = ((index: number) => T)
-  & ((index?: PH) => Nth_1<F, T>)
+type Nth_2 = (<F extends FunctorWithArLk<any> | string>(functor: F) => NthReturnType<F>)
 
-type Nth = (<F extends FunctorWithArLk<T> | string, T>(index: number, functor: F) => T)
+type Nth_1<F extends FunctorWithArLk<any> | string> = ((index: number) => NthReturnType<F>)
+
+type Nth = 
   & ((index: number, functor?: PH) => Nth_2)
-  & (<F extends FunctorWithArLk<T> | string, T>(index: PH, functor: F) => Nth_1<F, T>)
-  & ((index?: PH, functor?: PH) => Nth)
+  & (<F extends FunctorWithArLk<any> | string>(index: PH, functor: F) => Nth_1<F>)
+  & (<F extends FunctorWithArLk<any> | string>(index: number, functor: F) => NthReturnType<F>)
 ```
 <br>
 
@@ -69,6 +71,7 @@ nthArr3(0)    // 1
 nthArr3(2)    // undefined
 nthArr4(0)    // undefined
 nthArr4(5)    // undefined
+
 
 nthChar(0)    // 'h'
 nthChar(5)    // ''

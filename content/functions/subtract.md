@@ -26,15 +26,13 @@ function _subtract(a: number, b: number): number {
 
 ```typescript
 type Subtract_2 = ((b: number) => number)
-  & ((b?: PH) => Subtract_2)
-
+ 
 type Subtract_1 = ((a: number) => number)
-  & ((a?: PH) => Subtract_1)
 
-type Subtract = ((a: number, b: number) => number)
+type Subtract = 
   & ((a: number, b?: PH) => Subtract_2)
   & ((a: PH, b: number) => Subtract_1)
-  & ((a?: PH, b?: PH) => Subtract)
+  & ((a: number, b: number) => number)
 ```
 <br>
 

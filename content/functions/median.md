@@ -29,13 +29,12 @@ function _median(list: number[]) {
 
 ```typescript
 type Median = ((list: number[]) => number)
-  & ((list?: PH) => Median)
 ```
 <br>
 
 **Examples**
 ```typescript
-import {median } from 'https://deno.land/x/fae/mod.ts'
+import { median } from 'https://deno.land/x/fae/mod.ts'
 
 const ages = [2, 5, 3, 4, 4, 6, 7, 3]
 const data = {

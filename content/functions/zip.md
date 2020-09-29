@@ -27,15 +27,13 @@ function _zip<T1, T2>(list1: T1[], list2: T2[]): [T1, T2][] {
 
 ```typescript
 type Zip_2<T1> = (<T2>(list2: T2[]) => [T1, T2][])
-  & ((list2?: PH) => Zip_2<T1>)
 
 type Zip_1<T2> = (<T1>(list1: T1[]) => [T1, T2][])
-  & ((list1?: PH) => Zip_1<T2>)
 
-type Zip = (<T1, T2>(list1: T1[], list2: T2[]) => [T1, T2][])
+type Zip = 
   & (<T1>(list1: T1[], list2?: PH) => Zip_2<T1>)
   & (<T2>(list1: PH, list2: T2[]) => Zip_1<T2>)
-  & ((list1?: PH, list2?: PH) => Zip)
+  & (<T1, T2>(list1: T1[], list2: T2[]) => [T1, T2][])
 ```
 <br>
 
