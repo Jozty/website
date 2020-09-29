@@ -1,8 +1,5 @@
 <template>
   <div>
-    <b-sidebar :open="isSideToolBoxOpen" :overlay="true" :fullheight="true">
-      <side-tool-box />
-    </b-sidebar>
     <div class="columns is-gapless">
       <div class="column is-narrow">
         <side-tool-box v-if="$device.isDesktop" class="side-bar" />
@@ -25,8 +22,6 @@ import SideToolBox from '~/components/SideToolBox.vue'
   components: { SideToolBox },
 })
 export default class Docs extends Vue {
-  isSideToolBoxOpen = false
-
   transition() {
     return 'home'
   }
@@ -41,13 +36,6 @@ export default class Docs extends Vue {
     document.querySelectorAll('.icon').forEach((e) => {
       e.className = e.className.replace(/icon/g, 'fa')
     })
-
-    this.$nuxt.$on('toggleSideToolBox', this.toggleSideToolBox)
-  }
-
-  toggleSideToolBox(value: boolean) {
-    console.log(value)
-    this.isSideToolBoxOpen = value
   }
 }
 </script>
