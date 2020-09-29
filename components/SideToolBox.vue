@@ -4,7 +4,7 @@
     :class="{ sticky: isSticky }"
     :style="{ height }"
   >
-    <div ref="searchBox">
+    <div ref="searchBox" class="search-box">
       <b-field label="Search" type="is-secondary">
         <b-input v-model="searchQuery"></b-input>
       </b-field>
@@ -19,7 +19,7 @@
     <ul class="functions-list" :style="{ height: listHeight }">
       <div class="typ-h2">Functions</div>
       <li v-for="(func, i) in functions" :key="i">
-        <nuxt-link :to="{ hash: func.toLowerCase() }">{{ func }}</nuxt-link>
+        <nuxt-link :to="{ path: '/docs', hash: func.toLowerCase() }">{{ func }}</nuxt-link>
       </li>
     </ul>
   </div>
@@ -114,11 +114,14 @@ export default class SideToolBox extends Vue {
     top: 0;
   }
 }
+.search-box {
+  margin-bottom: 16px;
+}
 .functions-list {
   height: calc(100% - 72px);
   overflow-y: scroll;
   border-top: 2px solid $primary-200;
-  margin: 8px -16px 0;
+  margin: 8px -16px 16px;
   padding: 12px 0 12px 16px;
   li {
     padding-left: 8px;

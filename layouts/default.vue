@@ -1,19 +1,28 @@
 <template>
   <div>
+    <b-sidebar
+      :open.sync="isSideToolBarOpen"
+      :overlay="true"
+      :fullheight="true"
+    >
+      <side-bar-header />
+      <side-tool-box />
+    </b-sidebar>
     <b-navbar
       type="is-primary-50"
       class="is-fullhd"
       wrapper-class="container is-widescreen"
       :transparent="true"
       :class="{ 'border-bottom': !hasHero }"
+      :mobile-burger="false"
     >
       <template slot="brand">
-        <!--        <b-icon-->
-        <!--          v-if="isMoreIconVisible"-->
-        <!--          class="more"-->
-        <!--          icon="dots-vertical"-->
-        <!--          @click.native="toggleSideToolBox"-->
-        <!--        />-->
+        <b-icon
+          v-if="isMoreIconVisible"
+          class="more no-select"
+          icon="menu"
+          @click.native="openSideBar"
+        />
         <nuxt-link to="/" class="logo">
           <img src="~assets/logo-80x80-2.png" alt="logo" />
         </nuxt-link>
@@ -39,28 +48,30 @@
 
 <script lang="ts">
 import { Vue, Component, Watch } from 'nuxt-property-decorator'
+import SideToolBox from '~/components/SideToolBox.vue'
+import SideBarHeader from '~/components/SideBarHeader.vue'
 
-@Component
+@Component({
+  components: { SideBarHeader, SideToolBox },
+})
 export default class Default extends Vue {
-  isSideToolBoxOpen = false
   hasHero = false
   isMoreIconVisible = false
+  isSideToolBarOpen = false
 
   @Watch('$route')
   updateClass() {
     this.hasHero = this.$route.path === '/'
-    this.isMoreIconVisible =
-      // @ts-ignore
-      !this.$device.isDesktop && this.$route.path === '/docs'
+    // @ts-ignore
+    this.isMoreIconVisible = !this.$device.isDesktop
   }
 
   mounted() {
     this.updateClass()
   }
 
-  toggleSideToolBox() {
-    this.isSideToolBoxOpen = !this.isSideToolBoxOpen
-    this.$nuxt.$emit('toggleSideToolBox', this.isSideToolBoxOpen)
+  openSideBar() {
+    this.isSideToolBarOpen = true
   }
 }
 </script>
@@ -71,6 +82,10 @@ export default class Default extends Vue {
 }
 </style>
 <style lang="scss">
+@import 'assets/styles/buefy';
+.sidebar-content {
+  background-color: $primary-50;
+}
 .navbar {
   align-items: center;
   a {
