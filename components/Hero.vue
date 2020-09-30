@@ -5,11 +5,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
-
-@Component
-export default class Hero extends Vue {}
+<script>
+export default {}
 </script>
 
 <style lang="scss" scoped>

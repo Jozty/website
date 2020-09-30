@@ -19,28 +19,50 @@
     <ul class="functions-list" :style="{ height: listHeight }">
       <div class="typ-h2">Functions</div>
       <li v-for="(func, i) in functions" :key="i">
-        <nuxt-link :to="{ path: '/docs', hash: func.toLowerCase() }">{{ func }}</nuxt-link>
+        <nuxt-link :to="{ path: '/docs', hash: func.toLowerCase() }">{{
+          func
+        }}</nuxt-link>
       </li>
     </ul>
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component, Prop, Watch } from 'nuxt-property-decorator'
+<script>
+export default {
+  props: {
+    isSticky: {
+      type: Boolean,
+      default: true,
+    },
+  },
 
-@Component
-export default class SideToolBox extends Vue {
-  @Prop({ default: true }) readonly isSticky = true
+  data() {
+    return {
+      windowHeight: null,
+      posY: null,
+      functions: [],
+      searchQuery: '',
+      listHeight: 'calc(100% - 116px)',
+    }
+  },
 
-  public windowHeight: number
-  public posY: number
-  public functions: string[] = []
-  public searchQuery = ''
-  public listHeight = 'calc(100% - 116px)'
+  computed: {
+    height() {
+      if (process) {
+        return '100%'
+      }
+      return this.windowHeight - this.posY + 'px'
+    },
+  },
 
-  constructor() {
-    super()
-    if (!process.client) {
+  watch: {
+    searchQuery() {
+      this.getFunctions(this.searchQuery)
+    },
+  },
+
+  async mounted() {
+    if (process) {
       this.windowHeight = 0
       this.posY = 0
     } else {
@@ -48,21 +70,7 @@ export default class SideToolBox extends Vue {
       this.posY =
         document.querySelector('.side-bar')?.getBoundingClientRect().y || 0
     }
-  }
 
-  @Watch('searchQuery')
-  onSearch() {
-    this.getFunctions(this.searchQuery)
-  }
-
-  get height() {
-    if (process.client) {
-      return this.windowHeight - this.posY + 'px'
-    }
-    return '100%'
-  }
-
-  async mounted() {
     this.$nextTick(() => {
       window.addEventListener('resize', this.onResize)
       window.addEventListener('scroll', this.onScroll)
@@ -71,34 +79,36 @@ export default class SideToolBox extends Vue {
     this.listHeight = `calc(100% - ${this.$refs.searchBox.scrollHeight}px)`
 
     await this.getFunctions('')
-  }
+  },
 
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)
     window.removeEventListener('scroll', this.onScroll)
-  }
+  },
 
-  async getFunctions(searchQuery: string) {
-    // @ts-ignore
-    const functionsData = await this.$content('functions').fetch()
-    const functions: string[] = functionsData.map((f: any) => f.slug).sort()
-    if (!searchQuery) {
-      this.functions = functions
-    } else {
-      this.functions = functions.filter((f) =>
-        f.includes(searchQuery.toLowerCase())
-      )
-    }
-  }
+  methods: {
+    async getFunctions(searchQuery) {
+      // @ts-ignore
+      const functionsData = await this.$content('functions').fetch()
+      const functions = functionsData.map((f) => f.slug).sort()
+      if (!searchQuery) {
+        this.functions = functions
+      } else {
+        this.functions = functions.filter((f) =>
+          f.includes(searchQuery.toLowerCase())
+        )
+      }
+    },
 
-  onResize() {
-    this.windowHeight = window && window.innerHeight
-  }
+    onResize() {
+      this.windowHeight = window && window.innerHeight
+    },
 
-  onScroll() {
-    this.posY =
-      document.querySelector('.side-bar')?.getBoundingClientRect().y || 0
-  }
+    onScroll() {
+      this.posY =
+        document.querySelector('.side-bar')?.getBoundingClientRect().y || 0
+    },
+  },
 }
 </script>
 

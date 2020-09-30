@@ -15,28 +15,25 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+<script>
 import SideToolBox from '~/components/SideToolBox.vue'
-@Component({
+export default {
   components: { SideToolBox },
-})
-export default class Docs extends Vue {
   transition() {
     return 'home'
-  }
+  },
 
-  async asyncData({ $content, params }: any) {
+  async asyncData({ $content, params }) {
     const article = await $content('all', params.slug).fetch()
 
     return { article }
-  }
+  },
 
   mounted() {
     document.querySelectorAll('.icon').forEach((e) => {
       e.className = e.className.replace(/icon/g, 'fa')
     })
-  }
+  },
 }
 </script>
 

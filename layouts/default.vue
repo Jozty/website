@@ -46,33 +46,41 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component, Watch } from 'nuxt-property-decorator'
+<script>
 import SideToolBox from '~/components/SideToolBox.vue'
 import SideBarHeader from '~/components/SideBarHeader.vue'
 
-@Component({
+export default {
   components: { SideBarHeader, SideToolBox },
-})
-export default class Default extends Vue {
-  hasHero = false
-  isMoreIconVisible = false
-  isSideToolBarOpen = false
 
-  @Watch('$route')
-  updateClass() {
-    this.hasHero = this.$route.path === '/'
-    // @ts-ignore
-    this.isMoreIconVisible = !this.$device.isDesktop
-  }
+  data() {
+    return {
+      hasHero: false,
+      isMoreIconVisible: false,
+      isSideToolBarOpen: false,
+    }
+  },
+
+  watch: {
+    $route() {
+      this.updateClass()
+    },
+  },
 
   mounted() {
     this.updateClass()
-  }
+  },
 
-  openSideBar() {
-    this.isSideToolBarOpen = true
-  }
+  methods: {
+    updateClass() {
+      this.hasHero = this.$route.path === '/'
+      this.isMoreIconVisible = !this.$device.isDesktop
+    },
+
+    openSideBar() {
+      this.isSideToolBarOpen = true
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>

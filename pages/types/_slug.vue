@@ -8,16 +8,13 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
-
-@Component
-export default class Slug extends Vue {
+<script>
+export default {
   transition() {
     return 'home'
-  }
+  },
 
-  async asyncData({ $content, params }: any) {
+  async asyncData({ $content, params }) {
     try {
       const func = await $content(`types/${params.slug}`).fetch()
       return { func }
@@ -26,13 +23,13 @@ export default class Slug extends Vue {
       const func = await $content(`error`).fetch()
       return { func }
     }
-  }
+  },
 
   mounted() {
     document.querySelectorAll('.icon').forEach((e) => {
       e.className = e.className.replace(/icon/g, 'fa')
     })
-  }
+  },
 }
 </script>
 
