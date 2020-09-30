@@ -10,7 +10,7 @@ Returns the median of the given list of numbers. NaNs are filtered out, if prese
 
 <br>
 
-&check; Curried
+&cross; Curried
 
 <br>
 <!---
@@ -28,7 +28,7 @@ function _median(list: number[]) {
 **Curried type declaration**
 
 ```typescript
-type Median = ((list: number[]) => number)
+type Median = (list: number[]) => number
 ```
 <br>
 

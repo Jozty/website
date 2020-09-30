@@ -28,11 +28,11 @@ function _path<R, T = any>(ps: Path, obj: ObjRec<T> | null): R {
 **Curried type declaration**
 
 ```typescript
-type PathF_2 = (<T, R>(obj: ObjRec<T> | null) => R)
+type PathF_2 = <T, R>(obj: ObjRec<T> | null) => R
 
-type PathF_1<T, R> = ((ps: Path) => R)
+type PathF_1<T, R> = (ps: Path) => R
 
-type PathF = 
+type PathF =
   & ((ps: Path, obj?: PH) => PathF_2)
   & (<T, R>(ps: PH, obj: ObjRec<T> | null) => PathF_1<T, R>)
   & (<T, R>(ps: Path, obj: ObjRec<T> | null) => R)

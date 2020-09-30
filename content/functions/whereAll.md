@@ -29,9 +29,9 @@ function _whereAll<T>(specs: Tests<T>, testObj: Obj<T>) {
 **Curried type declaration**
 
 ```typescript
-type WhereAll_2<T> = ((testObj: Obj<T>) => boolean)
+type WhereAll_2<T> = (testObj: Obj<T>) => boolean
 
-type WhereAll_1<T> = ((specs: Tests<T>) => boolean)
+type WhereAll_1<T> = (specs: Tests<T>) => boolean
 
 type WhereAll = 
   & (<T>(specs: Tests<T>, testObj?: PH) => WhereAll_2<T>)

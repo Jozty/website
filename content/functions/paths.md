@@ -28,9 +28,9 @@ function _paths<T, R>(pathsArr: Path[], obj: ObjRec<T> | null): R[] {
 **Curried type declaration**
 
 ```typescript
-type Paths_2 = (<T, R>(obj: ObjRec<T> | null) => R[])
+type Paths_2 = <T, R>(obj: ObjRec<T> | null) => R[]
 
-type Paths_1<T, R> = ((pathsArr: Path[]) => R[])
+type Paths_1<T, R> = (pathsArr: Path[]) => R[]
 
 type Paths = 
   & ((pathsArr: Path[], obj?: PH) => Paths_2)

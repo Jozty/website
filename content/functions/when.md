@@ -28,11 +28,11 @@ function _when<T, R>(predicate: Predicate1<T>, func: FuncArr1<T, R>, value: T): 
 **Curried type declaration**
 
 ```typescript
-type When_1<T, R> = ((predicate: Predicate1<T>) => T | R)
+type When_1<T, R> = (predicate: Predicate1<T>) => T | R
 
-type When_2<T> = (<R>(func: FuncArr1<T, R>) => T | R)
+type When_2<T> = <R>(func: FuncArr1<T, R>) => T | R
 
-type When_3<T, R> = ((value: T) => T | R)
+type When_3<T, R> = (value: T) => T | R
 
 type When_2_3<T> = 
   & (<R>(func: FuncArr1<T, R>, value?: PH) => When_3<T, R>)

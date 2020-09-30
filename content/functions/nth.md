@@ -32,11 +32,15 @@ type NthReturnType<F> = F extends FunctorWithArLk<infer U>
   ? U
   : string
 
-type Nth_2 = (<F extends FunctorWithArLk<any> | string>(functor: F) => NthReturnType<F>)
+type Nth_2 = <F extends FunctorWithArLk<any> | string>(
+  functor: F,
+) => NthReturnType<F>
 
-type Nth_1<F extends FunctorWithArLk<any> | string> = ((index: number) => NthReturnType<F>)
+type Nth_1<F extends FunctorWithArLk<any> | string> = (
+  index: number,
+) => NthReturnType<F>
 
-type Nth = 
+type Nth =
   & ((index: number, functor?: PH) => Nth_2)
   & (<F extends FunctorWithArLk<any> | string>(index: PH, functor: F) => Nth_1<F>)
   & (<F extends FunctorWithArLk<any> | string>(index: number, functor: F) => NthReturnType<F>)

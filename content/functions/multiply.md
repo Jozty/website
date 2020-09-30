@@ -25,9 +25,9 @@ function _multiply(a: number, b: number): number {
 **Curried type declaration**
 
 ```typescript
-type Multiply_2 = ((b: number) => number)
+type Multiply_2 = (b: number) => number
 
-type Multiply_1 = ((a: number) => number)
+type Multiply_1 = (a: number) => number
 
 type Multiply = 
   & ((a: number, b?: PH) => Multiply_2)

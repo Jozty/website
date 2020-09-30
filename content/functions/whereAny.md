@@ -29,9 +29,9 @@ function _whereAny<T>(specs: Tests<T> , testObj: Obj<T>) {
 **Curried type declaration**
 
 ```typescript
-type WhereAny_2<T> = ((testObj: Obj<T>) => boolean)
+type WhereAny_2<T> = (testObj: Obj<T>) => boolean
 
-type WhereAny_1<T> = ((specs: Tests<T>) => boolean)
+type WhereAny_1<T> = (specs: Tests<T>) => boolean
 
 type WhereAny = 
   & (<T>(specs: Tests<T>, testObj?: PH) => WhereAny_2<T>)

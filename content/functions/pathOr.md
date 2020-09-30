@@ -28,11 +28,11 @@ function _pathOr<T, D, P>(d: D, p: Path, obj: ObjRec<T> | null) {
 **Curried type declaration**
 
 ```typescript
-type PathOr_1 = (<D, P>(d: D) => D | P)
+type PathOr_1 = <D, P>(d: D) => D | P
   
-type PathOr_2<D> = (<P>(p: Path) => D | P)  
+type PathOr_2<D> = <P>(p: Path) => D | P 
 
-type PathOr_3<D> = (<T, P>(obj: ObjRec<T> | null) => D | P)
+type PathOr_3<D> = <T, P>(obj: ObjRec<T> | null) => D | P
 
 type PathOr_2_3<D> = 
   & ((p: Path, obj?: PH) => PathOr_3<D>)

@@ -25,11 +25,11 @@ function _divide(a: number, b: number): number {
 **Curried type declaration**
 
 ```typescript
-type Divide_2 = ((b: number) => number)
+type Divide_2 = (b: number) => number
 
-type Divide_1 = ((a: number) => number)
+type Divide_1 = (a: number) => number
 
-type Divide = 
+type Divide =
   & ((a: number, b?: PH) => Divide_2)
   & ((a: PH, b: number) => Divide_1)
   & ((a: number, b: number) => number)

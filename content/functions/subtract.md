@@ -25,9 +25,9 @@ function _subtract(a: number, b: number): number {
 **Curried type declaration**
 
 ```typescript
-type Subtract_2 = ((b: number) => number)
+type Subtract_2 = (b: number) => number
  
-type Subtract_1 = ((a: number) => number)
+type Subtract_1 = (a: number) => number
 
 type Subtract = 
   & ((a: number, b?: PH) => Subtract_2)

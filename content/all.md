@@ -151,7 +151,6 @@ Fae.median([2, 6, NaN]) // 4
 Fae.median([Infinity, -Infinity]) // NaN
 Fae.median([]) // NaN
 Fae.median([Infinity, Infinity]) // Infinity
-
 ```
 
 ---
@@ -231,7 +230,6 @@ Fae.path('a')({a: 2, b: 3, c: {k: [1, 2, 3]}})  // 2
 Fae.path(Fae._, {a: 2, b: 3, c: {k: [1, 2, 3]}})('c.k') // [1, 2, 3]
 Fae.path('c.k.0', Fae._)({a: 2, b: 3, c: {k: [1, 2, 3]}}) // 1
 Fae.path('c.k.e', Fae._)({a: 2, b: 3, c: {k: [1, 2, 3]}}) // undefined
-
 ```
 
 ---
@@ -271,7 +269,6 @@ Fae.paths(['', ['p', 0, 'q']], { a: { b: 2 }, p: [{ q: 3 }] })  // [{ a: { b: 2 
 Fae.paths([[], ['p', 0, 'q']], { a: { b: 2 }, p: [{ q: 3 }] })  // [{ a: { b: 2 }, p: [{ q: 3 }] }, 3]
 Fae.paths([['p'], ['p', 0]], { a: { b: 2 }, p: [{ q: 3 }] })  // [[{ q: 3 } ], { q: 3 }]
 Fae.paths([['a', ''], ['p', 0, 'q']], { a: { b: 2 }, p: [{ q: 3 }]})  // [undefined, 3]
-
 ```
 
 ---
@@ -322,7 +319,6 @@ Fae.when(isNumber, add1)(10)  //11
 Fae.when(equals(Fae._, 5), g)(5)  // 15
 Fae.when(isNumber, add1 as Func)('hello') // 'hello'
 Fae.when(equals([1,2,4,5,6]))(Fae.filter(isEven))([1,2,3,5,6])  // [1, 2, 3, 5, 6]
-
 ```
 
 ---
@@ -356,7 +352,6 @@ Fae.whereAll(spec2, test1)    // false
 Fae.whereAll(spec2, test2)    // false
 Fae.whereAll(spec2, test3)    // true
 Fae.whereAll(spec2, test5)    // true
-
 ```
 
 ---
@@ -393,7 +388,6 @@ Fae.whereAny(specP.name, person1.name) // true
 Fae.whereAny(specP.name, person2.name) // false
 Fae.whereAny(specP.address, person2.name)) //false
 Fae.whereAny(specP.name, person2.address) //false
-
 ```
 
 ---
@@ -435,7 +429,6 @@ Fae.whereEq(spec, test3) // true
 Fae.whereEq(person1.address, person3.address) // false
 Fae.whereEq(person1, person3) // false
 Fae.whereEq(person1.address, person2.address) // true
-
 ```
 
 ---
