@@ -1,3 +1,5 @@
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
+
 export default {
   /*
    ** Headers of the page
@@ -31,7 +33,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [],
+  plugins: [{ src: '~plugins/monaco-editor', ssr: false }],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -60,5 +62,12 @@ export default {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    plugins: [
+      new MonacoWebpackPlugin({
+        languages: ['javascript'],
+        features: ['!gotoSymbol'],
+      }),
+    ],
+  },
 }
