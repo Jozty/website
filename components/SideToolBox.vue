@@ -43,16 +43,8 @@ export default {
       functions: [],
       searchQuery: '',
       listHeight: 'calc(100% - 116px)',
+      height: '100%',
     }
-  },
-
-  computed: {
-    height() {
-      if (process) {
-        return '100%'
-      }
-      return this.windowHeight - this.posY + 'px'
-    },
   },
 
   watch: {
@@ -66,9 +58,7 @@ export default {
       this.windowHeight = 0
       this.posY = 0
     } else {
-      this.windowHeight = window && window.innerHeight
-      this.posY =
-        document.querySelector('.side-bar')?.getBoundingClientRect().y || 0
+      this.onResize()
     }
 
     this.$nextTick(() => {
@@ -102,11 +92,13 @@ export default {
 
     onResize() {
       this.windowHeight = window && window.innerHeight
+      this.posY =
+        document.querySelector('.side-bar')?.getBoundingClientRect().y || 0
+      this.height = this.windowHeight - this.posY + 'px'
     },
 
     onScroll() {
-      this.posY =
-        document.querySelector('.side-bar')?.getBoundingClientRect().y || 0
+      this.onResize()
     },
   },
 }
