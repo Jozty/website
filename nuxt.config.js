@@ -57,7 +57,14 @@ export default {
    ** Content module configuration
    ** See https://content.nuxtjs.org/configuration
    */
-  content: {},
+  content: {
+    extendParser: {
+      '.d.ts': (f) => {
+        console.log(f)
+        return f
+      },
+    },
+  },
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
@@ -65,7 +72,7 @@ export default {
   build: {
     plugins: [
       new MonacoWebpackPlugin({
-        languages: ['javascript'],
+        languages: ['typescript'],
         features: ['!gotoSymbol'],
       }),
     ],
