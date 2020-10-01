@@ -6,7 +6,7 @@
       :height="height"
       :width="width"
       :options="options"
-      value="import * as Fae from 'fae'"
+      value=""
       :editor-before-mount="editorBeforeMount"
       :editor-mounted="editorMounted"
       @change="onChange"
@@ -57,18 +57,18 @@ export default {
     },
 
     editorMounted(editor, monaco) {
-      fetch('/declarations/latest/mod.d.ts')
+      fetch('/declarations/v0.6.2/mod.d.ts')
         .then((res) => res.text())
         .then((code) => {
           monaco.languages.typescript.typescriptDefaults.addExtraLib(
             code,
-            'node_modules/@types/fae/index.d.ts'
+            'node_modules/@types/fae@0.6.2/index.d.ts'
           )
 
           const x = monaco.editor.createModel(
-            `import * as Fae from "fae"`,
+            `import * as Fae from "fae@0.6.2"`,
             'typescript',
-            new monaco.Uri('fae.ts')
+            new monaco.Uri('fae0-6.2.ts')
           )
 
           editor.setModel(x)
