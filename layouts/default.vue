@@ -30,6 +30,7 @@
       <template slot="end">
         <b-navbar-item tag="router-link" to="/"> Home </b-navbar-item>
         <b-navbar-item tag="router-link" to="/docs"> Docs </b-navbar-item>
+        <b-navbar-item tag="router-link" to="/try"> Try Fae </b-navbar-item>
         <b-navbar-item tag="a" target="_blank" href="https://deno.land/x/fae">
           <img src="~assets/images/deno.png" alt="logo" />
         </b-navbar-item>

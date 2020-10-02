@@ -1,7 +1,7 @@
 <template>
   <div class="try">
-    <div class="columns is-gapless">
-      <div class="column">
+    <div class="editor-columns columns is-gapless">
+      <div ref="editor-pane" class="column">
         <monaco-editor
           theme="vs-dark"
           language="typescript"
@@ -17,7 +17,9 @@
       <div class="column is-narrow">
         <div ref="panel" class="panel">
           <div class="panel__options">
-<!--            <MonacoNotification />-->
+            <select>
+              <option>v0.6.2</option>
+            </select>
           </div>
         </div>
       </div>
@@ -26,10 +28,7 @@
 </template>
 
 <script>
-import MonacoNotification from '@/components/monaco/MonacoNotification'
 export default {
-  // eslint-disable-next-line vue/no-unused-components
-  components: { MonacoNotification },
   data() {
     return {
       width: '100%',
@@ -64,7 +63,6 @@ export default {
 
   methods: {
     onPanelResize(e) {
-      console.log(e.offsetX)
       if (e.offsetX < this.panel.BORDER_SIZE) {
         this.panel.mousePosition = e.x
         document.addEventListener('mousemove', this.resizePanel, false)
@@ -110,6 +108,7 @@ export default {
 
     editorMounted(editor, monaco) {
       this.editor = editor
+      // window.editor = editor
       fetch('/declarations/v0.6.2/mod.d.ts')
         .then((res) => res.text())
         .then((code) => {
@@ -118,15 +117,28 @@ export default {
             'node_modules/@types/fae@0.6.2/index.d.ts'
           )
 
-          const x = monaco.editor.createModel(
-            `import * as Fae from "fae@0.6.2"`,
-            'typescript',
-            new monaco.Uri('fae0-6.2.ts')
-          )
+          let x
+          if (monaco.editor.getModels().length) {
+            x = monaco.editor.getModels()[0]
+          } else {
+            x = monaco.editor.createModel(
+              `import * as Fae from "fae@0.6.2"`,
+              'typescript',
+              new monaco.Uri('fae0-6.2.ts')
+            )
+          }
 
           editor.setModel(x)
-          editor.layout()
+          this.layoutEditor()
         })
+    },
+
+    layoutEditor() {
+      const rect = this.$refs['editor-pane'].getBoundingClientRect()
+      this.editor.layout({
+        width: rect.width,
+        height: rect.height,
+      })
     },
   },
 }
@@ -141,7 +153,7 @@ $editor-background: #1e1e1e;
 }
 
 .columns {
-  height: 100vh;
+  height: calc(100vh - 82px);
 }
 .panel {
   width: $panel-width;
@@ -164,6 +176,14 @@ $editor-background: #1e1e1e;
     height: 64px;
     background-color: #1a1a1a;
     border-bottom: black solid 1px;
+    display: flex;
+    align-items: center;
+    padding: 4px;
   }
+}
+</style>
+<style lang="scss">
+.monaco-editor {
+  overflow: hidden !important;
 }
 </style>
