@@ -23,7 +23,7 @@
               <option>v0.4.0</option>
             </select>
             <div class="icon-actions">
-              <b-icon class="icon-run" icon="play" />
+              <b-icon class="icon-run" icon="play" @click.native="runCode" />
             </div>
           </div>
           <div class="panel__output-title">Output:</div>
@@ -40,11 +40,12 @@ export default {
     return {
       width: '100%',
       height: '100%',
+      value: '',
       options: {},
       version: '0.6.2',
       editor: null,
       monaco: null,
-      output: `<span style="color:#0AA">[Function: f]<span style="color:#FFF">\n</span></span>`,
+      output: ``,
       panel: {
         BORDER_SIZE: 8,
         mousePosition: null,
@@ -102,7 +103,7 @@ export default {
     },
 
     onChange(value) {
-      // console.log(value)
+      this.value = value
     },
 
     editorBeforeMount(monaco) {
@@ -157,6 +158,19 @@ export default {
         width: rect.width,
         height: rect.height,
       })
+    },
+
+    async runCode() {
+      console.log('jere')
+      try {
+        const res = await this.$axios.post('/api/run', {
+          code: this.value,
+        })
+        console.log(res)
+        this.output = res.data
+      } catch (e) {
+        console.error(e)
+      }
     },
   },
 }

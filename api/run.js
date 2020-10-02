@@ -1,12 +1,13 @@
 const { exec } = require('child_process')
 const Convert = require('ansi-to-html')
 
-const convert = new Convert();
-
-
+const convert = new Convert({
+  newline: true,
+})
 
 function writeResponse(code, res, data) {
   res.statusCode = code
+  console.log(JSON.stringify(data))
   res.write(JSON.stringify(data))
   res.end()
 }

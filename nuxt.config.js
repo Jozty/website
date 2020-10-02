@@ -49,6 +49,7 @@ export default {
   modules: [
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
+    '@nuxtjs/axios',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
     '@nuxtjs/device',
@@ -78,5 +79,5 @@ export default {
     ],
   },
 
-  serverMiddleware: [{ path: '/api/a', handler: '~/api/run.js' }],
+  serverMiddleware: [{ path: '/api/run', handler: '~/api/run.js' }],
 }
