@@ -1,4 +1,7 @@
 const { exec } = require('child_process')
+const path = require('path')
+const fs = require('fs')
+const { v4 } = require('uuid')
 const Convert = require('ansi-to-html')
 
 const convert = new Convert({
@@ -7,8 +10,9 @@ const convert = new Convert({
 
 function writeResponse(code, res, data) {
   res.statusCode = code
-  console.log(JSON.stringify(data))
-  res.write(JSON.stringify(data))
+  if (typeof data !== 'string') data = JSON.stringify(data)
+  const out = convert.toHtml(data)
+  res.write(out)
   res.end()
 }
 
@@ -29,22 +33,35 @@ function setHandlersOnReq(req, res) {
 }
 
 function runDeno(data, req, res) {
+  const file = path.join(__dirname, 'tmp', v4() + '.ts')
   const code = data.code
-  const command = `echo "${code}" | deno run -`
+  let imp
+  if (!data.version) {
+    imp = `import * as Fae from 'https://deno.land/x/fae/mod.ts'`
+  } else {
+    imp = `import * as Fae from 'https://deno.land/x/fae@${data.version}/mod.ts'`
+  }
+
+  fs.writeFileSync(file, imp + '\n' + code)
+
+  const command = `deno run ${file.toString()}`
   exec(command, (error, stdout, stderr) => {
     if (error) {
-      writeResponse(400, res, error.message)
-      return
-    }
-    if (stderr) {
+      console.error('error')
+      console.error(error)
+      writeResponse(400, res, error.message || error)
+    } else if (stderr && !stdout) {
+      console.error('stderr')
+      console.error(stderr)
       writeResponse(400, res, stderr)
-      return
+    } else {
+      writeResponse(200, res, stdout)
     }
-    const out = convert.toHtml(stdout)
-    writeResponse(200, res, out)
+    fs.unlinkSync(file)
   })
 }
 
 export default function (req, res, next) {
+  console.log('here')
   setHandlersOnReq(req, res)
 }

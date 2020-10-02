@@ -19,8 +19,6 @@
           <div class="panel__options">
             <select class="select">
               <option>v0.6.2</option>
-              <option>v0.5.0</option>
-              <option>v0.4.0</option>
             </select>
             <div class="icon-actions">
               <b-icon class="icon-run" icon="play" @click.native="runCode" />
@@ -42,7 +40,7 @@ export default {
       height: '100%',
       value: '',
       options: {},
-      version: '0.6.2',
+      version: 'v0.6.2',
       editor: null,
       monaco: null,
       output: ``,
@@ -50,6 +48,7 @@ export default {
         BORDER_SIZE: 8,
         mousePosition: null,
       },
+      isRunning: false,
     }
   },
 
@@ -161,16 +160,43 @@ export default {
     },
 
     async runCode() {
-      console.log('jere')
+      if (this.isRunning) return
+      this.isRunning = this
+      this.output = 'Running...'
       try {
+        const code = this.getCode()
+        if (!code.trim()) {
+          // TODO show notification
+          this.output = ''
+          return
+        }
+
         const res = await this.$axios.post('/api/run', {
-          code: this.value,
+          code,
+          version: this.version,
         })
         console.log(res)
         this.output = res.data
       } catch (e) {
+        this.output = (e.response && e.response.data) || e.toString()
         console.error(e)
+      } finally {
+        this.isRunning = false
       }
+    },
+
+    getCode() {
+      let arr = this.value.split('\n')
+      arr = arr.filter(this.isFaeImport)
+      return arr.join('\n')
+    },
+
+    isFaeImport(line) {
+      if (!line.includes('import') && !line.includes('from')) {
+        return true
+      }
+      if (!line.includes('fae')) return true
+      return false
     },
   },
 }
