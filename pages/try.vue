@@ -17,10 +17,17 @@
       <div class="column is-narrow">
         <div ref="panel" class="panel">
           <div class="panel__options">
-            <select>
+            <select class="select">
               <option>v0.6.2</option>
+              <option>v0.5.0</option>
+              <option>v0.4.0</option>
             </select>
+            <div class="icon-actions">
+              <b-icon class="icon-run" icon="play" />
+            </div>
           </div>
+          <div class="panel__output-title">Output:</div>
+          <div class="panel__output-dump" v-html="output"></div>
         </div>
       </div>
     </div>
@@ -36,6 +43,8 @@ export default {
       options: {},
       version: '0.6.2',
       editor: null,
+      monaco: null,
+      output: `<span style="color:#0AA">[Function: f]<span style="color:#FFF">\n</span></span>`,
       panel: {
         BORDER_SIZE: 8,
         mousePosition: null,
@@ -46,6 +55,13 @@ export default {
   computed: {
     panelE() {
       return this.$refs.panel
+    },
+
+    faeModels() {
+      if (!this.monaco) return []
+      return this.monaco.editor.getModels().filter((a) => {
+        return a.uri.toString().includes('fae')
+      })
     },
   },
 
@@ -74,6 +90,7 @@ export default {
       this.panel.mousePosition = e.x
       console.log(dx, e.x, getComputedStyle(this.panelE, '').width)
       const panelWidth = parseInt(getComputedStyle(this.panelE, '').width) + dx
+      this.panelE.classList.add('resized')
 
       if (panelWidth <= 500 && panelWidth >= 250) {
         this.panelE.style.width = panelWidth + 'px'
@@ -108,6 +125,7 @@ export default {
 
     editorMounted(editor, monaco) {
       this.editor = editor
+      this.monaco = monaco
       // window.editor = editor
       fetch('/declarations/v0.6.2/mod.d.ts')
         .then((res) => res.text())
@@ -118,8 +136,8 @@ export default {
           )
 
           let x
-          if (monaco.editor.getModels().length) {
-            x = monaco.editor.getModels()[0]
+          if (this.faeModels.length) {
+            x = this.faeModels[0]
           } else {
             x = monaco.editor.createModel(
               `import * as Fae from "fae@0.6.2"`,
@@ -160,6 +178,10 @@ $editor-background: #1e1e1e;
   background-color: $editor-background;
   height: 100%;
   position: relative;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 
   &:after {
     content: ' ';
@@ -172,14 +194,70 @@ $editor-background: #1e1e1e;
     cursor: w-resize;
   }
 
+  &.resized {
+    padding-right: 16px;
+  }
+
   &__options {
     height: 64px;
     background-color: #1a1a1a;
     border-bottom: black solid 1px;
     display: flex;
     align-items: center;
-    padding: 4px;
+    padding: 4px 12px;
   }
+
+  &__output-title {
+    padding: 8px 16px;
+  }
+
+  &__output-dump {
+    padding: 8px 16px;
+    overflow: auto;
+    flex: 1;
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #555;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #444;
+    }
+  }
+}
+.select {
+  -webkit-appearance: none;
+  align-items: center;
+  box-shadow: none;
+  padding: 6px 24px;
+  position: relative;
+  vertical-align: top;
+  cursor: pointer;
+  display: block;
+  font-size: 1em;
+  max-width: 100%;
+  outline: none;
+  background: $editor-background;
+  color: white;
+  border: none;
+  height: unset;
+}
+.icon-run {
+  color: green;
+  cursor: pointer;
+}
+.icon-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
 }
 </style>
 <style lang="scss">

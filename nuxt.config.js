@@ -77,4 +77,6 @@ export default {
       }),
     ],
   },
+
+  serverMiddleware: [{ path: '/api/a', handler: '~/api/run.js' }],
 }
