@@ -5,7 +5,10 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 COPY yarn.lock ./
 
-#RUN npm i -g yarn
+RUN curl -fsSL https://deno.land/x/install/install.sh | sh
+
+ENV DENO_INSTALL="/root/.deno"
+ENV PATH="$DENO_INSTALL/bin:$PATH"
 
 RUN yarn install
 
