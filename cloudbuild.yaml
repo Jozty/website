@@ -1,26 +1,25 @@
-#steps:
+steps:
 #  - name: gcr.io/cloud-builders/docker
 #    args:
 #      - build
-#      - '--no-cache'
+##      - '--no-cache'
 #      - '-t'
 #      - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
 #      - .
 #      - '-f'
 #      - Dockerfile
 #    id: Build
-steps:
   - name: 'gcr.io/kaniko-project/executor:latest'
     args:
       - --destination
       - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
       - --cache=true
     id: Build
-  - name: gcr.io/cloud-builders/docker
-    args:
-      - push
-      - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
-    id: Push
+#  - name: gcr.io/cloud-builders/docker
+#    args:
+#      - push
+#      - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA'
+#    id: Push
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
     args:
       - run
