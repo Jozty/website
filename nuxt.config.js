@@ -80,4 +80,15 @@ export default {
   },
 
   serverMiddleware: [{ path: '/api/run', handler: '~/api/run.js' }],
+
+  server: {
+    port: 8080,
+    host: '0.0.0.0',
+    timing: true,
+  },
+
+  axios: {
+    // proxyHeaders: false,
+    baseURL: '/',
+  },
 }
