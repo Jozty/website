@@ -7,12 +7,14 @@ description: All functions
 [addindex]: https://deno.land/x/fae/addIndex.ts
 [adjust]: https://deno.land/x/fae/adjust.ts
 [all]: https://deno.land/x/fae/all.ts
+[and]: https://deno.land/x/fae/and.ts
 [divide]: https://deno.land/x/fae/divide.ts
 [max]: https://deno.land/x/fae/max.ts
 [median]: https://deno.land/x/fae/median.ts
 [min]: https://deno.land/x/fae/min.ts
 [multiply]: https://deno.land/x/fae/multiply.ts
 [nth]: https://deno.land/x/fae/nth.ts
+[or]: https://deno.land/x/fae/or.ts
 [path]: https://deno.land/x/fae/path.ts
 [pathOr]: https://deno.land/x/fae/pathOr.ts
 [paths]: https://deno.land/x/fae/paths.ts
@@ -21,6 +23,7 @@ description: All functions
 [whereAll]: https://deno.land/x/fae/whereAll.ts
 [whereAny]: https://deno.land/x/fae/whereAny.ts
 [whereEq]: https://deno.land/x/fae/whereEq.ts
+[xor]: https://deno.land/x/fae/xor.ts
 [zip]: https://deno.land/x/fae/zip.ts
 [zipwith]: https://deno.land/x/fae/zipWith.ts
 
@@ -90,6 +93,39 @@ Fae.adjust(-3, Fae.add(1), [0, 1, 2, 3]) // [0, 2, 2, 3]
 Return `true` if all the elements of the functor match `predicate` `false` otherwise . Acts as a transducer if a transformer is passed in place of `functor`
 
 
+---
+
+### and
+
+###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/and)</span>[[src]][and]</span>
+
+```typescript
+(a: any, b: any) => boolean
+```
+
+Returns `true` if both arguments are truthy values, `false` otherwise.
+
+<br>
+
+All the values are truthy except
+
+* the number `0`
+* the BigInt `0n`
+* the keyword `null`
+* the keyword `undefined`
+* the boolean `false`
+* the number `NaN`
+* the empty string `""` (equivalent to `''` or <code>``</code>)
+
+```typescript
+Fae.and(true, false) // false
+Fae.and(true, true) // true
+Fae.and([1, 2], true) // true
+Fae.and([], true) // true
+Fae.and(NaN, true) // false
+Fae.and("", 1n) // false
+Fae.and(0n, 1) // false
+```
 ---
 
 ### divide
@@ -213,6 +249,40 @@ Fae.nth(-3, [1, 5, 3, 7, 9]) // 3
 Fae.nth(Fae._, 'hello')(-3) // 'l'
 ```
 
+---
+
+### or
+
+###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/or)</span>[[src]][or]</span>
+
+```typescript
+(a: any, b: any) => boolean
+```
+
+Returns `true` if any of arguments is truthy values, `false` otherwise.
+
+<br>
+
+All the values are truthy except
+
+* the number `0`
+* the BigInt `0n`
+* the keyword `null`
+* the keyword `undefined`
+* the boolean `false`
+* the number `NaN`
+* the empty string `""` (equivalent to `''` or <code>``</code>)
+
+```typescript
+Fae.or(true, false) // true
+Fae.or(true, true) // true
+Fae.or([1, 2], true) // true
+Fae.or([], false) // true
+Fae.or(NaN, true) // true
+Fae.or("", 0n) // false
+Fae.or(null, NaN) // false
+Fae.or(undefined, false) // false
+```
 ---
 
 ### path
@@ -431,6 +501,39 @@ Fae.whereEq(person1, person3) // false
 Fae.whereEq(person1.address, person2.address) // true
 ```
 
+---
+
+### xor
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/xor)</span>[[src]][xor]</span>
+
+```typescript
+(a: any, b: any) => boolean
+```
+
+Exclusive Or - Returns `true` if one of the arguments is truthy, and the other is falsy, `false` otherwise.
+
+<br>
+
+All the values are truthy except
+
+* the number `0`
+* the BigInt `0n`
+* the keyword `null`
+* the keyword `undefined`
+* the boolean `false`
+* the number `NaN`
+* the empty string `""` (equivalent to `''` or <code>``</code>)
+
+```typescript
+Fae.xor(true, true) // false
+Fae.xor(true, false) // true
+Fae.xor(true, []) // false
+Fae.xor([], {}) // false
+Fae.xor([], NaN) // true
+Fae.xor("abc", Infinity) // false
+Fae.xor(new Date())(0) // true
+```
 ---
 
 ### zip

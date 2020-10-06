@@ -133,3 +133,10 @@ code {
   user-select: none !important; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+.nuxt-content {
+  ul {
+    list-style: disc !important;
+    margin-left: 24px;
+  }
+}
