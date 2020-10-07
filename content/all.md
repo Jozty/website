@@ -18,7 +18,14 @@ description: All functions
 [path]: https://deno.land/x/fae/path.ts
 [pathOr]: https://deno.land/x/fae/pathOr.ts
 [paths]: https://deno.land/x/fae/paths.ts
+[range]: https://deno.land/x/fae/range.ts
+[rangeUntil]: https://deno.land/x/fae/rangeUntil.ts
+[reverse]: https://deno.land/x/fae/reverse.ts
 [subtract]: https://deno.land/x/fae/subtract.ts
+[sum]: https://deno.land/x/fae/sum.ts
+[tail]: https://deno.land/x/fae/tail.ts
+[trim]: https://deno.land/x/fae/trim.ts
+[typ]: https://deno.land/x/fae/typ.ts
 [when]: https://deno.land/x/fae/when.ts
 [whereAll]: https://deno.land/x/fae/whereAll.ts
 [whereAny]: https://deno.land/x/fae/whereAny.ts
@@ -343,6 +350,63 @@ Fae.paths([['a', ''], ['p', 0, 'q']], { a: { b: 2 }, p: [{ q: 3 }]})  // [undefi
 
 ---
 
+### range
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/range)</span>[[src]][range]</span>
+
+```typescript
+(from: number, to: number) => number[]
+```
+
+Returns a list of numbers from `from` to `to` **both inclusive**.
+
+```typescript
+Fae.range(0, 5) // [0, 1, 2, 3, 4, 5]
+Fae.range(4, 7) // [4, 5, 6, 7]
+Fae.range(3, 2) // []
+Fae.range(_, 5)(1) // [1, 2, 3, 4, 5]
+Fae.range(1, _)(5) // [1, 2, 3, 4, 5]
+```
+
+---
+
+### rangeUntil
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/rangeUntil)</span>[[src]][rangeUntil]</span>
+
+```typescript
+(from: number, to: number) => number[]
+```
+
+Returns a list of numbers from `from` (**inclusive**) to `to` (**exclusive**).
+
+```typescript
+Fae.rangeUntil(0, 5) // [0, 1, 2, 3, 4]
+Fae.rangeUntil(4, 7) // [4, 5, 6]
+Fae.rangeUntil(3, 2) // []
+Fae.rangeUntil(_, 5)(1) // [1, 2, 3, 4]
+Fae.rangeUntil(1, _)(5) // [1, 2, 3, 4]
+```
+
+---
+
+### reverse
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/reverse)</span>[[src]][reverse]</span>
+
+```typescript
+<F extends T[] | string, T>(functor: F) => F
+```
+
+Reverses given string or array without affecting the original.
+
+```typescript
+Fae.revrse([1, 2, 3, 4]) // [4, 3, 2, 1]
+Fae.revrse('abcd') // 'dcba'
+```
+
+---
+
 ### subtract
 
 ###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/subtract)</span>[[src]][subtract]</span>
@@ -358,6 +422,98 @@ Fae.subtract(3, 4) // -1
 const subtract5 = Fae.subtract(Fae._, 5)
 subtract5(12) // 7
 Fae.subtract(6)(3) // 3
+```
+
+---
+
+### sum
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/sum)</span>[[src]][sum]</span>
+
+```typescript
+(list: number[]) => number
+```
+
+Adds together all the elements of a list.
+
+```typescript
+Fae.sum([1, 2, 3, 4]) // 10
+Fae.sum([1, 2, 3, NaN]) // NaN
+Fae.sum([1, 2, 3, Infinity]) // Infinity
+Fae.sum([1, 2, 3, Infinity, -Infinity]) // NaN
+```
+
+---
+
+### tail
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/tail)</span>[[src]][tail]</span>
+
+```typescript
+(functor: ArrayLike<T> | string) => T[] | string
+```
+
+Returns all but the first element of `functor`. Accepts array-like(including string).
+
+```typescript
+Fae.tail([1, 2, 3]) // [2, 3]
+Fae.tail([3]) // []
+Fae.tail([]) // []
+
+Fae.tail('abc') // 'bc'
+Fae.tail('c') // ''
+Fae.tail('') // ''
+
+const arr = {
+  0: 1,
+  1: 2,
+  2: 3,
+  3: 4,
+  length: 4,
+}
+Fae.tail(arr) // [2, 3, 4]
+```
+
+---
+
+### trim
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/trim)</span>[[src]][trim]</span>
+
+```typescript
+(str: string, t: string) => string
+```
+
+Trims the string `str` from both end with `t`.
+Trims with white space if `t` is `''`, with `t` otherwise.
+
+```typescript
+Fae.trim('   abc  ', '') // 'abc'
+Fae.trim('!!!Hey!!!', '!') // 'Hey'
+Fae.trim('!!!Hey!!!', '!!') // '!Hey!'
+Fae.trim('[[Hello]]]', '[') // 'Hello]]]'
+```
+
+---
+
+### typ
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/typ)</span>[[src]][typ]</span>
+
+```typescript
+(a: any) => AllTypes
+```
+
+Gives a single-word string description of the (native) type of the value. The returned types are of type `AllTypes`
+
+```typescript
+Fae.typ({}) // 'Object'
+Fae.typ(1) // 'Number'
+Fae.typ(false) // 'Boolean'
+Fae.typ('s') // 'String'
+Fae.typ(null) // 'Null'
+Fae.typ([]) // 'Array'
+Fae.typ(/[A-z]/) // 'RegExp'
 ```
 
 ---
