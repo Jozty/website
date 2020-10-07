@@ -313,7 +313,7 @@ Fae.path('c.k.e', Fae._)({a: 2, b: 3, c: {k: [1, 2, 3]}}) // undefined
 
 ### pathOr
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/pathOr)</span>[[src]][pathOr]</span>
+###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](/pathOr)</span>[[src]][pathOr]</span>
 
 ```typescript
 (d: D, p: Path, obj: ObjRec<T> | null) => D | P
