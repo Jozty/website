@@ -25,7 +25,7 @@ description: All functions
 [propIs]: https://deno.land/x/fae/propIs.ts
 [propOr]: https://deno.land/x/fae/propOr.ts
 [props]: https://deno.land/x/fae/props.ts
-[propsStatisfies]: https://deno.land/x/fae/propsStatisfies.ts
+[propSatisfies]: https://deno.land/x/fae/propSatisfies.ts
 [range]: https://deno.land/x/fae/range.ts
 [rangeUntil]: https://deno.land/x/fae/rangeUntil.ts
 [reverse]: https://deno.land/x/fae/reverse.ts
@@ -470,6 +470,43 @@ const GreatWithDefault = Fae.propOr('FaeModule', 'GreatLibrary')
 
 Great(fae)  // undefined
 GreatWithDefault(fae)  // 'FaeModule'
+```
+
+---
+
+### props
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/props)</span>[[src]][props]</span>
+
+```typescript
+<T>(p: Prop[], obj: Obj<T> | ArrayLike<T>): (T | undefined)[]
+```
+
+Returns an array of multiple on the `obj`. Order is preserved.
+
+```typescript
+const obj = { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6 }
+
+Fae.props(['a', 'e'], obj) // [1, 5]
+Fae.props(['f', 'c', 'e'], obj) // [6, 3, 5]
+Fae.props(['a', 'nonexistent'], obj) // [1, undefined]
+```
+
+---
+
+### propSatisfies
+
+###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](/propSatisfies)</span>[[src]][propSatisfies]</span>
+
+```typescript
+<T>(pred: Predicate1<T>, name: Prop, obj: Obj<T>): boolean
+```
+
+Returns `true` if the specified object property satisfies the given
+predicate; `false` otherwise.
+
+```typescript
+Fae.propSatisfies(x => x > 0, 'x', {x: 1, y: 2}) // true
 ```
 
 ---
