@@ -36,6 +36,12 @@ type PropF =
 ```
 <br>
 
+**Used types**
+* [Prop](/types/Prop)
+* [Obj](/types/Obj)
+
+<br>
+
 **Examples**
 ```typescript
 import { prop } from 'https://deno.land/x/fae/mod.ts'

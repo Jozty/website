@@ -412,6 +412,68 @@ Fae.prop(0, ['Cthulhu', 'Dagon', 'Yog-Sothoth']) // 'Cthulhu'
 
 ---
 
+### propEq
+
+###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](/propEq)</span>[[src]][propEq]</span>
+
+```typescript
+<T>(name: Prop, val: T, obj: Obj<T>): boolean
+```
+
+Returns `true` if the specified object property is equal, to the given value; `false` otherwise.
+
+```typescript
+const obj1 = { name: 'Shubham', age: 22, hair: 'blue', isMarried: true }
+Fae.propEq('name', 'Shubham', obj1) // true
+Fae.propEq('hair', 'black', obj1) // false
+```
+
+---
+
+### propIs
+
+###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](/propIs)</span>[[src]][propIs]</span>
+
+```typescript
+<T>(type: string, name: Prop, obj: Obj<T>): boolean
+```
+    
+Returns `true` if the specified object property is of the given type; `false` otherwise.
+
+```typescript
+Fae.propIs('Number', 'a', {a: 1, y: 2}) // true
+Fae.propIs('String', 'a', {a: 'foo'}) // true
+Fae.propIs('Number', 'a', {}) // false
+```
+
+---
+
+### propOr
+
+###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](/propOr)</span>[[src]][propOr]</span>
+
+```typescript
+<T, R>(d: R, p: Prop, obj: Obj<T> | null): T | R
+```
+
+If the given, non-null object has an own property with the specified name,
+returns the value of that property. Otherwise, returns the provided default value.
+
+```typescript
+const fae = {
+  name: 'Fae',
+  age: 15
+}
+
+const Great = Fae.prop('GreatLibrary')
+const GreatWithDefault = Fae.propOr('FaeModule', 'GreatLibrary')
+
+Great(fae)  // undefined
+GreatWithDefault(fae)  // 'FaeModule'
+```
+
+---
+
 ### range
 
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/range)</span>[[src]][range]</span>
