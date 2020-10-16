@@ -18,6 +18,14 @@ description: All functions
 [path]: https://deno.land/x/fae/path.ts
 [pathOr]: https://deno.land/x/fae/pathOr.ts
 [paths]: https://deno.land/x/fae/paths.ts
+[pluck]: https://deno.land/x/fae/pluck.ts
+[prepend]: https://deno.land/x/fae/prepend.ts
+[prop]: https://deno.land/x/fae/prop.ts
+[propEq]: https://deno.land/x/fae/propEq.ts
+[propIs]: https://deno.land/x/fae/propIs.ts
+[propOr]: https://deno.land/x/fae/propOr.ts
+[props]: https://deno.land/x/fae/props.ts
+[propsStatisfies]: https://deno.land/x/fae/propsStatisfies.ts
 [range]: https://deno.land/x/fae/range.ts
 [rangeUntil]: https://deno.land/x/fae/rangeUntil.ts
 [reverse]: https://deno.land/x/fae/reverse.ts
@@ -346,6 +354,60 @@ Fae.paths(['', ['p', 0, 'q']], { a: { b: 2 }, p: [{ q: 3 }] })  // [{ a: { b: 2 
 Fae.paths([[], ['p', 0, 'q']], { a: { b: 2 }, p: [{ q: 3 }] })  // [{ a: { b: 2 }, p: [{ q: 3 }] }, 3]
 Fae.paths([['p'], ['p', 0]], { a: { b: 2 }, p: [{ q: 3 }] })  // [[{ q: 3 } ], { q: 3 }]
 Fae.paths([['a', ''], ['p', 0, 'q']], { a: { b: 2 }, p: [{ q: 3 }]})  // [undefined, 3]
+```
+
+---
+
+### pluck
+
+###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/pluck)</span>[[src]][pluck]</span>
+
+```typescript
+(p: Prop, list: Obj<T>[]): T[]
+```
+
+Returns a new list by plucking the same named property off all objects in the list supplied.
+
+```typescript
+const getAges = Fae.pluck('age')
+getAges([{name: 'shubham', age: 22}, {name: 'shivam', age: 23}]) // [22, 23]
+
+Fae.pluck(0, [[1, 2], [3, 4]]) // [1, 3]
+Fae.pluck('val', {a: {val: 3}, b: {val: 5}}) // {a: 3, b: 5}
+```
+
+---
+
+### prepend
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/prepend)</span>[[src]][prepend]</span>
+
+```typescript
+<T>(el: T, list: T[]) => T[]
+```
+
+Add the `el` to the start of `list` and returns new list without affecting original
+
+```typescript
+Fae.prepend('tests', ['write', 'more']); //=> [''tests', ''write', 'more']
+Fae.prepend(['tests'], ['write', 'more']); //=> [['tests'], 'write', 'more']
+```
+
+---
+
+### prop
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/prop)</span>[[src]][prop]</span>
+
+```typescript
+<T>(p: Prop, obj: Obj<T> | ArrayLike<T>): T | undefined
+```
+
+Returns property `p` on the `obj` if exists
+
+```typescript
+Fae.prop('name', { name: 'John', age: 23 }) // 'John'
+Fae.prop(0, ['Cthulhu', 'Dagon', 'Yog-Sothoth']) // 'Cthulhu'
 ```
 
 ---
