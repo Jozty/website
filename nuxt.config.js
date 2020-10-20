@@ -33,7 +33,10 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [{ src: '~plugins/monaco-editor', ssr: false }],
+  plugins: [
+    { src: '~plugins/monaco-editor', ssr: false },
+    '~plugins/global-mixin',
+  ],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -53,6 +56,7 @@ export default {
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
     '@nuxtjs/device',
+    'nuxt-clipboard2',
   ],
   /*
    ** Content module configuration

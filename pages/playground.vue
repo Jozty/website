@@ -17,10 +17,21 @@
       <div class="column is-narrow">
         <div ref="panel" class="panel">
           <div class="panel__options">
-            <select class="select">
-              <option>v0.6.2</option>
+            <select v-model="version" class="select">
+              <option
+                v-for="version in versions"
+                :key="version"
+                :value="version"
+              >
+                {{ version }}
+              </option>
             </select>
             <div class="icon-actions">
+              <b-icon
+                class="icon-share"
+                icon="share-variant"
+                @click.native="shareCode"
+              />
               <b-icon class="icon-run" icon="play" @click.native="runCode" />
             </div>
           </div>
@@ -29,18 +40,20 @@
         </div>
       </div>
     </div>
+    <monaco-notification ref="noti" />
   </div>
 </template>
 
 <script>
+import MonacoNotification from '@/components/monaco/MonacoNotification'
 export default {
+  components: { MonacoNotification },
   data() {
     return {
       width: '100%',
       height: '100%',
       value: '',
       options: {},
-      version: 'v0.6.2',
       editor: null,
       monaco: null,
       output: ``,
@@ -49,6 +62,7 @@ export default {
         mousePosition: null,
       },
       isRunning: false,
+      version: 'v0.6.2',
     }
   },
 
@@ -57,12 +71,38 @@ export default {
       return this.$refs.panel
     },
 
-    faeModels() {
-      if (!this.monaco) return []
-      return this.monaco.editor.getModels().filter((a) => {
-        return a.uri.toString().includes('fae')
-      })
+    encodedCodeString() {
+      if (Buffer) {
+        return Buffer.from(this.codeWithoutImports).toString('base64')
+      }
+      return window.btoa(this.codeWithoutImports)
     },
+
+    codeWithoutImports() {
+      let arr = this.value.split('\n')
+      arr = arr.map(this.commentImports)
+      return arr.join('\n')
+    },
+
+    shareUrl() {
+      return `${this.baseUrl}${this.$route.fullPath}`
+    },
+  },
+
+  watch: {
+    encodedCodeString() {
+      this.setUrl()
+    },
+    version() {
+      this.setUrl()
+      this.setModel()
+    },
+  },
+
+  created() {
+    const { code, version } = this.$route.query
+    this.version = version || this.latestVersion
+    this.value = this.getDecodedCode(code || '')
   },
 
   mounted() {
@@ -78,6 +118,13 @@ export default {
   },
 
   methods: {
+    setUrl() {
+      this.$router.push({
+        path: this.$route.path,
+        query: { code: this.encodedCodeString, version: this.version },
+      })
+    },
+
     onPanelResize(e) {
       if (e.offsetX < this.panel.BORDER_SIZE) {
         this.panel.mousePosition = e.x
@@ -126,29 +173,7 @@ export default {
     editorMounted(editor, monaco) {
       this.editor = editor
       this.monaco = monaco
-      // window.editor = editor
-      fetch('/declarations/v0.6.2/mod.d.ts')
-        .then((res) => res.text())
-        .then((code) => {
-          monaco.languages.typescript.typescriptDefaults.addExtraLib(
-            code,
-            'node_modules/@types/fae@0.6.2/index.d.ts'
-          )
-
-          let x
-          if (this.faeModels.length) {
-            x = this.faeModels[0]
-          } else {
-            x = monaco.editor.createModel(
-              `import * as Fae from "fae@0.6.2"`,
-              'typescript',
-              new monaco.Uri('fae0-6.2.ts')
-            )
-          }
-
-          editor.setModel(x)
-          this.layoutEditor()
-        })
+      this.setModel()
     },
 
     layoutEditor() {
@@ -159,14 +184,70 @@ export default {
       })
     },
 
+    faeModels() {
+      if (!this.monaco) return []
+      return this.monaco.editor.getModels()
+      // return this.monaco.editor.getModels().filter((a) => {
+      //   return a.uri.toString().includes('fae')
+      // })
+    },
+
+    getDecodedCode(encodedCodeString) {
+      encodedCodeString = encodedCodeString || ''
+      if (Buffer) {
+        return Buffer.from(encodedCodeString, 'base64').toString('utf-8')
+      } else {
+        return window.atob(encodedCodeString)
+      }
+    },
+
+    setModel() {
+      let code = `import * as Fae from "fae@${this.version}"`
+      code += this.getDecodedCode(this.encodedCodeString)
+
+      const model = this.faeModels().find((m) =>
+        m.uri.toString().includes(this.version)
+      )
+
+      console.log(this.faeModels())
+
+      if (model) {
+        console.log(code)
+        console.log(model)
+        model.setValue(code)
+        this.editor.setModel(model)
+      } else {
+        fetch(`/declarations/${this.version}/mod.d.ts`)
+          .then((res) => res.text())
+          .then((declarationCode) => {
+            this.monaco.languages.typescript.typescriptDefaults.addExtraLib(
+              declarationCode,
+              `node_modules/@types/fae@${this.version}/index.d.ts`
+            )
+
+            const model = this.monaco.editor.createModel(
+              code,
+              'typescript',
+              new this.monaco.Uri(`${this.version}.ts`)
+            )
+
+            this.editor.setModel(model)
+            this.layoutEditor()
+          })
+      }
+    },
+
     async runCode() {
       if (this.isRunning) return
       this.isRunning = this
       this.output = 'Running...'
       try {
-        const code = this.getCode()
+        const code = this.codeWithoutImports
         if (!code.trim()) {
-          // TODO show notification
+          this.showNotification(
+            'No code',
+            'You forgot to add some honey to your code!'
+          )
           this.output = ''
           return
         }
@@ -185,18 +266,28 @@ export default {
       }
     },
 
-    getCode() {
-      let arr = this.value.split('\n')
-      arr = arr.filter(this.isFaeImport)
-      return arr.join('\n')
+    commentImports(line) {
+      if (!line.includes('import') && !line.includes('from')) {
+        return line
+      }
+      return ''
     },
 
-    isFaeImport(line) {
-      if (!line.includes('import') && !line.includes('from')) {
-        return true
+    async shareCode() {
+      try {
+        await this.$copyText(this.shareUrl)
+        this.showNotification('Copied', 'Share URL copied to clipboard')
+      } catch (e) {
+        this.showNotification(
+          'Error',
+          'Error while copying share URL to clipboard'
+        )
+        console.error(e)
       }
-      if (!line.includes('fae')) return true
-      return false
+    },
+
+    showNotification(title, message, timeout) {
+      this.$refs.noti.open(title, message, timeout)
     },
   },
 }
@@ -255,6 +346,7 @@ $editor-background: #1e1e1e;
     padding: 8px 16px;
     overflow: auto;
     flex: 1;
+    word-break: break-all;
     &::-webkit-scrollbar {
       width: 8px;
     }
@@ -292,6 +384,11 @@ $editor-background: #1e1e1e;
 .icon-run {
   color: green;
   cursor: pointer;
+}
+.icon-share {
+  color: deepskyblue;
+  cursor: pointer;
+  margin-right: 4px;
 }
 .icon-actions {
   display: flex;

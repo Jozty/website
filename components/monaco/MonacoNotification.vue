@@ -1,7 +1,7 @@
 <template>
-  <div class="notifications-center visible">
+  <div class="notifications-center" :class="{ visible: isVisible }">
     <div class="notifications-center-header">
-      <span class="notifications-center-header-title">Notifications</span>
+      <span class="notifications-center-header-title">{{ title }}</span>
       <div class="notifications-center-header-toolbar"></div>
     </div>
     <div class="notifications-list-container">
@@ -20,7 +20,9 @@
                   <div class="notification-list-item-buttons-container"></div>
                 </div>
                 <div class="notification-list-item-main-row">
-                  <div class="notification-list-item-message">Hey there</div>
+                  <div class="notification-list-item-message">
+                    {{ message }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -34,6 +36,24 @@
 <script>
 export default {
   name: 'MonacoNotification',
+
+  data() {
+    return {
+      title: '',
+      message: '',
+      isVisible: false,
+    }
+  },
+
+  methods: {
+    open(title, message, timeout = 2000) {
+      console.log('here')
+      this.title = title || ''
+      this.message = message || ''
+      this.isVisible = true
+      setTimeout(() => (this.isVisible = false), timeout)
+    },
+  },
 }
 </script>
 
@@ -42,15 +62,16 @@ export default {
   position: fixed;
   z-index: 1000;
   right: 8px;
-  bottom: 31px;
-  display: none;
+  bottom: -100%;
   overflow: hidden;
   width: 240px;
   color: #f8f8f2;
   box-shadow: rgb(0, 0, 0) 0px 0px 8px;
+  transition: all 0.34s;
+  display: block;
 
   &.visible {
-    display: block;
+    bottom: 32px;
   }
 }
 .notifications-center-header {
@@ -61,7 +82,7 @@ export default {
   height: 35px;
   font-size: 13px;
   line-height: 1.4em;
-  background: rgb(43, 44, 57);
+  background: #2b2b2b;
 
   &-title {
     text-transform: uppercase;
@@ -95,6 +116,7 @@ export default {
     top: 0px;
     height: 84px;
     padding: 8px;
+    background: #1a1a1a;
   }
 }
 
@@ -111,8 +133,13 @@ export default {
   overflow: hidden;
 }
 
+.notification-list-item-message {
+  word-break: break-all;
+  white-space: normal;
+}
+
 .monaco-list.list_id_65 .monaco-list-rows {
-  background: #21222c;
+  background: #1a1a1a;
 }
 .monaco-list.list_id_65:focus .monaco-list-row.focused {
   background-color: rgba(68, 71, 90, 0.46);
