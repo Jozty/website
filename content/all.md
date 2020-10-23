@@ -8,8 +8,6 @@ description: All functions
 [adjust]: https://deno.land/x/fae/adjust.ts
 [all]: https://deno.land/x/fae/all.ts
 [and]: https://deno.land/x/fae/and.ts
-[complement]: https://deno.land/x/fae/complement.ts
-[concat]: https://deno.land/x/fae/concat.ts
 [divide]: https://deno.land/x/fae/divide.ts
 [max]: https://deno.land/x/fae/max.ts
 [median]: https://deno.land/x/fae/median.ts
