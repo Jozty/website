@@ -8,7 +8,7 @@
         <nuxt-link to="/docs">Docs</nuxt-link>
       </div>
       <div class="column">
-        <nuxt-link to="/try">Try Fae</nuxt-link>
+        <nuxt-link to="/playground">Playground</nuxt-link>
       </div>
     </div>
     <div class="columns is-mobile">
