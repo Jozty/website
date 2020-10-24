@@ -158,12 +158,12 @@ Returns the complement of the function.
 ```typescript
 const even = (x: number) => x % 2 === 0
 const f = Fae.complement(even)
-Fae.d(10, -2) // 10
-Fae.max(30.89)(10.56) // 30.89
-Fae.max(Fae._, 10)(5) // 10
-Fae.max('aaa', 'ab')  // 'ab'
-Fae.max('aa', 'aab')  // 'aab'
-Fae.max(0, Infinity)  // Infinity
+f(8) // false
+f(-2) // false
+f(2.2) // true
+f(0)  // false
+Fae.complement(isNaN)(NaN)// false
+Fae.complement(isNaN)(Infinity)// true
 ```
 
 ---
@@ -173,7 +173,7 @@ Fae.max(0, Infinity)  // Infinity
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/concat)</span>[[src]][concat]</span>
 
 ```typescript
-(a: T, b: T) => T
+(a: (...args: T) => boolean) => (...args: T) => boolean
 ```
 
 Returns the concatenation of strings,arrays.
@@ -187,6 +187,12 @@ Fae.max(Fae._, 10)(5) // 10
 Fae.max('aaa', 'ab')  // 'ab'
 Fae.max('aa', 'aab')  // 'aab'
 Fae.max(0, Infinity)  // Infinity
+Fae.concat('foo', 'bar')// 'foobar'
+Fae.concat('x', '')// 'x'
+Fae.concat('', 'x')// 'x'
+Fae.concat('', '')// ''
+Fae.concat(['a', 'b'], ['c', 'd'])// ['a', 'b', 'c', 'd']
+Fae.concat([], ['c', 'd'])// ['c', 'd']
 ```
 
 ---
@@ -196,7 +202,7 @@ Fae.max(0, Infinity)  // Infinity
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/divide)</span>[[src]][divide]</span>
 
 ```typescript
-(a: number, b: number) => number
+(a: L, b: L) : L
 ```
 
 Divides two numbers
