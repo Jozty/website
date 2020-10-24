@@ -3,7 +3,7 @@ title: concat function
 description: a thorough tour of concat function
 ---
 
-## Add 
+## Concat
 <br>
 
 Concat two arrays,strings
@@ -14,7 +14,7 @@ Concat two arrays,strings
 
 <br>
 
-**Non curried type declaration**
+(**Non curried type declaration**)
 ```typescript
 function _concat<L extends T[] | string, T>(a: L, b: L): L {
   // ...
@@ -22,17 +22,23 @@ function _concat<L extends T[] | string, T>(a: L, b: L): L {
 ```
 <br>
 
-**Curried type declaration**
+(**Curried type declaration**)
 
 ```typescript
+type ConcatReturnType<F> = F extends string
+  ? string
+  : F extends (infer U)[]
+  ? U[]
+  : never
+
 type Concat_2<L extends any[] | string> = (b: L) => ConcatReturnType<L>
 
 type Concat_1<L extends any[] | string> = (a: L) => ConcatReturnType<L>
 
 type Concat =
-  &(<L extends any[] | string>(a: L, b?: PH) => Concat_2<ConcatReturnType<L>>)
-  &(<L extends any[] | string>(a: PH, b: L) => Concat_1<ConcatReturnType<L>>)
-  &(<L extends any[] | string>(a: L, b: L) => ConcatReturnType<L>)
+  & (<L extends any[] | string>(a: L, b?: PH) => Concat_2<ConcatReturnType<L>>)
+  & (<L extends any[] | string>(a: PH, b: L) => Concat_1<ConcatReturnType<L>>)
+  & (<L extends any[] | string>(a: L, b: L) => ConcatReturnType<L>)
 ```
 <br>
 

@@ -145,6 +145,52 @@ Fae.and(0n, 1) // false
 ```
 ---
 
+### complement
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/complement)</span>[[src]][complement]</span>
+
+```typescript
+(a: T, b: T) => T
+```
+
+Returns the complement of the function.
+
+```typescript
+const even = (x: number) => x % 2 === 0
+const f = Fae.complement(even)
+Fae.d(10, -2) // 10
+Fae.max(30.89)(10.56) // 30.89
+Fae.max(Fae._, 10)(5) // 10
+Fae.max('aaa', 'ab')  // 'ab'
+Fae.max('aa', 'aab')  // 'aab'
+Fae.max(0, Infinity)  // Infinity
+```
+
+---
+
+### concat
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/concat)</span>[[src]][concat]</span>
+
+```typescript
+(a: T, b: T) => T
+```
+
+Returns the concatenation of strings,arrays.
+
+```typescript
+const divideBy10 = Fae.complement(Fae._, 10)
+divideBy10(30) // 3
+Fae.max(10, -2) // 10
+Fae.max(30.89)(10.56) // 30.89
+Fae.max(Fae._, 10)(5) // 10
+Fae.max('aaa', 'ab')  // 'ab'
+Fae.max('aa', 'aab')  // 'aab'
+Fae.max(0, Infinity)  // Infinity
+```
+
+---
+
 ### divide
 
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/divide)</span>[[src]][divide]</span>

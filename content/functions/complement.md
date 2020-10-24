@@ -2,7 +2,6 @@
 title:  complement function
 description: a thorough tour of complement function
 ---
-
 ## Complement 
 <br>
 
@@ -10,13 +9,11 @@ Complement a function
 
 <br>
 
-&#10060; Curried
+&cross; Curried
 
 <br>
 
-
-
-**Declaration**
+(**Declaration**)
 
 ```typescript
 type Complement = (<T extends any[]>(a:(...args: T) => boolean,)=> (...args: T) => boolean)
