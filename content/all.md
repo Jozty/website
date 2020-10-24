@@ -8,6 +8,8 @@ description: All functions
 [adjust]: https://deno.land/x/fae/adjust.ts
 [all]: https://deno.land/x/fae/all.ts
 [and]: https://deno.land/x/fae/and.ts
+[complement]: https://deno.land/x/fae/complement.ts
+[concat]: https://deno.land/x/fae/concat.ts
 [divide]: https://deno.land/x/fae/divide.ts
 [max]: https://deno.land/x/fae/max.ts
 [median]: https://deno.land/x/fae/median.ts
@@ -141,6 +143,50 @@ Fae.and(NaN, true) // false
 Fae.and("", 1n) // false
 Fae.and(0n, 1) // false
 ```
+---
+
+### complement
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/complement)</span>[[src]][complement]</span>
+
+```typescript
+(a: (...args: T) => boolean) => (...args: T) => boolean
+```
+
+Returns the complement of the function.
+
+```typescript
+const even = (x: number) => x % 2 === 0
+const f = Fae.complement(even)
+f(8) // false
+f(-2) // false
+f(2.2) // true
+f(0)  // false
+Fae.complement(isNaN)(NaN)// false
+Fae.complement(isNaN)(Infinity)// true
+```
+
+---
+
+### concat
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/concat)</span>[[src]][concat]</span>
+
+```typescript
+<L extends any[] | string>(a: L, b: L) => ConcatReturnType<L>>
+```
+
+Returns the concatenation of strings,arrays.
+
+```typescript
+Fae.concat('foo', 'bar')// 'foobar'
+Fae.concat('x', '')// 'x'
+Fae.concat('', 'x')// 'x'
+Fae.concat('', '')// ''
+Fae.concat(['a', 'b'], ['c', 'd'])// ['a', 'b', 'c', 'd']
+Fae.concat([], ['c', 'd'])// ['c', 'd']
+```
+
 ---
 
 ### divide
