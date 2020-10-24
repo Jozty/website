@@ -150,7 +150,7 @@ Fae.and(0n, 1) // false
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/complement)</span>[[src]][complement]</span>
 
 ```typescript
-(a: T, b: T) => T
+(a: (...args: T) => boolean) => (...args: T) => boolean
 ```
 
 Returns the complement of the function.
@@ -173,20 +173,12 @@ Fae.complement(isNaN)(Infinity)// true
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/concat)</span>[[src]][concat]</span>
 
 ```typescript
-(a: (...args: T) => boolean) => (...args: T) => boolean
+(a: L, b: L) : L
 ```
 
 Returns the concatenation of strings,arrays.
 
 ```typescript
-const divideBy10 = Fae.complement(Fae._, 10)
-divideBy10(30) // 3
-Fae.max(10, -2) // 10
-Fae.max(30.89)(10.56) // 30.89
-Fae.max(Fae._, 10)(5) // 10
-Fae.max('aaa', 'ab')  // 'ab'
-Fae.max('aa', 'aab')  // 'aab'
-Fae.max(0, Infinity)  // Infinity
 Fae.concat('foo', 'bar')// 'foobar'
 Fae.concat('x', '')// 'x'
 Fae.concat('', 'x')// 'x'
@@ -202,7 +194,7 @@ Fae.concat([], ['c', 'd'])// ['c', 'd']
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/divide)</span>[[src]][divide]</span>
 
 ```typescript
-(a: L, b: L) : L
+(a: number, b: number) => number
 ```
 
 Divides two numbers
