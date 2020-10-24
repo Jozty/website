@@ -13,10 +13,10 @@ Complement a function
 
 <br>
 
-(**Declaration**)
+**Declaration**
 
 ```typescript
-type Complement = (<T extends any[]>(a:(...args: T) => boolean,)=> (...args: T) => boolean)
+type Complement = ((<T extends any[]>(a:(...args: T) => boolean,)=> (...args: T) => boolean))
 ```
 <br>
 
