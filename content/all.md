@@ -11,6 +11,11 @@ description: All functions
 [complement]: https://deno.land/x/fae/complement.ts
 [concat]: https://deno.land/x/fae/concat.ts
 [divide]: https://deno.land/x/fae/divide.ts
+[flip]: https://deno.land/x/fae/flip.ts
+[fromPairs]: https://deno.land/x/fae/fromPairs.ts
+[groupWith]: https://deno.land/x/fae/groupWith.ts
+[inc]: https://deno.land/x/fae/inc.ts
+[indexOf]: https://deno.land/x/fae/indexOf.ts
 [max]: https://deno.land/x/fae/max.ts
 [median]: https://deno.land/x/fae/median.ts
 [min]: https://deno.land/x/fae/min.ts
@@ -209,6 +214,121 @@ Fae.divide(20)(5) // 4
 ```
 
 ---
+
+### flip
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/flip)</span>[[src]][flip]</span>
+
+```typescript
+(this: number, a: number, b: number, ...rest: number[])=>(this: number, b: number, a: number,...rest: number[])
+```
+
+Inverts the first two arguments of a function
+
+```typescript
+const f = (a: string, b: string, c: string) => a + ' ' + b + ' ' + c
+const i = (a: number, b: number, c: number) => a + b * c
+const g = Fae.flip(f)
+f('a', 'b', 'c')    // 'a b c'
+g('a', 'b', 'c')    // 'b a c'
+g('a', '@', 'A')    // '@ a A'
+```
+
+---
+
+### fromPairs
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/fromPairs)</span>[[src]][fromPairs]</span>
+
+```typescript
+ <T>(pairs: Pair<T>[]) => Obj<T>
+```
+
+Creates a new object from a list key-value pairs. If a key appears in
+multiple pairs, the rightmost pair is included in the object.
+
+```typescript
+fromPairs([
+  ['a', 1],
+  ['b', 2],
+  ['c', 3],
+  ])                // { a: 1, b: 2, c: 3 }
+
+fromPairs([
+  ['a', 1],
+  ['b', 2],
+  ['c', 3],
+  ['d', 4],
+  ])                //{ a: 1, b: 2, c: 3, d: 4 }
+  ```
+
+---
+
+### groupWith
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/groupWith)</span>[[src]][groupWith]</span>
+
+```typescript
+<L extends T[] | string, T>(predicate: Predicate2<T>,functor: L,) => L[]
+```
+
+Creates a new object of list of values which are satisfy the given function.
+
+```typescript
+const isConsecutive = function (a: number, b: number) {
+      return a + 1 === b
+    }
+Fae.groupWith(isConsecutive, [])                 // []
+Fae.groupWith(isConsecutive, [4, 3, 2, 1])       // [[4], [3], [2], [1]]
+Fae.groupWith(isConsecutive, [1, 2, 3, 4])       // [[1, 2, 3, 4]]
+Fae.groupWith(isConsecutive, [1, 2, 2, 3])       // [[1, 2],[2, 3]]
+Fae.groupWith(isConsecutive, [1, 2, 9, 3, 4])    // [[1, 2],[9],[3, 4]]
+Fae.groupWith(isConsecutive, [1, 2, 9, 10, 3, 4])// [[1, 2],[9, 10],[3, 4]]
+```
+
+---
+
+### inc
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/inc)</span>[[src]][inc]</span>
+
+```typescript
+(a: number) => number
+```
+
+ Increases its argument by 1.
+
+```typescript
+Fae.inc(-1)// 0
+Fae.inc(0)// 1
+Fae.inc(1)// 2
+Fae.inc(1020.34)// 1021.34
+Fae.inc(-Infinity)// -Infinity
+Fae.inc(Infinity)// Infinity
+Fae.inc(NaN)// NaN
+```
+
+---
+
+### indexOf
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/indexOf)</span>[[src]][indexOf]</span>
+
+```typescript
+(list: T[]) => number
+```
+
+Returns the position of the first occurrence of `value` in `list`, or -1 if the item is not included in the array
+
+```typescript
+const list = [0, 10, 0, 30]
+Fae.indexOf(30, list)           // 3
+Fae.indexOf(40, list)           // -1
+Fae.indexOf(0, list)            // 0
+```
+
+---
+
 
 ### max
 
