@@ -40,14 +40,21 @@ type GroupWith =
 ```typescript
 import { groupWith, equals, _ } from 'https://deno.land/x/fae/mod.ts'
 
-const isConsecutive = function (a: number, b: number) {
-      return a + 1 === b
-    }
-groupWith(isConsecutive, [])                 // []
-groupWith(isConsecutive, [4, 3, 2, 1])       // [[4], [3], [2], [1]]
-groupWith(isConsecutive, [1, 2, 3, 4])       // [[1, 2, 3, 4]]
-groupWith(isConsecutive, [1, 2, 2, 3])       // [[1, 2],[2, 3]]
-groupWith(isConsecutive, [1, 2, 9, 3, 4])    // [[1, 2],[9],[3, 4]]
-groupWith(isConsecutive, [1, 2, 9, 10, 3, 4])// [[1, 2],[9, 10],[3, 4]]
-groupWith(isConsecutive, _)([4, 3, 2, 1])    // [[4], [3], [2], [1]]
+const isConsecutive = (a: number, b: number) => a + 1 === b
+
+groupWith(isConsecutive, [])                  // []
+groupWith(isConsecutive, [4, 3, 2, 1])        // [[4], [3], [2], [1]]
+groupWith(isConsecutive, [1, 2, 3, 4])        // [[1, 2, 3, 4]]
+groupWith(isConsecutive, [1, 2, 2, 3])        // [[1, 2], [2, 3]]
+groupWith(isConsecutive, [1, 2, 9, 3, 4])     // [[1, 2], [9], [3, 4]]
+groupWith(isConsecutive, [1, 2, 9, 10, 3, 4]) // [[1, 2], [9, 10], [3, 4]]
+
+groupWith(equals, 'Finaallyy')                // ['F', 'i', 'n', 'aa', 'll', 'yy']
+groupWith(equals, 'Mississippi')              // ['M', 'i', 'ss', 'i', 'ss', 'i', 'pp', 'i']
+
+groupWith(isConsecutive, _)([4, 3, 2, 1])     // [[4], [3], [2], [1]]
+groupWith(_, [4, 3, 2, 1])(isConsecutive)     // [[4], [3], [2], [1]]
+groupWith(equals, _)('Mississippi')           // ['M', 'i', 'ss', 'i', 'ss', 'i', 'pp', 'i']
+groupWith(_, 'Mississippi')(equals)           // ['M', 'i', 'ss', 'i', 'ss', 'i', 'pp', 'i']
+
 ``` 

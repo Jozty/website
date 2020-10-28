@@ -227,7 +227,6 @@ Inverts the first two arguments of a function
 
 ```typescript
 const f = (a: string, b: string, c: string) => a + ' ' + b + ' ' + c
-const i = (a: number, b: number, c: number) => a + b * c
 const g = Fae.flip(f)
 f('a', 'b', 'c')    // 'a b c'
 g('a', 'b', 'c')    // 'b a c'
@@ -251,15 +250,15 @@ multiple pairs, the rightmost pair is included in the object.
 Fae.fromPairs([
   ['a', 1],
   ['b', 2],
-  ['c', 3],
-  ])                // { a: 1, b: 2, c: 3 }
+  ['c', 3]
+])                // { a: 1, b: 2, c: 3 }
 
 Fae.fromPairs([
   ['a', 1],
   ['b', 2],
   ['c', 3],
-  ['d', 4],
-  ])                //{ a: 1, b: 2, c: 3, d: 4 }
+  ['d', 4]
+])                // { a: 1, b: 2, c: 3, d: 4 }
   ```
 
 ---
@@ -269,21 +268,19 @@ Fae.fromPairs([
 ###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](/groupWith)</span>[[src]][groupWith]</span>
 
 ```typescript
-<L extends T[] | string, T>(predicate: Predicate2<T>,functor: L,) => L[]
+<L extends T[] | string, T>(predicate: Predicate2<T>,functor: L) => L[]
 ```
 
 Creates a new object of list of values which are satisfy the given function.
 
 ```typescript
-const isConsecutive = function (a: number, b: number) {
-      return a + 1 === b
-    }
-Fae.groupWith(isConsecutive, [])                 // []
-Fae.groupWith(isConsecutive, [4, 3, 2, 1])       // [[4], [3], [2], [1]]
-Fae.groupWith(isConsecutive, [1, 2, 3, 4])       // [[1, 2, 3, 4]]
-Fae.groupWith(isConsecutive, [1, 2, 2, 3])       // [[1, 2],[2, 3]]
-Fae.groupWith(isConsecutive, [1, 2, 9, 3, 4])    // [[1, 2],[9],[3, 4]]
-Fae.groupWith(isConsecutive, [1, 2, 9, 10, 3, 4])// [[1, 2],[9, 10],[3, 4]]
+const isConsecutive = (a: number, b: number) => a + 1 === b
+Fae.groupWith(isConsecutive, [])                  // []
+Fae.groupWith(isConsecutive, [4, 3, 2, 1])        // [[4], [3], [2], [1]]
+Fae.groupWith(isConsecutive, [1, 2, 3, 4])        // [[1, 2, 3, 4]]
+Fae.groupWith(isConsecutive, [1, 2, 2, 3])        // [[1, 2], [2, 3]]
+Fae.groupWith(isConsecutive, [1, 2, 9, 3, 4])     // [[1, 2], [9], [3, 4]]
+Fae.groupWith(isConsecutive, [1, 2, 9, 10, 3, 4]) // [[1, 2], [9, 10], [3, 4]]
 ```
 
 ---

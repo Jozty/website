@@ -26,11 +26,11 @@ function _inc(element: number): number {
 ```typescript
 import { inc } from 'https://deno.land/x/fae/mod.ts'
 
-inc(-1)       // 0
-inc(0)        // 1
-inc(1)        // 2
-inc(1020.34)  // 1021.34
-inc(-Infinity)// -Infinity
-inc(Infinity) // Infinity
-inc(NaN)      // NaN
+inc(-1)        // 0
+inc(0)         // 1
+inc(1)         // 2
+inc(1020.34)   // 1021.34
+inc(-Infinity) // -Infinity
+inc(Infinity)  // Infinity
+inc(NaN)       // NaN
 ``` 
