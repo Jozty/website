@@ -163,11 +163,11 @@ Returns the complement of the function.
 ```typescript
 const even = (x: number) => x % 2 === 0
 const f = Fae.complement(even)
-f(8) // false
-f(-2) // false
-f(2.2) // true
-f(0)  // false
-Fae.complement(isNaN)(NaN)// false
+f(8)                           // false
+f(-2)                          // false
+f(2.2)                         // true
+f(0)                           // false
+Fae.complement(isNaN)(NaN)     // false
 Fae.complement(isNaN)(Infinity)// true
 ```
 
@@ -184,12 +184,12 @@ Fae.complement(isNaN)(Infinity)// true
 Returns the concatenation of strings,arrays.
 
 ```typescript
-Fae.concat('foo', 'bar')// 'foobar'
-Fae.concat('x', '')// 'x'
-Fae.concat('', 'x')// 'x'
-Fae.concat('', '')// ''
-Fae.concat(['a', 'b'], ['c', 'd'])// ['a', 'b', 'c', 'd']
-Fae.concat([], ['c', 'd'])// ['c', 'd']
+Fae.concat('foo', 'bar')            // 'foobar'
+Fae.concat('x', '')                 // 'x'
+Fae.concat('', 'x')                 // 'x'
+Fae.concat('', '')                  // ''
+Fae.concat(['a', 'b'], ['c', 'd'])  // ['a', 'b', 'c', 'd']
+Fae.concat([], ['c', 'd'])          // ['c', 'd']
 ```
 
 ---
@@ -299,13 +299,13 @@ Fae.groupWith(isConsecutive, [1, 2, 9, 10, 3, 4])// [[1, 2],[9, 10],[3, 4]]
  Increases its argument by 1.
 
 ```typescript
-Fae.inc(-1)// 0
-Fae.inc(0)// 1
-Fae.inc(1)// 2
-Fae.inc(1020.34)// 1021.34
-Fae.inc(-Infinity)// -Infinity
-Fae.inc(Infinity)// Infinity
-Fae.inc(NaN)// NaN
+Fae.inc(-1)         // 0
+Fae.inc(0)          // 1
+Fae.inc(1)          // 2
+Fae.inc(1020.34)    // 1021.34
+Fae.inc(-Infinity)  // -Infinity
+Fae.inc(Infinity)   // Infinity
+Fae.inc(NaN)        // NaN
 ```
 
 ---
