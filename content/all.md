@@ -220,7 +220,7 @@ Fae.divide(20)(5) // 4
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/flip)</span>[[src]][flip]</span>
 
 ```typescript
-(this: number, a: number, b: number, ...rest: number[])=>(this: number, b: number, a: number,...rest: number[])
+(func:number) => number
 ```
 
 Inverts the first two arguments of a function
@@ -238,7 +238,7 @@ g('a', '@', 'A')    // '@ a A'
 
 ### fromPairs
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/fromPairs)</span>[[src]][fromPairs]</span>
+###### since v0.2.0 <span> <span class="full-docs">[[full-docs]](/fromPairs)</span>[[src]][fromPairs]</span>
 
 ```typescript
  <T>(pairs: Pair<T>[]) => Obj<T>
@@ -266,7 +266,7 @@ fromPairs([
 
 ### groupWith
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/groupWith)</span>[[src]][groupWith]</span>
+###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](/groupWith)</span>[[src]][groupWith]</span>
 
 ```typescript
 <L extends T[] | string, T>(predicate: Predicate2<T>,functor: L,) => L[]
@@ -312,7 +312,7 @@ Fae.inc(NaN)// NaN
 
 ### indexOf
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/indexOf)</span>[[src]][indexOf]</span>
+###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](/indexOf)</span>[[src]][indexOf]</span>
 
 ```typescript
 (list: T[]) => number

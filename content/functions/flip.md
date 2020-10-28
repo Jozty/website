@@ -10,12 +10,11 @@ Inverts the first two arguments of a function
 
 <br>
 
-&check; Curried
+&cross; Curried
 
 <br>
 
-
-**Declaration**
+**Type declaration**
 
 ```typescript
 function _flip(func:number): number {
@@ -35,7 +34,6 @@ const g = flip(f)
 f('a', 'b', 'c')    // 'a b c'
 g('a', 'b', 'c')    // 'b a c'
 g('a', '@', 'A')    // '@ a A'
-  
 
 const h = flip(i)
 
@@ -45,6 +43,7 @@ i(2, -3, 4)          // -10
 h(2, -3, 4)          // 5
 
 const g = flip(f)('a')
+
 g('b', 'c')         // 'b a c'
 g(_, 'c')('b')      // 'b a c'
 g('b', _)('c')      // 'b a c'

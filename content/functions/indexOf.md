@@ -11,11 +11,19 @@ Returns the position of the first occurrence of `value` in `list`, or -1 if the 
 
 <br>
 
-&cross; Curried
+&check; Curried
 
 <br>
 
-**Declaration**
+**Non curried type declaration**
+```typescript
+function _indexOf<T>(value: T, list: T[]): number {
+  // ...
+}
+```
+<br>
+
+**Curried type declaration**
 
 ```typescript
 type IndexOf_2<T> = (list: T[]) => number
@@ -44,4 +52,7 @@ const input = [1, 2, 1, 2, 5]
 indexOf(1, input)           // 0
 indexOf(2, input)           // 1
 indexOf(5, input)           // 4
+indexOf(_, [-0])(0)         // -1
+indexOf(5, _)(input)        // 4
+indexOf(_, input)(2)        // 1
 ```
