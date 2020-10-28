@@ -250,14 +250,14 @@ multiple pairs, the rightmost pair is included in the object.
 Fae.fromPairs([
   ['a', 1],
   ['b', 2],
-  ['c', 3]
+  ['c', 3],
 ])                // { a: 1, b: 2, c: 3 }
 
 Fae.fromPairs([
   ['a', 1],
   ['b', 2],
   ['c', 3],
-  ['d', 4]
+  ['d', 4],
 ])                // { a: 1, b: 2, c: 3, d: 4 }
   ```
 
