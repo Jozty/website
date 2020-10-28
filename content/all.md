@@ -11,12 +11,18 @@ description: All functions
 [complement]: https://deno.land/x/fae/complement.ts
 [concat]: https://deno.land/x/fae/concat.ts
 [divide]: https://deno.land/x/fae/divide.ts
+[lens]: https://deno.land/x/fae/lens.ts
+[lensIndex]: https://deno.land/x/fae/lensIndex.ts
+[lensPath]: https://deno.land/x/fae/lensPath.ts
+[lensProp]: https://deno.land/x/fae/lensProp.ts
+[lensProp]: https://deno.land/x/fae/lensProp.ts
 [max]: https://deno.land/x/fae/max.ts
 [median]: https://deno.land/x/fae/median.ts
 [min]: https://deno.land/x/fae/min.ts
 [multiply]: https://deno.land/x/fae/multiply.ts
 [nth]: https://deno.land/x/fae/nth.ts
 [or]: https://deno.land/x/fae/or.ts
+[over]: https://deno.land/x/fae/over.ts
 [path]: https://deno.land/x/fae/path.ts
 [pathOr]: https://deno.land/x/fae/pathOr.ts
 [paths]: https://deno.land/x/fae/paths.ts
@@ -31,11 +37,13 @@ description: All functions
 [range]: https://deno.land/x/fae/range.ts
 [rangeUntil]: https://deno.land/x/fae/rangeUntil.ts
 [reverse]: https://deno.land/x/fae/reverse.ts
+[set]: https://deno.land/x/fae/set.ts
 [subtract]: https://deno.land/x/fae/subtract.ts
 [sum]: https://deno.land/x/fae/sum.ts
 [tail]: https://deno.land/x/fae/tail.ts
 [trim]: https://deno.land/x/fae/trim.ts
 [typ]: https://deno.land/x/fae/typ.ts
+[view]: https://deno.land/x/fae/view.ts
 [when]: https://deno.land/x/fae/when.ts
 [whereAll]: https://deno.land/x/fae/whereAll.ts
 [whereAny]: https://deno.land/x/fae/whereAny.ts
@@ -210,6 +218,80 @@ Fae.divide(20)(5) // 4
 
 ---
 
+### lens
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/lens)</span>[[src]][lens]</span>
+
+```typescript
+<T, F>(getter: LensGetter<T, F>, setter: LensSetter<T, F>) => Lens<T, F>
+```
+
+Returns a lens for the given getter and setter functions. The `getter` "gets"
+the value of the focus; the setter "sets" the value of the focus. The `setter`
+should not mutate the data structure.
+
+```typescript
+const lens1 = Fae.lens(
+  Fae.prop('abc') as LensGetter<T, F>,
+  (Fae.assoc('abc') as any) as LensSetter<T, F>,
+)
+
+const lens2 = Fae.lens(
+  Fae.nth(-1) as LensGetter<T, F>,
+  (Fae.update(-1) as any) as LensSetter<T, F>,
+)
+```
+
+---
+
+### lensIndex
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/lensIndex)</span>[[src]][lensIndex]</span>
+
+```typescript
+<T, F>(index: number) => Lens<T, F>
+```
+
+Returns a lens whose focus is the specified index.
+
+```typescript
+const headLens = Fae.lensIndex(0)
+```
+
+---
+
+### lensPath
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/lensPath)</span>[[src]][lensPath]</span>
+
+```typescript
+<T, F>(path: Path) => Lens<T, F>
+```
+
+Returns a lens whose focus is the specified path.
+
+```typescript
+const xHeadYLens = Fae.lensPath(['x', 0, 'y'])
+```
+
+---
+
+### lensProp
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/lensProp)</span>[[src]][lensProp]</span>
+
+```typescript
+<T, F>(prop: Prop) => Lens<T, F>
+```
+
+Returns a lens whose focus is the specified property
+
+```typescript
+const xLens = Fae.lensProp('x')
+```
+
+---
+
 ### max
 
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/max)</span>[[src]][max]</span>
@@ -343,6 +425,27 @@ Fae.or(NaN, true) // true
 Fae.or("", 0n) // false
 Fae.or(null, NaN) // false
 Fae.or(undefined, false) // false
+```
+---
+
+### over
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/over)</span>[[src]][over]</span>
+
+```typescript
+<T, F>(lens: Lens<T, F>, fn: FuncArr1<F, F>, target: T) => T
+```
+
+Returns the result of "setting" the portion of the given data structure `target`
+focused by the given `lens` to the result of applying the given function `fn` to
+the focused value.
+
+```typescript
+const headLens = Fae.lensIndex(0)
+const arr = ['foo', 'bar', 'baz']
+
+// string only at index 0 is transformed 
+Fae.over(headLens, (x: string) => x.toUpperCase(), arr) // ['FOO', 'bar', 'baz']
 ```
 ---
 
@@ -614,6 +717,26 @@ Fae.revrse('abcd') // 'dcba'
 
 ---
 
+### set
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/set)</span>[[src]][set]</span>
+
+```typescript
+<T, F>(lens: Lens<T, F>, value: F, target: T) => T
+```
+
+Returns the result of "setting" the portion of the given data structure `target`
+focused by the given `len`s to the given `value`.
+
+```typescript
+const xLens = Fae.lensProp('x')
+const obj = { x: 1, y: 2 }
+
+Fae.set(xLens, 4, {x: 1, y: 2})  // {x: 4, y: 2}
+Fae.set(xLens, 8, {x: 1, y: 2})  // {x: 8, y: 2}
+```
+---
+
 ### subtract
 
 ###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/subtract)</span>[[src]][subtract]</span>
@@ -723,6 +846,24 @@ Fae.typ([]) // 'Array'
 Fae.typ(/[A-z]/) // 'RegExp'
 ```
 
+---
+
+### view
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/view)</span>[[src]][view]</span>
+
+```typescript
+<T, F>(lens: Lens<T, F>, target: T) => F
+```
+
+Returns the value of portion of `target` focused by given `lens`.
+
+```typescript
+const xLens = Fae.lensProp('x')
+const obj = { x: 1, y: 2 }
+
+Fae.view(xLens, {x: 1, y: 2})  // 1
+```
 ---
 
 ### when
