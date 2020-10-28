@@ -46,14 +46,14 @@ type Concat =
 ```typescript
 import { concat, _ } from 'https://deno.land/x/fae/mod.ts'
 
-concat(['a', 'b'], ['c', 'd'])// ['a', 'b', 'c', 'd']
-concat([], ['c', 'd'])// ['c', 'd']
-concat('foo', 'bar')// 'foobar'
-concat('x', '')// 'x'
-concat('', 'x')// 'x'
-concat('', '')// ''
-concat(_, 'bar')('foo')// 'foobar'
-concat('x', _)('')// 'x'
-concat(_, ['a'])(['c', 'd'])// ['c', 'd', 'a']
+concat(['a', 'b'], ['c', 'd'])       // ['a', 'b', 'c', 'd']
+concat([], ['c', 'd'])               // ['c', 'd']
+concat('foo', 'bar')                 // 'foobar'
+concat('x', '')                      // 'x'
+concat('', 'x')                      // 'x'
+concat('', '')                       // ''
+concat(_, 'bar')('foo')              // 'foobar'
+concat('x', _)('')                   // 'x'
+concat(_, ['a'])(['c', 'd'])         // ['c', 'd', 'a']
 concat(_, [] as string[])(['c', 'd'])// ['c', 'd']
 ```
