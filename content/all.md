@@ -8,13 +8,26 @@ description: All functions
 [adjust]: https://deno.land/x/fae/adjust.ts
 [all]: https://deno.land/x/fae/all.ts
 [and]: https://deno.land/x/fae/and.ts
+[complement]: https://deno.land/x/fae/complement.ts
+[concat]: https://deno.land/x/fae/concat.ts
 [divide]: https://deno.land/x/fae/divide.ts
+[flip]: https://deno.land/x/fae/flip.ts
+[fromPairs]: https://deno.land/x/fae/fromPairs.ts
+[groupWith]: https://deno.land/x/fae/groupWith.ts
+[inc]: https://deno.land/x/fae/inc.ts
+[indexOf]: https://deno.land/x/fae/indexOf.ts
+[lens]: https://deno.land/x/fae/lens.ts
+[lensIndex]: https://deno.land/x/fae/lensIndex.ts
+[lensPath]: https://deno.land/x/fae/lensPath.ts
+[lensProp]: https://deno.land/x/fae/lensProp.ts
+[lensProp]: https://deno.land/x/fae/lensProp.ts
 [max]: https://deno.land/x/fae/max.ts
 [median]: https://deno.land/x/fae/median.ts
 [min]: https://deno.land/x/fae/min.ts
 [multiply]: https://deno.land/x/fae/multiply.ts
 [nth]: https://deno.land/x/fae/nth.ts
 [or]: https://deno.land/x/fae/or.ts
+[over]: https://deno.land/x/fae/over.ts
 [path]: https://deno.land/x/fae/path.ts
 [pathOr]: https://deno.land/x/fae/pathOr.ts
 [paths]: https://deno.land/x/fae/paths.ts
@@ -29,11 +42,13 @@ description: All functions
 [range]: https://deno.land/x/fae/range.ts
 [rangeUntil]: https://deno.land/x/fae/rangeUntil.ts
 [reverse]: https://deno.land/x/fae/reverse.ts
+[set]: https://deno.land/x/fae/set.ts
 [subtract]: https://deno.land/x/fae/subtract.ts
 [sum]: https://deno.land/x/fae/sum.ts
 [tail]: https://deno.land/x/fae/tail.ts
 [trim]: https://deno.land/x/fae/trim.ts
 [typ]: https://deno.land/x/fae/typ.ts
+[view]: https://deno.land/x/fae/view.ts
 [when]: https://deno.land/x/fae/when.ts
 [whereAll]: https://deno.land/x/fae/whereAll.ts
 [whereAny]: https://deno.land/x/fae/whereAny.ts
@@ -143,6 +158,50 @@ Fae.and(0n, 1) // false
 ```
 ---
 
+### complement
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/complement)</span>[[src]][complement]</span>
+
+```typescript
+(a: (...args: T) => boolean) => (...args: T) => boolean
+```
+
+Returns the complement of the function.
+
+```typescript
+const even = (x: number) => x % 2 === 0
+const f = Fae.complement(even)
+f(8)                           // false
+f(-2)                          // false
+f(2.2)                         // true
+f(0)                           // false
+Fae.complement(isNaN)(NaN)     // false
+Fae.complement(isNaN)(Infinity)// true
+```
+
+---
+
+### concat
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/concat)</span>[[src]][concat]</span>
+
+```typescript
+<L extends any[] | string>(a: L, b: L) => ConcatReturnType<L>>
+```
+
+Returns the concatenation of strings,arrays.
+
+```typescript
+Fae.concat('foo', 'bar')            // 'foobar'
+Fae.concat('x', '')                 // 'x'
+Fae.concat('', 'x')                 // 'x'
+Fae.concat('', '')                  // ''
+Fae.concat(['a', 'b'], ['c', 'd'])  // ['a', 'b', 'c', 'd']
+Fae.concat([], ['c', 'd'])          // ['c', 'd']
+```
+
+---
+
 ### divide
 
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/divide)</span>[[src]][divide]</span>
@@ -160,6 +219,192 @@ divideBy10(30) // 3
 const reciprocal = Fae.divide(1)
 reciprocal(2) // 0.5
 Fae.divide(20)(5) // 4
+```
+
+---
+
+### flip
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/flip)</span>[[src]][flip]</span>
+
+```typescript
+(func:number) => number
+```
+
+Inverts the first two arguments of a function
+
+```typescript
+const f = (a: string, b: string, c: string) => a + ' ' + b + ' ' + c
+const g = Fae.flip(f)
+f('a', 'b', 'c')    // 'a b c'
+g('a', 'b', 'c')    // 'b a c'
+g('a', '@', 'A')    // '@ a A'
+```
+
+---
+
+### fromPairs
+
+###### since v0.2.0 <span> <span class="full-docs">[[full-docs]](/fromPairs)</span>[[src]][fromPairs]</span>
+
+```typescript
+ <T>(pairs: Pair<T>[]) => Obj<T>
+```
+
+Creates a new object from a list key-value pairs. If a key appears in
+multiple pairs, the rightmost pair is included in the object.
+
+```typescript
+Fae.fromPairs([
+  ['a', 1],
+  ['b', 2],
+  ['c', 3],
+])                // { a: 1, b: 2, c: 3 }
+
+Fae.fromPairs([
+  ['a', 1],
+  ['b', 2],
+  ['c', 3],
+  ['d', 4],
+])                // { a: 1, b: 2, c: 3, d: 4 }
+  ```
+
+---
+
+### groupWith
+
+###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](/groupWith)</span>[[src]][groupWith]</span>
+
+```typescript
+<L extends T[] | string, T>(predicate: Predicate2<T>,functor: L) => L[]
+```
+
+Creates a new object of list of values which are satisfy the given function.
+
+```typescript
+const isConsecutive = (a: number, b: number) => a + 1 === b
+Fae.groupWith(isConsecutive, [])                  // []
+Fae.groupWith(isConsecutive, [4, 3, 2, 1])        // [[4], [3], [2], [1]]
+Fae.groupWith(isConsecutive, [1, 2, 3, 4])        // [[1, 2, 3, 4]]
+Fae.groupWith(isConsecutive, [1, 2, 2, 3])        // [[1, 2], [2, 3]]
+Fae.groupWith(isConsecutive, [1, 2, 9, 3, 4])     // [[1, 2], [9], [3, 4]]
+Fae.groupWith(isConsecutive, [1, 2, 9, 10, 3, 4]) // [[1, 2], [9, 10], [3, 4]]
+```
+
+---
+
+### inc
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/inc)</span>[[src]][inc]</span>
+
+```typescript
+(a: number) => number
+```
+
+ Increases its argument by 1.
+
+```typescript
+Fae.inc(-1)         // 0
+Fae.inc(0)          // 1
+Fae.inc(1)          // 2
+Fae.inc(1020.34)    // 1021.34
+Fae.inc(-Infinity)  // -Infinity
+Fae.inc(Infinity)   // Infinity
+Fae.inc(NaN)        // NaN
+```
+
+---
+
+### indexOf
+
+###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](/indexOf)</span>[[src]][indexOf]</span>
+
+```typescript
+(list: T[]) => number
+```
+
+Returns the position of the first occurrence of `value` in `list`, or -1 if the item is not included in the array
+
+```typescript
+const list = [0, 10, 0, 30]
+Fae.indexOf(30, list)           // 3
+Fae.indexOf(40, list)           // -1
+Fae.indexOf(0, list)            // 0
+```
+
+---
+
+
+### lens
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/lens)</span>[[src]][lens]</span>
+
+```typescript
+<T, F>(getter: LensGetter<T, F>, setter: LensSetter<T, F>) => Lens<T, F>
+```
+
+Returns a lens for the given getter and setter functions. The `getter` "gets"
+the value of the focus; the setter "sets" the value of the focus. The `setter`
+should not mutate the data structure.
+
+```typescript
+const lens1 = Fae.lens(
+  Fae.prop('abc') as LensGetter<T, F>,
+  (Fae.assoc('abc') as any) as LensSetter<T, F>,
+)
+
+const lens2 = Fae.lens(
+  Fae.nth(-1) as LensGetter<T, F>,
+  (Fae.update(-1) as any) as LensSetter<T, F>,
+)
+```
+
+---
+
+### lensIndex
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/lensIndex)</span>[[src]][lensIndex]</span>
+
+```typescript
+<T, F>(index: number) => Lens<T, F>
+```
+
+Returns a lens whose focus is the specified index.
+
+```typescript
+const headLens = Fae.lensIndex(0)
+```
+
+---
+
+### lensPath
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/lensPath)</span>[[src]][lensPath]</span>
+
+```typescript
+<T, F>(path: Path) => Lens<T, F>
+```
+
+Returns a lens whose focus is the specified path.
+
+```typescript
+const xHeadYLens = Fae.lensPath(['x', 0, 'y'])
+```
+
+---
+
+### lensProp
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/lensProp)</span>[[src]][lensProp]</span>
+
+```typescript
+<T, F>(prop: Prop) => Lens<T, F>
+```
+
+Returns a lens whose focus is the specified property
+
+```typescript
+const xLens = Fae.lensProp('x')
 ```
 
 ---
@@ -297,6 +542,27 @@ Fae.or(NaN, true) // true
 Fae.or("", 0n) // false
 Fae.or(null, NaN) // false
 Fae.or(undefined, false) // false
+```
+---
+
+### over
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/over)</span>[[src]][over]</span>
+
+```typescript
+<T, F>(lens: Lens<T, F>, fn: FuncArr1<F, F>, target: T) => T
+```
+
+Returns the result of "setting" the portion of the given data structure `target`
+focused by the given `lens` to the result of applying the given function `fn` to
+the focused value.
+
+```typescript
+const headLens = Fae.lensIndex(0)
+const arr = ['foo', 'bar', 'baz']
+
+// string only at index 0 is transformed 
+Fae.over(headLens, (x: string) => x.toUpperCase(), arr) // ['FOO', 'bar', 'baz']
 ```
 ---
 
@@ -568,6 +834,26 @@ Fae.revrse('abcd') // 'dcba'
 
 ---
 
+### set
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/set)</span>[[src]][set]</span>
+
+```typescript
+<T, F>(lens: Lens<T, F>, value: F, target: T) => T
+```
+
+Returns the result of "setting" the portion of the given data structure `target`
+focused by the given `len`s to the given `value`.
+
+```typescript
+const xLens = Fae.lensProp('x')
+const obj = { x: 1, y: 2 }
+
+Fae.set(xLens, 4, {x: 1, y: 2})  // {x: 4, y: 2}
+Fae.set(xLens, 8, {x: 1, y: 2})  // {x: 8, y: 2}
+```
+---
+
 ### subtract
 
 ###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/subtract)</span>[[src]][subtract]</span>
@@ -677,6 +963,24 @@ Fae.typ([]) // 'Array'
 Fae.typ(/[A-z]/) // 'RegExp'
 ```
 
+---
+
+### view
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/view)</span>[[src]][view]</span>
+
+```typescript
+<T, F>(lens: Lens<T, F>, target: T) => F
+```
+
+Returns the value of portion of `target` focused by given `lens`.
+
+```typescript
+const xLens = Fae.lensProp('x')
+const obj = { x: 1, y: 2 }
+
+Fae.view(xLens, {x: 1, y: 2})  // 1
+```
 ---
 
 ### when
