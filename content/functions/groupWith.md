@@ -16,7 +16,7 @@ Creates a new object of list of values which are satisfy the given function.
 
 **Non curried type declaration**
 ```typescript
-function _groupWith<L extends T[] | string, T>(predicate: Predicate2<T | string>,functor: L): T[][] | string[] = [] {
+function _groupWith<L extends T[] | string, T>(predicate: Predicate2<T | string>,functor: L): T[][] | string[] {
     //..
 }
 ```
