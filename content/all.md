@@ -11,6 +11,11 @@ description: All functions
 [complement]: https://deno.land/x/fae/complement.ts
 [concat]: https://deno.land/x/fae/concat.ts
 [divide]: https://deno.land/x/fae/divide.ts
+[flip]: https://deno.land/x/fae/flip.ts
+[fromPairs]: https://deno.land/x/fae/fromPairs.ts
+[groupWith]: https://deno.land/x/fae/groupWith.ts
+[inc]: https://deno.land/x/fae/inc.ts
+[indexOf]: https://deno.land/x/fae/indexOf.ts
 [lens]: https://deno.land/x/fae/lens.ts
 [lensIndex]: https://deno.land/x/fae/lensIndex.ts
 [lensPath]: https://deno.land/x/fae/lensPath.ts
@@ -166,11 +171,11 @@ Returns the complement of the function.
 ```typescript
 const even = (x: number) => x % 2 === 0
 const f = Fae.complement(even)
-f(8) // false
-f(-2) // false
-f(2.2) // true
-f(0)  // false
-Fae.complement(isNaN)(NaN)// false
+f(8)                           // false
+f(-2)                          // false
+f(2.2)                         // true
+f(0)                           // false
+Fae.complement(isNaN)(NaN)     // false
 Fae.complement(isNaN)(Infinity)// true
 ```
 
@@ -187,12 +192,12 @@ Fae.complement(isNaN)(Infinity)// true
 Returns the concatenation of strings,arrays.
 
 ```typescript
-Fae.concat('foo', 'bar')// 'foobar'
-Fae.concat('x', '')// 'x'
-Fae.concat('', 'x')// 'x'
-Fae.concat('', '')// ''
-Fae.concat(['a', 'b'], ['c', 'd'])// ['a', 'b', 'c', 'd']
-Fae.concat([], ['c', 'd'])// ['c', 'd']
+Fae.concat('foo', 'bar')            // 'foobar'
+Fae.concat('x', '')                 // 'x'
+Fae.concat('', 'x')                 // 'x'
+Fae.concat('', '')                  // ''
+Fae.concat(['a', 'b'], ['c', 'd'])  // ['a', 'b', 'c', 'd']
+Fae.concat([], ['c', 'd'])          // ['c', 'd']
 ```
 
 ---
@@ -217,6 +222,118 @@ Fae.divide(20)(5) // 4
 ```
 
 ---
+
+### flip
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/flip)</span>[[src]][flip]</span>
+
+```typescript
+(func:number) => number
+```
+
+Inverts the first two arguments of a function
+
+```typescript
+const f = (a: string, b: string, c: string) => a + ' ' + b + ' ' + c
+const g = Fae.flip(f)
+f('a', 'b', 'c')    // 'a b c'
+g('a', 'b', 'c')    // 'b a c'
+g('a', '@', 'A')    // '@ a A'
+```
+
+---
+
+### fromPairs
+
+###### since v0.2.0 <span> <span class="full-docs">[[full-docs]](/fromPairs)</span>[[src]][fromPairs]</span>
+
+```typescript
+ <T>(pairs: Pair<T>[]) => Obj<T>
+```
+
+Creates a new object from a list key-value pairs. If a key appears in
+multiple pairs, the rightmost pair is included in the object.
+
+```typescript
+Fae.fromPairs([
+  ['a', 1],
+  ['b', 2],
+  ['c', 3],
+])                // { a: 1, b: 2, c: 3 }
+
+Fae.fromPairs([
+  ['a', 1],
+  ['b', 2],
+  ['c', 3],
+  ['d', 4],
+])                // { a: 1, b: 2, c: 3, d: 4 }
+  ```
+
+---
+
+### groupWith
+
+###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](/groupWith)</span>[[src]][groupWith]</span>
+
+```typescript
+<L extends T[] | string, T>(predicate: Predicate2<T>,functor: L) => L[]
+```
+
+Creates a new object of list of values which are satisfy the given function.
+
+```typescript
+const isConsecutive = (a: number, b: number) => a + 1 === b
+Fae.groupWith(isConsecutive, [])                  // []
+Fae.groupWith(isConsecutive, [4, 3, 2, 1])        // [[4], [3], [2], [1]]
+Fae.groupWith(isConsecutive, [1, 2, 3, 4])        // [[1, 2, 3, 4]]
+Fae.groupWith(isConsecutive, [1, 2, 2, 3])        // [[1, 2], [2, 3]]
+Fae.groupWith(isConsecutive, [1, 2, 9, 3, 4])     // [[1, 2], [9], [3, 4]]
+Fae.groupWith(isConsecutive, [1, 2, 9, 10, 3, 4]) // [[1, 2], [9, 10], [3, 4]]
+```
+
+---
+
+### inc
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/inc)</span>[[src]][inc]</span>
+
+```typescript
+(a: number) => number
+```
+
+ Increases its argument by 1.
+
+```typescript
+Fae.inc(-1)         // 0
+Fae.inc(0)          // 1
+Fae.inc(1)          // 2
+Fae.inc(1020.34)    // 1021.34
+Fae.inc(-Infinity)  // -Infinity
+Fae.inc(Infinity)   // Infinity
+Fae.inc(NaN)        // NaN
+```
+
+---
+
+### indexOf
+
+###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](/indexOf)</span>[[src]][indexOf]</span>
+
+```typescript
+(list: T[]) => number
+```
+
+Returns the position of the first occurrence of `value` in `list`, or -1 if the item is not included in the array
+
+```typescript
+const list = [0, 10, 0, 30]
+Fae.indexOf(30, list)           // 3
+Fae.indexOf(40, list)           // -1
+Fae.indexOf(0, list)            // 0
+```
+
+---
+
 
 ### lens
 
