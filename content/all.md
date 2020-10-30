@@ -64,7 +64,7 @@ description: All functions
 
 ### add
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/add)</span>[[src]][add]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/add)</span>[[src]][add]</span>
 
 ```typescript
 (a: number, b: number) => number
@@ -83,7 +83,7 @@ Fae.add(4)(3) // 8
 
 ### addIndex
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/addIndex)</span>[[src]][addindex]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/addIndex)</span>[[src]][addindex]</span>
 
 ```typescript
 (fn: Func) => Func
@@ -102,7 +102,7 @@ indexedMap((val, idx) => idx + '-' + val, ['f', 'o', 'o', 'b', 'a', 'r'])
 
 ### adjust
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/adjust)</span>[[src]][adjust]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/adjust)</span>[[src]][adjust]</span>
 
 ```typescript
 (index: number, fn: Func, list: T[]) => T[]
@@ -119,7 +119,7 @@ Fae.adjust(-3, Fae.add(1), [0, 1, 2, 3]) // [0, 2, 2, 3]
 
 ### all
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/all)</span>[[src]][all]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/all)</span>[[src]][all]</span>
 
 ```typescript
 (predicate: Predicate1<T>, functor: ArrayLike<T>) => boolean
@@ -132,7 +132,7 @@ Return `true` if all the elements of the functor match `predicate` `false` other
 
 ### and
 
-###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/and)</span>[[src]][and]</span>
+###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](functions/and)</span>[[src]][and]</span>
 
 ```typescript
 (a: any, b: any) => boolean
@@ -165,7 +165,7 @@ Fae.and(0n, 1) // false
 
 ### complement
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/complement)</span>[[src]][complement]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/complement)</span>[[src]][complement]</span>
 
 ```typescript
 (a: (...args: T) => boolean) => (...args: T) => boolean
@@ -188,7 +188,7 @@ Fae.complement(isNaN)(Infinity)// true
 
 ### concat
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/concat)</span>[[src]][concat]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/concat)</span>[[src]][concat]</span>
 
 ```typescript
 <L extends any[] | string>(a: L, b: L) => InferType<L>
@@ -209,7 +209,7 @@ Fae.concat([], ['c', 'd'])          // ['c', 'd']
 
 ### divide
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/divide)</span>[[src]][divide]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/divide)</span>[[src]][divide]</span>
 
 ```typescript
 (a: number, b: number) => number
@@ -230,7 +230,7 @@ Fae.divide(20)(5) // 4
 
 ### either
 
-###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/either)</span>[[src]][either]</span>
+###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](functions/either)</span>[[src]][either]</span>
 
 ```typescript
 <T extends Func> (f: T, g: T) : T
@@ -258,7 +258,7 @@ g(7)    // false
 
 ### endsWith
 
-###### since v0.2.0 <span> <span class="full-docs">[[full-docs]](/endsWith)</span>[[src]][endsWith]</span>
+###### since v0.2.0 <span> <span class="full-docs">[[full-docs]](functions/endsWith)</span>[[src]][endsWith]</span>
 
 ```typescript
 <L extends any[] | string>(suffix: L, functor: L) : boolean
@@ -277,7 +277,7 @@ Fae.endsWith('ology', _)('astrology')             // true
 
 ### eqProps
 
-###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](/eqProps)</span>[[src]][eqProps]</span>
+###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](functions/eqProps)</span>[[src]][eqProps]</span>
 
 ```typescript
 <T>(prop: string, obj1: Obj<T>, obj2: Obj<T>) : Obj<T>
@@ -306,7 +306,7 @@ Fae.eqProps(
 
 ### flip
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/flip)</span>[[src]][flip]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/flip)</span>[[src]][flip]</span>
 
 ```typescript
 (func:number) => number
@@ -326,7 +326,7 @@ g('a', '@', 'A')    // '@ a A'
 
 ### fromPairs
 
-###### since v0.2.0 <span> <span class="full-docs">[[full-docs]](/fromPairs)</span>[[src]][fromPairs]</span>
+###### since v0.2.0 <span> <span class="full-docs">[[full-docs]](functions/fromPairs)</span>[[src]][fromPairs]</span>
 
 ```typescript
  <T>(pairs: Pair<T>[]) => Obj<T>
@@ -354,7 +354,7 @@ Fae.fromPairs([
 
 ### groupWith
 
-###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](/groupWith)</span>[[src]][groupWith]</span>
+###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](functions/groupWith)</span>[[src]][groupWith]</span>
 
 ```typescript
 <L extends T[] | string, T>(predicate: Predicate2<T>,functor: L) => L[]
@@ -376,7 +376,7 @@ Fae.groupWith(isConsecutive, [1, 2, 9, 10, 3, 4]) // [[1, 2], [9, 10], [3, 4]]
 
 ### head
 
-###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](/head)</span>[[src]][head]</span>
+###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](functions/head)</span>[[src]][head]</span>
 
 ```typescript
 <L extends any[] | string>(functor: L) : InferElementType<L>
@@ -397,7 +397,7 @@ Fae.head('')                  // ''
 
 ### identity
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/identity)</span>[[src]][identity]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/identity)</span>[[src]][identity]</span>
 
 ```typescript
 <T>(x: T) : T
@@ -420,7 +420,7 @@ Fae.identity(g('foo'))              // 'foobar'
 
 ### inc
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/inc)</span>[[src]][inc]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/inc)</span>[[src]][inc]</span>
 
 ```typescript
 (a: number) => number
@@ -442,7 +442,7 @@ Fae.inc(NaN)        // NaN
 
 ### indexOf
 
-###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](/indexOf)</span>[[src]][indexOf]</span>
+###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](functions/indexOf)</span>[[src]][indexOf]</span>
 
 ```typescript
 (list: T[]) => number
@@ -462,7 +462,7 @@ Fae.indexOf(0, list)            // 0
 
 ### lens
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/lens)</span>[[src]][lens]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/lens)</span>[[src]][lens]</span>
 
 ```typescript
 <T, F>(getter: LensGetter<T, F>, setter: LensSetter<T, F>) => Lens<T, F>
@@ -488,7 +488,7 @@ const lens2 = Fae.lens(
 
 ### lensIndex
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/lensIndex)</span>[[src]][lensIndex]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/lensIndex)</span>[[src]][lensIndex]</span>
 
 ```typescript
 <T, F>(index: number) => Lens<T, F>
@@ -504,7 +504,7 @@ const headLens = Fae.lensIndex(0)
 
 ### lensPath
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/lensPath)</span>[[src]][lensPath]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/lensPath)</span>[[src]][lensPath]</span>
 
 ```typescript
 <T, F>(path: Path) => Lens<T, F>
@@ -520,7 +520,7 @@ const xHeadYLens = Fae.lensPath(['x', 0, 'y'])
 
 ### lensProp
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/lensProp)</span>[[src]][lensProp]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/lensProp)</span>[[src]][lensProp]</span>
 
 ```typescript
 <T, F>(prop: Prop) => Lens<T, F>
@@ -536,7 +536,7 @@ const xLens = Fae.lensProp('x')
 
 ### max
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/max)</span>[[src]][max]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/max)</span>[[src]][max]</span>
 
 ```typescript
 (a: T, b: T) => T
@@ -557,7 +557,7 @@ Fae.max(0, Infinity)  // Infinity
 
 ### median
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/median)</span>[[src]][median]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/median)</span>[[src]][median]</span>
 
 ```typescript
 (list: number[]) => number
@@ -578,7 +578,7 @@ Fae.median([Infinity, Infinity]) // Infinity
 
 ### min
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/min)</span>[[src]][min]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/min)</span>[[src]][min]</span>
 
 ```typescript
 (a: T, b: T) => T
@@ -599,7 +599,7 @@ Fae.min(0, Infinity)  // 0
 
 ### multiply
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/multiply)</span>[[src]][multiply]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/multiply)</span>[[src]][multiply]</span>
 
 ```typescript
 (a: number, b: number) => number
@@ -618,7 +618,7 @@ Fae.multiply(6)(7) // 42
 
 ### nth
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/nth)</span>[[src]][nth]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/nth)</span>[[src]][nth]</span>
 
 ```typescript
 (index: number, functor: F) => NthReturnType<F>
@@ -638,7 +638,7 @@ Fae.nth(Fae._, 'hello')(-3) // 'l'
 
 ### or
 
-###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/or)</span>[[src]][or]</span>
+###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](functions/or)</span>[[src]][or]</span>
 
 ```typescript
 (a: any, b: any) => boolean
@@ -672,7 +672,7 @@ Fae.or(undefined, false) // false
 
 ### over
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/over)</span>[[src]][over]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/over)</span>[[src]][over]</span>
 
 ```typescript
 <T, F>(lens: Lens<T, F>, fn: FuncArr1<F, F>, target: T) => T
@@ -693,7 +693,7 @@ Fae.over(headLens, (x: string) => x.toUpperCase(), arr) // ['FOO', 'bar', 'baz']
 
 ### path
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/path)</span>[[src]][path]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/path)</span>[[src]][path]</span>
 
 ```typescript
 (ps: Path, obj: ObjRec<T> | null) => R
@@ -712,7 +712,7 @@ Fae.path('c.k.e', Fae._)({a: 2, b: 3, c: {k: [1, 2, 3]}}) // undefined
 
 ### pathOr
 
-###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](/pathOr)</span>[[src]][pathOr]</span>
+###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](functions/pathOr)</span>[[src]][pathOr]</span>
 
 ```typescript
 (d: D, p: Path, obj: ObjRec<T> | null) => D | P
@@ -732,7 +732,7 @@ Fae.pathOr(Fae._, Fae._, {a: 2, b: 3, c: {k: [1, 2, 3]}})('Undefined')('c.k.e') 
 
 ### paths
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/paths)</span>[[src]][paths]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/paths)</span>[[src]][paths]</span>
 
 ```typescript
 (pathsArr: Path[], obj: ObjRec<T> | null) => R[]
@@ -751,7 +751,7 @@ Fae.paths([['a', ''], ['p', 0, 'q']], { a: { b: 2 }, p: [{ q: 3 }]})  // [undefi
 
 ### pluck
 
-###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/pluck)</span>[[src]][pluck]</span>
+###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](functions/pluck)</span>[[src]][pluck]</span>
 
 ```typescript
 (p: Prop, list: Obj<T>[]): T[]
@@ -771,7 +771,7 @@ Fae.pluck('val', {a: {val: 3}, b: {val: 5}}) // {a: 3, b: 5}
 
 ### prepend
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/prepend)</span>[[src]][prepend]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/prepend)</span>[[src]][prepend]</span>
 
 ```typescript
 <T>(el: T, list: T[]) => T[]
@@ -788,7 +788,7 @@ Fae.prepend(['tests'], ['write', 'more']); //=> [['tests'], 'write', 'more']
 
 ### prop
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/prop)</span>[[src]][prop]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/prop)</span>[[src]][prop]</span>
 
 ```typescript
 <T>(p: Prop, obj: Obj<T> | ArrayLike<T>): T | undefined
@@ -805,7 +805,7 @@ Fae.prop(0, ['Cthulhu', 'Dagon', 'Yog-Sothoth']) // 'Cthulhu'
 
 ### propEq
 
-###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](/propEq)</span>[[src]][propEq]</span>
+###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](functions/propEq)</span>[[src]][propEq]</span>
 
 ```typescript
 <T>(name: Prop, val: T, obj: Obj<T>): boolean
@@ -823,7 +823,7 @@ Fae.propEq('hair', 'black', obj1) // false
 
 ### propIs
 
-###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](/propIs)</span>[[src]][propIs]</span>
+###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](functions/propIs)</span>[[src]][propIs]</span>
 
 ```typescript
 <T>(type: string, name: Prop, obj: Obj<T>): boolean
@@ -841,7 +841,7 @@ Fae.propIs('Number', 'a', {}) // false
 
 ### propOr
 
-###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](/propOr)</span>[[src]][propOr]</span>
+###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](functions/propOr)</span>[[src]][propOr]</span>
 
 ```typescript
 <T, R>(d: R, p: Prop, obj: Obj<T> | null): T | R
@@ -867,7 +867,7 @@ GreatWithDefault(fae)  // 'FaeModule'
 
 ### props
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/props)</span>[[src]][props]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/props)</span>[[src]][props]</span>
 
 ```typescript
 <T>(p: Prop[], obj: Obj<T> | ArrayLike<T>): (T | undefined)[]
@@ -887,7 +887,7 @@ Fae.props(['a', 'nonexistent'], obj) // [1, undefined]
 
 ### propSatisfies
 
-###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](/propSatisfies)</span>[[src]][propSatisfies]</span>
+###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](functions/propSatisfies)</span>[[src]][propSatisfies]</span>
 
 ```typescript
 <T>(pred: Predicate1<T>, name: Prop, obj: Obj<T>): boolean
@@ -904,7 +904,7 @@ Fae.propSatisfies(x => x > 0, 'x', {x: 1, y: 2}) // true
 
 ### range
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/range)</span>[[src]][range]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/range)</span>[[src]][range]</span>
 
 ```typescript
 (from: number, to: number) => number[]
@@ -924,7 +924,7 @@ Fae.range(1, _)(5) // [1, 2, 3, 4, 5]
 
 ### rangeUntil
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/rangeUntil)</span>[[src]][rangeUntil]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/rangeUntil)</span>[[src]][rangeUntil]</span>
 
 ```typescript
 (from: number, to: number) => number[]
@@ -944,7 +944,7 @@ Fae.rangeUntil(1, _)(5) // [1, 2, 3, 4]
 
 ### reverse
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/reverse)</span>[[src]][reverse]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/reverse)</span>[[src]][reverse]</span>
 
 ```typescript
 <F extends T[] | string, T>(functor: F) => F
@@ -961,7 +961,7 @@ Fae.revrse('abcd') // 'dcba'
 
 ### set
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/set)</span>[[src]][set]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/set)</span>[[src]][set]</span>
 
 ```typescript
 <T, F>(lens: Lens<T, F>, value: F, target: T) => T
@@ -981,7 +981,7 @@ Fae.set(xLens, 8, {x: 1, y: 2})  // {x: 8, y: 2}
 
 ### subtract
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/subtract)</span>[[src]][subtract]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/subtract)</span>[[src]][subtract]</span>
 
 ```typescript
 (a: number, b: number) => number
@@ -1000,7 +1000,7 @@ Fae.subtract(6)(3) // 3
 
 ### sum
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/sum)</span>[[src]][sum]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/sum)</span>[[src]][sum]</span>
 
 ```typescript
 (list: number[]) => number
@@ -1019,7 +1019,7 @@ Fae.sum([1, 2, 3, Infinity, -Infinity]) // NaN
 
 ### tail
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/tail)</span>[[src]][tail]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/tail)</span>[[src]][tail]</span>
 
 ```typescript
 (functor: ArrayLike<T> | string) => T[] | string
@@ -1050,7 +1050,7 @@ Fae.tail(arr) // [2, 3, 4]
 
 ### trim
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/trim)</span>[[src]][trim]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/trim)</span>[[src]][trim]</span>
 
 ```typescript
 (str: string, t: string) => string
@@ -1070,7 +1070,7 @@ Fae.trim('[[Hello]]]', '[') // 'Hello]]]'
 
 ### typ
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/typ)</span>[[src]][typ]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/typ)</span>[[src]][typ]</span>
 
 ```typescript
 (a: any) => AllTypes
@@ -1092,7 +1092,7 @@ Fae.typ(/[A-z]/) // 'RegExp'
 
 ### view
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/view)</span>[[src]][view]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/view)</span>[[src]][view]</span>
 
 ```typescript
 <T, F>(lens: Lens<T, F>, target: T) => F
@@ -1110,7 +1110,7 @@ Fae.view(xLens, {x: 1, y: 2})  // 1
 
 ### when
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/when)</span>[[src]][when]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/when)</span>[[src]][when]</span>
 
 ```typescript
 (predicate: Predicate1<T>, func: FuncArr1<T, R>, value: T) => T | R
@@ -1141,7 +1141,7 @@ Fae.when(equals([1,2,4,5,6]))(Fae.filter(isEven))([1,2,3,5,6])  // [1, 2, 3, 5, 
 
 ### whereAll
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/whereAll)</span>[[src]][whereAll]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/whereAll)</span>[[src]][whereAll]</span>
 
 ```typescript
 (specs: Tests<T>, testObj: Obj<T>) => boolean
@@ -1174,7 +1174,7 @@ Fae.whereAll(spec2, test5)    // true
 
 ### whereAny
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/whereAny)</span>[[src]][whereAny]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/whereAny)</span>[[src]][whereAny]</span>
 
 ```typescript
 (specs: Tests<T>, testObj: Obj<T>) => boolean
@@ -1210,7 +1210,7 @@ Fae.whereAny(specP.name, person2.address) //false
 
 ### whereEq
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/whereEq)</span>[[src]][whereEq]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/whereEq)</span>[[src]][whereEq]</span>
 
 ```typescript
 (spec: Obj<T>, testObj: Obj<T>) => boolean
@@ -1251,7 +1251,7 @@ Fae.whereEq(person1.address, person2.address) // true
 
 ### xor
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/xor)</span>[[src]][xor]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/xor)</span>[[src]][xor]</span>
 
 ```typescript
 (a: any, b: any) => boolean
@@ -1284,7 +1284,7 @@ Fae.xor(new Date())(0) // true
 
 ### zip
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/zip)</span>[[src]][zip]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/zip)</span>[[src]][zip]</span>
 
 ```typescript
 (list1: T1[], list2: T2[]) =>  [T1, T2][]
@@ -1302,7 +1302,7 @@ Fae.zip([1, 2, 3], [100, 200, 300, 400]) // [[1, 100],[2, 200],[3, 300]]
 
 ### zipWith
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/zipWith)</span>[[src]][zipwith]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](functions/zipWith)</span>[[src]][zipwith]</span>
 
 ```typescript
 (fn: (a: T1, b: T2) => R, list1: T1[], list2: T2[]) => R[]
