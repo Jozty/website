@@ -191,7 +191,7 @@ Fae.complement(isNaN)(Infinity)// true
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/concat)</span>[[src]][concat]</span>
 
 ```typescript
-<L extends any[] | string>(a: L, b: L) => ConcatReturnType<L>
+<L extends any[] | string>(a: L, b: L) => InferType<L>
 ```
 
 Returns the concatenation of strings,arrays.
