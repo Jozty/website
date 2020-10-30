@@ -379,7 +379,7 @@ Fae.groupWith(isConsecutive, [1, 2, 9, 10, 3, 4]) // [[1, 2], [9, 10], [3, 4]]
 ###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](/head)</span>[[src]][head]</span>
 
 ```typescript
-<L extends any[] | string>(functor: L) : HeadReturnType<L>
+<L extends any[] | string>(functor: L) : InferElementType<L>
 ```
 
 Returns the first element of the given list or string. In some libraries

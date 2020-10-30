@@ -23,7 +23,7 @@ type HeadReturnType<F> = F extends string
   ? U
   : never
   
-function _head = <L extends any[] | string>(functor: L) : HeadReturnType<L> {
+function _head = <L extends any[] | string>(functor: L) : InferElementType<L> {
     //..
 }
 ```
