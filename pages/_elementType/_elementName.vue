@@ -16,7 +16,9 @@ export default {
 
   async asyncData({ $content, params }) {
     try {
-      const func = await $content(`types/${params.slug}`).fetch()
+      const func = await $content(
+        `${params.elementType}/${params.elementName}`
+      ).fetch()
       return { func }
     } catch (e) {
       console.error(e)
@@ -28,6 +30,13 @@ export default {
   mounted() {
     document.querySelectorAll('.icon').forEach((e) => {
       e.className = e.className.replace(/icon/g, 'fa')
+    })
+
+    const { elementType, elementName } = this.$route.params
+
+    this.$gtm.push({
+      event: 'page',
+      route: `${elementType}/${elementName}`,
     })
   },
 }

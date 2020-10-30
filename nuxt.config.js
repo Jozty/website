@@ -57,6 +57,7 @@ export default {
     '@nuxt/content',
     '@nuxtjs/device',
     'nuxt-clipboard2',
+    '@nuxtjs/gtm',
   ],
   /*
    ** Content module configuration
@@ -94,5 +95,8 @@ export default {
   axios: {
     // proxyHeaders: false,
     baseURL: '/',
+  },
+  gtm: {
+    id: 'G-8M9NPTZDSB',
   },
 }
