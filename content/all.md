@@ -11,9 +11,14 @@ description: All functions
 [complement]: https://deno.land/x/fae/complement.ts
 [concat]: https://deno.land/x/fae/concat.ts
 [divide]: https://deno.land/x/fae/divide.ts
+[either]: https://deno.land/x/fae/either.ts
+[endsWith]: https://deno.land/x/fae/endsWith.ts
+[eqProps]: https://deno.land/x/fae/eqProps.ts
 [flip]: https://deno.land/x/fae/flip.ts
 [fromPairs]: https://deno.land/x/fae/fromPairs.ts
 [groupWith]: https://deno.land/x/fae/groupWith.ts
+[head]: https://deno.land/x/fae/head.ts
+[identity]: https://deno.land/x/fae/identity.ts
 [inc]: https://deno.land/x/fae/inc.ts
 [indexOf]: https://deno.land/x/fae/indexOf.ts
 [lens]: https://deno.land/x/fae/lens.ts
@@ -186,7 +191,7 @@ Fae.complement(isNaN)(Infinity)// true
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/concat)</span>[[src]][concat]</span>
 
 ```typescript
-<L extends any[] | string>(a: L, b: L) => ConcatReturnType<L>>
+<L extends any[] | string>(a: L, b: L) => ConcatReturnType<L>
 ```
 
 Returns the concatenation of strings,arrays.
@@ -219,6 +224,81 @@ divideBy10(30) // 3
 const reciprocal = Fae.divide(1)
 reciprocal(2) // 0.5
 Fae.divide(20)(5) // 4
+```
+
+---
+
+### either
+
+###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/either)</span>[[src]][either]</span>
+
+```typescript
+<T extends Func> (f: T, g: T) : T
+```
+
+A function wrapping calls to the two functions in an `||` operation,
+returning the result of the first function if it is true and the result
+of the second function otherwise. Second function will not be invoked if the first returns a true value.
+
+```typescript
+let even = (x: number) => (x & 1) === 0
+let gt10 = (x: number) => x > 10
+let f = Fae.either(even, gt10)
+f(8)    // true
+f(13)   // true
+f(7)    // false
+let g = Fae.either(even, _)(gt10)
+g(8)    // true
+g(13)   // true
+g(7)    // false
+```
+
+---
+
+### endsWith
+
+###### since v0.2.0 <span> <span class="full-docs">[[full-docs]](/endsWith)</span>[[src]][endsWith]</span>
+
+```typescript
+<L extends any[] | string>(suffix: L, functor: L) : boolean
+```
+Returns true if `functor` ends with `suffix`.
+
+```typescript
+Fae.endsWith('c', 'abc')                          // true
+Fae.endsWith(['c'], ['a', 'b', 'c'])              // true
+Fae.endsWith(['b'], ['a', 'b', 'c'])              // false
+Fae.endsWith(_, ['a', 'b', 'c'])(['a', 'b', 'c']) // true
+Fae.endsWith('ology', _)('astrology')             // true
+```
+
+---
+
+### eqProps
+
+###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](/eqProps)</span>[[src]][eqProps]</span>
+
+```typescript
+<T>(prop: string, obj1: Obj<T>, obj2: Obj<T>) : Obj<T>
+```
+
+Reports whether two objects have the same value, for the specified property.
+Useful as a curried predicate.
+
+```typescript
+Fae.eqProps('value', { value: 0 }, { value: -0 })               // false
+Fae.eqProps('value', { value: Infinity }, { value: Infinity })  // true
+Fae.eqProps('value', { value: Infinity }, { value: -Infinity }) // false
+Fae.eqProps(
+        'age',
+        { name: 'shubham', age: 10 },
+        { name: 'shubham', age: 12 },
+      )                                                         // false  
+Fae.eqProps(
+        'name',
+        { name: 'shivam', age: 10 },
+        { name: 'shubham', age: 10 },
+      )                                                         // false
 ```
 
 ---
@@ -289,6 +369,50 @@ Fae.groupWith(isConsecutive, [1, 2, 3, 4])        // [[1, 2, 3, 4]]
 Fae.groupWith(isConsecutive, [1, 2, 2, 3])        // [[1, 2], [2, 3]]
 Fae.groupWith(isConsecutive, [1, 2, 9, 3, 4])     // [[1, 2], [9], [3, 4]]
 Fae.groupWith(isConsecutive, [1, 2, 9, 10, 3, 4]) // [[1, 2], [9, 10], [3, 4]]
+```
+
+---
+
+### head
+
+###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](/head)</span>[[src]][head]</span>
+
+```typescript
+<L extends any[] | string>(functor: L) : HeadReturnType<L>
+```
+
+Returns the first element of the given list or string. In some libraries
+this function is named `first`.
+
+```typescript
+Fae.head([1, 2, 3])           // 1
+Fae.head([2, 3])              // 2
+Fae.head([3])                 // 3
+Fae.head('c')                 // 'c'
+Fae.head('')                  // ''
+```
+
+---
+
+### identity
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/identity)</span>[[src]][identity]</span>
+
+```typescript
+<T>(x: T) : T
+```
+
+Returns the supplied parameter
+
+```typescript
+let f = (x: number) => ++x
+let g = (y: string) => y+'bar'
+
+Fae.identity(undefined)             // undefined
+Fae.identity('foo')                 // 'foo'
+Fae.identity('foo', 'bar')          // 'foo'
+Fae.identity(f(1))                  // 2
+Fae.identity(g('foo'))              // 'foobar'
 ```
 
 ---
