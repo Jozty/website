@@ -26,9 +26,20 @@ function _endsWith<L extends any[] | string>(suffix: L, functor: L) : boolean {
 **Curried type declaration**
 
 ```typescript
-function _endsWith<L extends any[] | string>(suffix: L, functor: L) : boolean {
-    //..
-}
+type EndsWithReturnType<F> = F extends string
+  ? string
+  : F extends (infer U)[]
+  ? U[]
+  : never
+
+type EndsWith_2<L extends any[] | string> = (functor: L) => boolean
+
+type EndsWith_1<L extends any[] | string> = (suffix: L) => boolean
+
+type EndsWith =
+ & (<L extends any[] | string>(suffix: L,functor?: PH,) => EndsWith_2<EndsWithReturnType<L>>)
+ & (<L extends any[] | string>(suffix: PH,functor: L,) => EndsWith_1<EndsWithReturnType<L>>)
+ & (<L extends any[] | string>(suffix: L,functor: L,) => boolean)
 ```
 <br>
 

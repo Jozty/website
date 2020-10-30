@@ -2,12 +2,11 @@
 title:  head function
 description: a thorough tour of head function
 ---
-## Complement
+## Head
 
 <br>
 
-Returns the first element of the given list or string. In some libraries
-this function is named `first`.
+Returns the first element of the given list or string. Its return undefined for empty list.
 
 <br>
 

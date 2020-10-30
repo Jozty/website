@@ -247,6 +247,7 @@ let f = Fae.either(even, gt10)
 f(8)    // true
 f(13)   // true
 f(7)    // false
+
 let g = Fae.either(even, _)(gt10)
 g(8)    // true
 g(13)   // true
@@ -295,10 +296,10 @@ Fae.eqProps(
         { name: 'shubham', age: 12 },
       )                                                         // false  
 Fae.eqProps(
-        'name',
+        'age',
         { name: 'shivam', age: 10 },
         { name: 'shubham', age: 10 },
-      )                                                         // false
+      )                                                         // true
 ```
 
 ---

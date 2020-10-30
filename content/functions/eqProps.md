@@ -3,7 +3,7 @@ title: eqProps function
 description: a thorough tour of eqProps function
 ---
 
-## GroupWith
+## EqProps
 
 <br>
 
