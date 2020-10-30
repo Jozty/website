@@ -12,7 +12,7 @@ async function createLink(reqBody, req, res) {
         option: 'UNGUESSABLE',
       },
     }
-    const key = 'AIzaSyBqrXOcDTRHB94WAeYE2OJoUwu7bNQP-5E'
+    const key = ''
     const response = await fetch(
       `https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${key}`,
       {
