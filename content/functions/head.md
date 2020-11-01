@@ -29,6 +29,11 @@ function _head = <L extends any[] | string>(functor: L) : InferElementType<L> {
 ```
 <br>
 
+**Used types**
+* [InferElementType](/types/InferElementType)
+
+<br>
+
 **Examples**
 
 ```typescript

@@ -39,6 +39,11 @@ type Either =
 ```
 <br>
 
+**Used types**
+* [Func](/types/Func)
+
+<br>
+
 **Examples**
 ```typescript
 import { either, _ } from 'https://deno.land/x/fae/mod.ts'

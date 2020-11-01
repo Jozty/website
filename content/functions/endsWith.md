@@ -37,6 +37,11 @@ type EndsWith =
 ```
 <br>
 
+**Used types**
+* [InferType](/types/InferType)
+
+<br>
+
 **Examples**
 ```typescript
 import { endsWith, _ } from 'https://deno.land/x/fae/mod.ts'

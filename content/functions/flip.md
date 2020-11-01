@@ -23,6 +23,11 @@ function _flip(func:number): number {
 ```
 <br>
 
+**Used types**
+* [Func](/types/Func)
+
+<br>
+
 **Examples**
 ```typescript
 import { flip, _ } from 'https://deno.land/x/fae/mod.ts'

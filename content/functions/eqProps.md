@@ -18,7 +18,7 @@ Useful as a curried predicate.
 
 **Non curried type declaration**
 ```typescript
-function _eqProps<T>(prop: string, obj1: Obj<T>, obj2: Obj<T>) : Obj<T> {
+function _eqProps<T>(prop: Prop, obj1: Obj<T>, obj2: Obj<T>) : Obj<T> {
     //..
 }
 ```
@@ -27,7 +27,7 @@ function _eqProps<T>(prop: string, obj1: Obj<T>, obj2: Obj<T>) : Obj<T> {
 **Curried type declaration**
 
 ```typescript
-type EqProps_1<T> = (prop: string) => boolean
+type EqProps_1<T> = (prop: Prop) => boolean
 
 type EqProps_2<T> = (obj1: Obj<T>) => boolean
 
@@ -39,24 +39,30 @@ type EqProps_2_3 =
  & (<T>(obj1: Obj<T>, obj2: Obj<T>) => boolean)
 
 type EqProps_1_3<T> =
- & ((prop: string, obj2?: PH) => EqProps_3<T>)
+ & ((prop: Prop, obj2?: PH) => EqProps_3<T>)
  & ((prop: PH, obj2: Obj<T>) => EqProps_1<T>)
- & ((prop: string, obj2: Obj<T>) => boolean)
+ & ((prop: Prop, obj2: Obj<T>) => boolean)
 
 type EqProps_1_2<T> =
- & ((prop: string, obj1?: PH) => EqProps_2<T>)
+ & ((prop: Prop, obj1?: PH) => EqProps_2<T>)
  & ((prop: PH, obj1: Obj<T>) => EqProps_1<T>)
- & ((prop: string, obj1: Obj<T>) => boolean)
+ & ((prop: Prop, obj1: Obj<T>) => boolean)
 
 type EqProps =
- & ((prop: string, obj1?: PH, obj2?: PH) => EqProps_2_3)
+ & ((prop: Prop, obj1?: PH, obj2?: PH) => EqProps_2_3)
  & (<T>(prop: PH, obj1: Obj<T>, obj2?: PH) => EqProps_1_3<T>)
  & (<T>(prop: PH, obj1: PH, obj2: Obj<T>) => EqProps_1_2<T>)
- & (<T>(prop: string, obj1: Obj<T>, obj2?: PH) => EqProps_3<T>)
- & (<T>(prop: string, obj1: PH, obj2: Obj<T>) => EqProps_2<T>)
+ & (<T>(prop: Prop, obj1: Obj<T>, obj2?: PH) => EqProps_3<T>)
+ & (<T>(prop: Prop, obj1: PH, obj2: Obj<T>) => EqProps_2<T>)
  & (<T>(prop: PH, obj1: Obj<T>, obj2: Obj<T>) => EqProps_1<T>)
- & (<T>(prop: string,obj1: Obj<T>,obj2: Obj<T>) => boolean)
+ & (<T>(prop: Prop,obj1: Obj<T>,obj2: Obj<T>) => boolean)
 ```
+<br>
+
+**Used types**
+* [Obj](/types/Obj)
+* [Prop](/types/Prop)
+
 <br>
 
 **Examples**

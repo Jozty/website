@@ -36,6 +36,11 @@ type GroupWith =
 ```
 <br>
 
+**Used types**
+* [Predicate2](/types/Predicate2)
+
+<br>
+
 **Examples**
 ```typescript
 import { groupWith, equals, _ } from 'https://deno.land/x/fae/mod.ts'
