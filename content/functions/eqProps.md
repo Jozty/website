@@ -97,25 +97,25 @@ eqProps(
   'value',
   { value: Infinity }, 
   { value: -Infinity },
-   )                                                         // false
+)                                                            // false
 
 eqProps(
   'age',
   { name: 'shubham', age: 10 },
   { name: 'shubham', age: 12 },
-)                                                           // false
+)                                                            // false
   
 eqProps(
   'name',
   { name: 'shivam', age: 10 },
   { name: 'shubham', age: 10 },
-)                                                           // false
+)                                                            // false
 
-eqProps(_, { value: 0 }, { value: -0 })('value')            // false
-eqProps('value', _)({ value: -0 }, { value: 0 })            // false
+eqProps(_, { value: 0 }, { value: -0 })('value')             // false
+eqProps('value', _)({ value: -0 }, { value: 0 })             // false
 eqProps(
   _,
   { name: 'shubham', age: 10 },
   { name: 'shubham', age: 12 },
-)('name')                                                   // true
+)('name')                                                    // true
 ``` 

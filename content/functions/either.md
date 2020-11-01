@@ -48,10 +48,10 @@ type Either =
 ```typescript
 import { either, _ } from 'https://deno.land/x/fae/mod.ts'
 
-let even = (x: number) => (x & 1) === 0
-let gt10 = (x: number) => x > 10
-let f = either(even, gt10)
-let g = either(even, _)(gt10)
+const even = (x: number) => (x & 1) === 0
+const gt10 = (x: number) => x > 10
+const f = either(even, gt10)
+const g = either(even, _)(gt10)
 
 f(8)    // true
 f(13)   // true
