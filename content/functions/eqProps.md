@@ -69,29 +69,53 @@ type EqProps =
 ```typescript
 import { eqProps, _ } from 'https://deno.land/x/fae/mod.ts'
 
-eqProps('value', { value: 0 }, { value: -0 })               // false
-eqProps('value', { value: -0 }, { value: 0 })               // false
-eqProps('value', { value: NaN }, { value: NaN })            // true
-eqProps('value', { value: Infinity }, { value: Infinity })  // true
-eqProps('value', { value: Infinity }, { value: -Infinity }) // false
+eqProps(
+  'value',
+  { value: 0 },
+  { value: -0 },
+)                                                            // false
 
 eqProps(
-        'age',
-        { name: 'shubham', age: 10 },
-        { name: 'shubham', age: 12 },
-      )                                                     // false
-    
+  'value',
+  { value: -0 },
+  { value: 0 },
+)                                                            // false
+
 eqProps(
-        'name',
-        { name: 'shivam', age: 10 },
-        { name: 'shubham', age: 10 },
-      )                                                     // false
+  'value',
+  { value: NaN },
+  { value: NaN },
+)                                                            // true
+
+eqProps(
+  'value',
+  { value: Infinity },
+  { value: Infinity },
+)                                                            // true
+
+eqProps(
+  'value',
+  { value: Infinity }, 
+  { value: -Infinity },
+   )                                                         // false
+
+eqProps(
+  'age',
+  { name: 'shubham', age: 10 },
+  { name: 'shubham', age: 12 },
+)                                                           // false
+  
+eqProps(
+  'name',
+  { name: 'shivam', age: 10 },
+  { name: 'shubham', age: 10 },
+)                                                           // false
 
 eqProps(_, { value: 0 }, { value: -0 })('value')            // false
 eqProps('value', _)({ value: -0 }, { value: 0 })            // false
 eqProps(
-        _,
-        { name: 'shubham', age: 10 },
-        { name: 'shubham', age: 12 },
-      )('name')                                             // true
+  _,
+  { name: 'shubham', age: 10 },
+  { name: 'shubham', age: 12 },
+)('name')                                                   // true
 ``` 

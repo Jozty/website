@@ -233,7 +233,7 @@ Fae.divide(20)(5) // 4
 ###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/functions/either)</span>[[src]][either]</span>
 
 ```typescript
-<T extends Func> (f: T, g: T) : T
+<T extends Func> (f: T, g: T): T
 ```
 
 A function wrapping calls to the two /functions in an `||` operation,
@@ -241,14 +241,15 @@ returning the result of the first function if it is true and the result
 of the second function otherwise. Second function will not be invoked if the first returns a true value.
 
 ```typescript
-let even = (x: number) => (x & 1) === 0
-let gt10 = (x: number) => x > 10
-let f = Fae.either(even, gt10)
+const even = (x: number) => (x & 1) === 0
+const gt10 = (x: number) => x > 10
+const f = Fae.either(even, gt10)
+
 f(8)    // true
 f(13)   // true
 f(7)    // false
 
-let g = Fae.either(even, _)(gt10)
+const g = Fae.either(even, _)(gt10)
 g(8)    // true
 g(13)   // true
 g(7)    // false
@@ -261,7 +262,7 @@ g(7)    // false
 ###### since v0.2.0 <span> <span class="full-docs">[[full-docs]](/functions/endsWith)</span>[[src]][endsWith]</span>
 
 ```typescript
-<L extends any[] | string>(suffix: L, functor: L) : boolean
+<L extends any[] | string>(suffix: L, functor: L): boolean
 ```
 Returns true if `functor` ends with `suffix`.
 
@@ -280,7 +281,7 @@ Fae.endsWith('ology', _)('astrology')             // true
 ###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](/functions/eqProps)</span>[[src]][eqProps]</span>
 
 ```typescript
-<T>(prop: string, obj1: Obj<T>, obj2: Obj<T>) : Obj<T>
+<T>(prop: string, obj1: Obj<T>, obj2: Obj<T>) => Obj<T>
 ```
 
 Reports whether two objects have the same value, for the specified property.
@@ -291,15 +292,15 @@ Fae.eqProps('value', { value: 0 }, { value: -0 })               // false
 Fae.eqProps('value', { value: Infinity }, { value: Infinity })  // true
 Fae.eqProps('value', { value: Infinity }, { value: -Infinity }) // false
 Fae.eqProps(
-        'age',
-        { name: 'shubham', age: 10 },
-        { name: 'shubham', age: 12 },
-      )                                                         // false  
+'age',
+{ name: 'shubham', age: 10 },
+{ name: 'shubham', age: 12 },
+)                                                               // false  
 Fae.eqProps(
-        'age',
-        { name: 'shivam', age: 10 },
-        { name: 'shubham', age: 10 },
-      )                                                         // true
+  'age',
+  { name: 'shivam', age: 10 },
+  { name: 'shubham', age: 10 },
+)                                                              // true
 ```
 
 ---
@@ -317,6 +318,7 @@ Inverts the first two arguments of a function
 ```typescript
 const f = (a: string, b: string, c: string) => a + ' ' + b + ' ' + c
 const g = Fae.flip(f)
+
 f('a', 'b', 'c')    // 'a b c'
 g('a', 'b', 'c')    // 'b a c'
 g('a', '@', 'A')    // '@ a A'
@@ -379,7 +381,7 @@ Fae.groupWith(isConsecutive, [1, 2, 9, 10, 3, 4]) // [[1, 2], [9, 10], [3, 4]]
 ###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](/functions/head)</span>[[src]][head]</span>
 
 ```typescript
-<L extends any[] | string>(functor: L) : InferElementType<L>
+<L extends any[] | string>(functor: L) => InferElementType<L>
 ```
 
 Returns the first element of the given list or string. In some libraries
