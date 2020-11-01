@@ -18,7 +18,7 @@ Useful as a curried predicate.
 
 **Non curried type declaration**
 ```typescript
-function _eqProps<T>(prop: Prop, obj1: Obj<T>, obj2: Obj<T>) : Obj<T> {
+function _eqProps<T>(prop: Prop, obj1: Obj<T>, obj2: Obj<T>): Obj<T> {
     //..
 }
 ```

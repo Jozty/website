@@ -17,13 +17,7 @@ Returns the first element of the given list or string. Its return undefined for 
 **Type declaration**
 
 ```typescript
-type HeadReturnType<F> = F extends string
-  ? string
-  : F extends (infer U)[]
-  ? U
-  : never
-  
-function _head = <L extends any[] | string>(functor: L) : InferElementType<L> {
+function _head = <L extends any[] | string>(functor: L): InferElementType<L> {
     //..
 }
 ```

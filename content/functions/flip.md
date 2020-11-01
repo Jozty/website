@@ -17,7 +17,7 @@ Inverts the first two arguments of a function
 **Type declaration**
 
 ```typescript
-function _flip(func:number): number {
+function _flip(func: number): number {
   // ...
 }
 ```

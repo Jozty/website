@@ -16,7 +16,7 @@ Returns the supplied parameter
 **Type declaration**
 
 ```typescript
-function _identity = <T>(x: T) : T {
+function _identity = <T>(x: T): T {
     //..
 }
 ```

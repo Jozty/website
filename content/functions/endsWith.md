@@ -17,7 +17,7 @@ Returns true if `functor` ends with `suffix`.
 
 **Non curried type declaration**
 ```typescript
-function _endsWith<L extends any[] | string>(suffix: L, functor: L) : boolean {
+function _endsWith<L extends any[] | string>(suffix: L, functor: L): boolean {
     //..
 }
 ```
