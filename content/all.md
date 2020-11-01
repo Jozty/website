@@ -402,7 +402,7 @@ Fae.head('')                  // ''
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/identity)</span>[[src]][identity]</span>
 
 ```typescript
-<T>(x: T) : T
+<T>(x: T): T
 ```
 
 Returns the supplied parameter
