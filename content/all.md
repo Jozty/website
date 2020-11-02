@@ -1,6 +1,6 @@
 ---
 title: Docs
-description: All /functions
+description: All functions
 ---
 
 [add]: https://deno.land/x/fae/add.ts
@@ -90,7 +90,7 @@ Fae.add(4)(3) // 8
 ```
 
 Returns a new iteration function from the passed function by adding two more parameters to its callback function 1.
-the current index 2. the entire list The passed function must have first argument as the iteration /functions and last arguments as the list.
+the current index 2. the entire list The passed function must have first argument as the iteration functions and last arguments as the list.
 
 ```typescript
 const indexedMap = Fae.addIndex(Fae.map)
@@ -233,10 +233,10 @@ Fae.divide(20)(5) // 4
 ###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/functions/either)</span>[[src]][either]</span>
 
 ```typescript
-<T extends Func> (f: T, g: T): T
+<T extends Func> (f: T, g: T) => T
 ```
 
-A function wrapping calls to the two /functions in an `||` operation,
+A function wrapping calls to the two functions in an `||` operation,
 returning the result of the first function if it is true and the result
 of the second function otherwise. Second function will not be invoked if the first returns a true value.
 
@@ -262,7 +262,7 @@ g(7)    // false
 ###### since v0.2.0 <span> <span class="full-docs">[[full-docs]](/functions/endsWith)</span>[[src]][endsWith]</span>
 
 ```typescript
-<L extends any[] | string>(suffix: L, functor: L): boolean
+<L extends any[] | string>(suffix: L, functor: L) => boolean
 ```
 Returns true if `functor` ends with `suffix`.
 
@@ -281,26 +281,42 @@ Fae.endsWith('ology', _)('astrology')             // true
 ###### since v0.3.0 <span> <span class="full-docs">[[full-docs]](/functions/eqProps)</span>[[src]][eqProps]</span>
 
 ```typescript
-<T>(prop: string, obj1: Obj<T>, obj2: Obj<T>) => Obj<T>
+<T>(prop: Prop, obj1: Obj<T>, obj2: Obj<T>) => Obj<T>
 ```
 
 Reports whether two objects have the same value, for the specified property.
 Useful as a curried predicate.
 
 ```typescript
-Fae.eqProps('value', { value: 0 }, { value: -0 })               // false
-Fae.eqProps('value', { value: Infinity }, { value: Infinity })  // true
-Fae.eqProps('value', { value: Infinity }, { value: -Infinity }) // false
 Fae.eqProps(
-'age',
-{ name: 'shubham', age: 10 },
-{ name: 'shubham', age: 12 },
-)                                                               // false  
+  'value',
+  { value: 0 },
+  { value: -0 },
+)                                       // false
+
+Fae.eqProps(
+  'value',
+  { value: Infinity },
+  { value: Infinity },
+)                                       // true
+
+Fae.eqProps(
+  'value',
+  { value: Infinity },
+  { value: -Infinity },
+)                                      // false
+
+Fae.eqProps(
+  'age',
+  { name: 'shubham', age: 10 },
+  { name: 'shubham', age: 12 },
+)                                      // false
+  
 Fae.eqProps(
   'age',
   { name: 'shivam', age: 10 },
   { name: 'shubham', age: 10 },
-)                                                              // true
+)                                      // true
 ```
 
 ---
@@ -359,13 +375,14 @@ Fae.fromPairs([
 ###### since v0.5.0 <span> <span class="full-docs">[[full-docs]](/functions/groupWith)</span>[[src]][groupWith]</span>
 
 ```typescript
-<L extends T[] | string, T>(predicate: Predicate2<T>,functor: L) => L[]
+<L extends T[] | string, T>(predicate: Predicate2<T>, functor: L) => L[]
 ```
 
 Creates a new object of list of values which are satisfy the given function.
 
 ```typescript
 const isConsecutive = (a: number, b: number) => a + 1 === b
+
 Fae.groupWith(isConsecutive, [])                  // []
 Fae.groupWith(isConsecutive, [4, 3, 2, 1])        // [[4], [3], [2], [1]]
 Fae.groupWith(isConsecutive, [1, 2, 3, 4])        // [[1, 2, 3, 4]]
@@ -402,14 +419,14 @@ Fae.head('')                  // ''
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/identity)</span>[[src]][identity]</span>
 
 ```typescript
-<T>(x: T): T
+<T>(x: T) => T
 ```
 
 Returns the supplied parameter
 
 ```typescript
-let f = (x: number) => ++x
-let g = (y: string) => y+'bar'
+const f = (x: number) => ++x
+const g = (y: string) => y + 'bar'
 
 Fae.identity(undefined)             // undefined
 Fae.identity('foo')                 // 'foo'
@@ -470,7 +487,7 @@ Fae.indexOf(0, list)            // 0
 <T, F>(getter: LensGetter<T, F>, setter: LensSetter<T, F>) => Lens<T, F>
 ```
 
-Returns a lens for the given getter and setter /functions. The `getter` "gets"
+Returns a lens for the given getter and setter functions. The `getter` "gets"
 the value of the focus; the setter "sets" the value of the focus. The `setter`
 should not mutate the data structure.
 
@@ -1149,8 +1166,8 @@ Fae.when(equals([1,2,4,5,6]))(Fae.filter(isEven))([1,2,3,5,6])  // [1, 2, 3, 5, 
 (specs: Tests<T>, testObj: Obj<T>) => boolean
 ```
 
-Takes a specs objects whose properties are predicate /functions. Each predicate is applied to the value of the corresponding property of the test object. Returns `true` if all the predicates are satisfied, `false` otherwise.
-**NOTE** returns `false` if there is no predicated /functions.
+Takes a specs objects whose properties are predicate functions. Each predicate is applied to the value of the corresponding property of the test object. Returns `true` if all the predicates are satisfied, `false` otherwise.
+**NOTE** returns `false` if there is no predicated functions.
 
 ```typescript
 const equals = Fae.curry(2, (x: number, y: number) => x === y)
@@ -1183,7 +1200,7 @@ Fae.whereAll(spec2, test5)    // true
 ```
 
 Takes a specs objects whose property is a predicate function. Each predicate is applied to the value of the corresponding property of the test object. Returns `true` if any of the predicates is satisfied, `false` otherwise.
-**NOTE** returns `false` if there is no predicated /functions.
+**NOTE** returns `false` if there is no predicated functions.
 
 ```typescript
 const equals = Fae.curry(2, (x: number, y: number) => x === y)
@@ -1204,7 +1221,7 @@ const person2 = {
 
 Fae.whereAny(specP.name, person1.name) // true
 Fae.whereAny(specP.name, person2.name) // false
-Fae.whereAny(specP.address, person2.name)) //false
+Fae.whereAny(specP.address, person2.name) //false
 Fae.whereAny(specP.name, person2.address) //false
 ```
 

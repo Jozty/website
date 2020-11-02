@@ -111,8 +111,17 @@ eqProps(
   { name: 'shubham', age: 10 },
 )                                                            // false
 
-eqProps(_, { value: 0 }, { value: -0 })('value')             // false
-eqProps('value', _)({ value: -0 }, { value: 0 })             // false
+eqProps(
+  _,
+  { value: 0 },
+  { value: -0 },
+)('value')                                                   // false
+
+eqProps('value',_,)(
+  { value: -0 },
+  { value: 0 },
+)                                                            // false
+
 eqProps(
   _,
   { name: 'shubham', age: 10 },

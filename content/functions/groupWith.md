@@ -61,5 +61,4 @@ groupWith(isConsecutive, _)([4, 3, 2, 1])     // [[4], [3], [2], [1]]
 groupWith(_, [4, 3, 2, 1])(isConsecutive)     // [[4], [3], [2], [1]]
 groupWith(equals, _)('Mississippi')           // ['M', 'i', 'ss', 'i', 'ss', 'i', 'pp', 'i']
 groupWith(_, 'Mississippi')(equals)           // ['M', 'i', 'ss', 'i', 'ss', 'i', 'pp', 'i']
-
 ``` 

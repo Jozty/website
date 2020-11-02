@@ -16,7 +16,7 @@ Returns the supplied parameter
 **Type declaration**
 
 ```typescript
-function _identity = <T>(x: T): T {
+function _identity<T>(x: T): T {
     //..
 }
 ```
@@ -27,7 +27,7 @@ function _identity = <T>(x: T): T {
 import { identity } from 'https://deno.land/x/fae/mod.ts'
 
 const f = (x: number) => ++x
-const g = (y: string) => y+'bar'
+const g = (y: string) => y + 'bar'
 
 identity(undefined)             // undefined
 identity('foo')                 // 'foo'

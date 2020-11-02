@@ -16,7 +16,7 @@ Complement a function
 **Type declaration**
 
 ```typescript
-function _complement = <T extends any[]> (a: (...args: T) => boolean) => (...args: T):  boolean
+function _complement<T extends any[]>(a: (...args: T) => boolean) => (...args: T): boolean
 ```
 <br>
 
