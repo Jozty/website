@@ -23,6 +23,12 @@ function _fromPairs<T>(pairs: Pair<T>[]): Obj<T> {
 ```
 <br>
 
+**Used types**
+* [Obj](/types/Obj)
+* [Prop](/types/Prop)
+
+<br>
+
 **Examples**
 ```typescript
 import { fromPairs } from 'https://deno.land/x/fae/mod.ts'

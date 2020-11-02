@@ -57,6 +57,7 @@ export default {
     '@nuxt/content',
     '@nuxtjs/device',
     'nuxt-clipboard2',
+    '@nuxtjs/gtm',
   ],
   /*
    ** Content module configuration
@@ -83,7 +84,10 @@ export default {
     ],
   },
 
-  serverMiddleware: [{ path: '/api/run', handler: '~/api/run.js' }],
+  serverMiddleware: [
+    { path: '/api/run', handler: '~/api/run.js' },
+    { path: '/api/createDl', handler: '~/api/createDL.js' },
+  ],
 
   server: {
     port: 8080,
@@ -94,5 +98,8 @@ export default {
   axios: {
     // proxyHeaders: false,
     baseURL: '/',
+  },
+  gtm: {
+    id: 'G-8M9NPTZDSB',
   },
 }
