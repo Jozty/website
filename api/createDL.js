@@ -12,7 +12,8 @@ async function createLink(reqBody, req, res) {
         option: 'UNGUESSABLE',
       },
     }
-    const key = ''
+    console.log(process.env.FIREBASE_API_KEY)
+    const key = process.env.FIREBASE_API_KEY
     const response = await fetch(
       `https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${key}`,
       {
