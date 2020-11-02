@@ -84,7 +84,10 @@ export default {
     ],
   },
 
-  serverMiddleware: [{ path: '/api/run', handler: '~/api/run.js' }],
+  serverMiddleware: [
+    { path: '/api/run', handler: '~/api/run.js' },
+    { path: '/api/createDl', handler: '~/api/createDL.js' },
+  ],
 
   server: {
     port: 8080,

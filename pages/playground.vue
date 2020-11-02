@@ -275,7 +275,10 @@ export default {
 
     async shareCode() {
       try {
-        await this.$copyText(this.shareUrl)
+        const res = await this.$axios.post('/api/createDL', {
+          shareUrl: this.shareUrl,
+        })
+        await this.$copyText(res.data || this.shareUrl)
         this.showNotification('Copied', 'Share URL copied to clipboard')
       } catch (e) {
         this.showNotification(
