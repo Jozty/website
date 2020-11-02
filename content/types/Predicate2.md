@@ -3,7 +3,7 @@ title: Predicate2 type
 description: type declaration of Predicate2
 ---
 
-## Predicate@ type
+## Predicate2 type
 <br>
 
 **Type declaration**
