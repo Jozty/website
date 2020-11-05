@@ -87,6 +87,7 @@ export default {
   serverMiddleware: [
     { path: '/api/run', handler: '~/api/run.js' },
     { path: '/api/createDl', handler: '~/api/createDL.js' },
+    { path: '/api/health', handler: '~/api/health.js' },
   ],
 
   server: {
