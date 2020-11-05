@@ -100,6 +100,7 @@ export default {
     baseURL: '/',
   },
   gtm: {
-    id: 'G-8M9NPTZDSB',
+    id: 'GTM-M2SJFR5',
+    enabled: true,
   },
 }

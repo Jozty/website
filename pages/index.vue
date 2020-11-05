@@ -31,6 +31,11 @@ export default {
     document.querySelectorAll('.icon').forEach((e) => {
       e.className = e.className.replace(/icon/g, 'fa')
     })
+
+    this.$gtm.push({
+      event: 'page',
+      route: `/`,
+    })
   },
 }
 </script>
