@@ -27,6 +27,7 @@
     "core-js": "^3.6.5",
     "monaco-editor-vue": "^1.0.10",
     "monaco-editor-webpack-plugin": "1.8.1",
+    "node-fetch": "^2.6.1",
     "nuxt": "^2.14.5",
     "nuxt-buefy": "^0.4.3",
     "nuxt-clipboard2": "^0.2.1",
