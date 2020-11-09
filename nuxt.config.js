@@ -1,4 +1,9 @@
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
+import fs from 'fs'
+import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin'
+
+function removeMdExtension(name) {
+  return name.replace('.md', '')
+}
 
 export default {
   /*
@@ -58,6 +63,7 @@ export default {
     '@nuxtjs/device',
     'nuxt-clipboard2',
     '@nuxtjs/gtm',
+    '@nuxtjs/sitemap',
   ],
   /*
    ** Content module configuration
@@ -66,7 +72,6 @@ export default {
   content: {
     extendParser: {
       '.d.ts': (f) => {
-        console.log(f)
         return f
       },
     },
@@ -100,8 +105,35 @@ export default {
     // proxyHeaders: false,
     baseURL: '/',
   },
+
   gtm: {
     id: 'GTM-M2SJFR5',
     enabled: true,
+  },
+
+  sitemap: {
+    hostname: 'https://fae.jozty.io',
+    gzip: true,
+    routes() {
+      const functions = fs
+        .readdirSync('./content/functions')
+        .map((name) => 'functions/' + name)
+
+      const types = fs
+        .readdirSync('./content/types')
+        .map((ame) => 'types/' + ame)
+
+      const paths = functions
+        .concat(types)
+        .map(removeMdExtension)
+        .map((url) => ({
+          url,
+          changefreq: 'weekly',
+          priority: 0.8,
+          lastmod: new Date(),
+        }))
+
+      return paths
+    },
   },
 }
