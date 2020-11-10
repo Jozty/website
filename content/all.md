@@ -12,10 +12,7 @@ description: All functions
 [concat]: https://deno.land/x/fae/concat.ts
 [divide]: https://deno.land/x/fae/divide.ts
 [either]: https://deno.land/x/fae/either.ts
-<<<<<<< HEAD
 [empty]: https://deno.land/x/fae/empty.ts
-=======
->>>>>>> 90e1455f285b77f61e978f9fe4dc6de20812f44a
 [endsWith]: https://deno.land/x/fae/endsWith.ts
 [eqProps]: https://deno.land/x/fae/eqProps.ts
 [flip]: https://deno.land/x/fae/flip.ts
@@ -266,7 +263,6 @@ g(7)    // false
 
 ---
 
-<<<<<<< HEAD
 ### empty
 
 ###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/functions/empty)</span>[[src]][empty]</span>
@@ -290,8 +286,6 @@ Fae.empty(new Array([1, 2]))        // []
 
 ---
 
-=======
->>>>>>> 90e1455f285b77f61e978f9fe4dc6de20812f44a
 ### endsWith
 
 ###### since v0.2.0 <span> <span class="full-docs">[[full-docs]](/functions/endsWith)</span>[[src]][endsWith]</span>

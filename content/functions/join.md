@@ -34,8 +34,13 @@ type Join_1<T> = (separator: string | number) => string
 type Join =
   & ((separator: string | number, functor?: PH) => Join_2)
   & (<T>(separator: PH, functor: FunctorWithArLk<T>) => Join_1<T>)
-  & (<T>(separator: string | number, functor: FunctorWithArLk<T>,) => string)
+  & (<T>(separator: string | number, functor: FunctorWithArLk<T>) => string)
 ```
+
+<br>
+
+**Used types**
+* [FunctorWithArLk](/types/FunctorWithArLk)
 
 <br>
 
