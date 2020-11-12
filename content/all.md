@@ -527,16 +527,7 @@ insert(4, ['s', 't'], list)     // ['a', 'b', 'c', 'd', ['s', 't'], 'e']
 insert(8, 'z', list)            // ['a', 'b', 'c', 'd', 'e', 'z']
 insert(0, 'z', list)            // ['z', 'a', 'b', 'c', 'd', 'e']
 insert(-1, 'z', list)           // ['a', 'b', 'c', 'd', 'e', 'z']
-
 insert(0)('z')(list)            // ['z', 'a', 'b', 'c', 'd', 'e'])
-insert(0, _, list)('z')         // ['z', 'a', 'b', 'c', 'd', 'e'])
-insert(_, 'z', list)(8)         // ['a', 'b', 'c', 'd', 'e', 'z'])
-insert(3, 'x', _)(list)         // ['a', 'b', 'c', 'x', 'd', 'e'])
-insert(3, _, list)('x')         // ['a', 'b', 'c', 'x', 'd', 'e'])
-insert(_, _, list)(4, 'x')      // ['a', 'b', 'c', 'd', 'x', 'e'])
-insert(5, _, _)('x', list)      // ['a', 'b', 'c', 'd', 'e', 'x'])
-insert(_, 'x', _)(1, list)      // ['a', 'x', 'b', 'c', 'd', 'e'])
-insert(_, _, list)(1)('x')      // ['a', 'x', 'b', 'c', 'd', 'e'])
 ```
 
 ---
@@ -696,7 +687,7 @@ Fae.max(0, Infinity)  // Infinity
 
 ### mean
 
-###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/)</span>[[src]][]</span>
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/mean)</span>[[src]][mean]</span>
 
 ```typescript
 (list: number[]) => number

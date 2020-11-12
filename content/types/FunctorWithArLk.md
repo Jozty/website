@@ -11,3 +11,9 @@ description: type declaration of FunctorWithArLk
 ```typescript
 type FunctorWithArLk<T> = Functor<T> | ArrayLike<T>
 ```
+<br>
+
+**Used types**
+* [Functor](/types/Functor)
+
+

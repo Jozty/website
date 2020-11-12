@@ -37,18 +37,15 @@ type Insert_2_3 =
   & (<T>(element: PH, list: T[]) => Insert_2<T>)
   & (<T>(element: T, list: T[]) => T[])
 
-
 type Insert_1_3<T> =
   & ((index: number, list?: PH) => Insert_3<T>)
   & (<T>(index: PH, list: T[]) => Insert_1<T>)
   & ((index: number, list: T[]) => T[])
 
-
 type Insert_1_2<T> =
   & ((index: number, element?: PH) => Insert_2<T>)
   & ((index: PH, element: T) => Insert_1<T>)
   & ((index: number, element: T) => T[])
-
 
 type Insert =
   & ((index: number, element?: PH, list?: PH) => Insert_2_3)
@@ -80,9 +77,4 @@ insert(0)('z')(list)            // ['z', 'a', 'b', 'c', 'd', 'e'])
 insert(0, _, list)('z')         // ['z', 'a', 'b', 'c', 'd', 'e'])
 insert(_, 'z', list)(8)         // ['a', 'b', 'c', 'd', 'e', 'z'])
 insert(3, 'x', _)(list)         // ['a', 'b', 'c', 'x', 'd', 'e'])
-insert(3, _, list)('x')         // ['a', 'b', 'c', 'x', 'd', 'e'])
-insert(_, _, list)(4, 'x')      // ['a', 'b', 'c', 'd', 'x', 'e'])
-insert(5, _, _)('x', list)      // ['a', 'b', 'c', 'd', 'e', 'x'])
-insert(_, 'x', _)(1, list)      // ['a', 'x', 'b', 'c', 'd', 'e'])
-insert(_, _, list)(1)('x')      // ['a', 'x', 'b', 'c', 'd', 'e'])
 ```
