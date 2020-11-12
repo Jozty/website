@@ -31,9 +31,9 @@ type IndexOf_2<T> = (list: T[]) => number
 type IndexOf_1<T> = (value: T) => number
 
 type IndexOf =
- & (<T>(value: T, list?: PH) => IndexOf_2<T>)
- & (<T>(value: PH, list: T[]) => IndexOf_1<T>)
- & (<T>(value: T, list: T[]) => number)
+  & (<T>(value: T, list?: PH) => IndexOf_2<T>)
+  & (<T>(value: PH, list: T[]) => IndexOf_1<T>)
+  & (<T>(value: T, list: T[]) => number)
 ```
 
 <br>

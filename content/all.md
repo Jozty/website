@@ -12,6 +12,7 @@ description: All functions
 [concat]: https://deno.land/x/fae/concat.ts
 [divide]: https://deno.land/x/fae/divide.ts
 [either]: https://deno.land/x/fae/either.ts
+[empty]: https://deno.land/x/fae/empty.ts
 [endsWith]: https://deno.land/x/fae/endsWith.ts
 [eqProps]: https://deno.land/x/fae/eqProps.ts
 [flip]: https://deno.land/x/fae/flip.ts
@@ -21,15 +22,20 @@ description: All functions
 [identity]: https://deno.land/x/fae/identity.ts
 [inc]: https://deno.land/x/fae/inc.ts
 [indexOf]: https://deno.land/x/fae/indexOf.ts
+[insert]: https://deno.land/x/fae/insert.ts
+[isEmpty]: https://deno.land/x/fae/isEmpty.ts
+[join]: https://deno.land/x/fae/join.ts
 [lens]: https://deno.land/x/fae/lens.ts
 [lensIndex]: https://deno.land/x/fae/lensIndex.ts
 [lensPath]: https://deno.land/x/fae/lensPath.ts
 [lensProp]: https://deno.land/x/fae/lensProp.ts
 [lensProp]: https://deno.land/x/fae/lensProp.ts
 [max]: https://deno.land/x/fae/max.ts
+[mean]: https://deno.land/x/fae/mean.ts
 [median]: https://deno.land/x/fae/median.ts
 [min]: https://deno.land/x/fae/min.ts
 [multiply]: https://deno.land/x/fae/multiply.ts
+[not]: https://deno.land/x/fae/not.ts
 [nth]: https://deno.land/x/fae/nth.ts
 [or]: https://deno.land/x/fae/or.ts
 [over]: https://deno.land/x/fae/over.ts
@@ -257,6 +263,29 @@ g(7)    // false
 
 ---
 
+### empty
+
+###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/functions/empty)</span>[[src]][empty]</span>
+
+```typescript
+<T>(x: T) => T | Partial<T>
+```
+
+Returns the empty value of its argument's type.
+
+```typescript
+Fae.empty([1, 2, 3, 4, 5])          // []
+Fae.empty([[1, 2], 3, [4, 5]])      // []
+Fae.empty([[[1, 2], 3, [4, 5]]])    // []
+Fae.empty({ x: 1, y: 2 })           // {}
+Fae.empty('abc')                    // ''
+Fae.empty('[1, 2, 3]')              // ''
+Fae.empty(new String('abc'))        // ''
+Fae.empty(new Array([1, 2]))        // []
+```
+
+---
+
 ### endsWith
 
 ###### since v0.2.0 <span> <span class="full-docs">[[full-docs]](/functions/endsWith)</span>[[src]][endsWith]</span>
@@ -478,6 +507,88 @@ Fae.indexOf(0, list)            // 0
 
 ---
 
+### insert
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/insert)</span>[[src]][insert]</span>
+
+```typescript
+<T>(index: number, element: T, list: T[]) => T[]
+```
+
+Returns a new array with `element` inserted at `index` to `list` without affecting original one.
+
+```typescript
+const list = ['a', 'b', 'c', 'd', 'e']
+
+insert(2, ['s', 't'], list)     // ['a', 'b', ['s', 't'], 'c', 'd', 'e']
+insert(3, ['a', 'b'], list)     // ['a', 'b', 'c', ['a', 'b'], 'd', 'e']
+insert(4, ['s', 't'], list)     // ['a', 'b', 'c', 'd', ['s', 't'], 'e']
+
+insert(8, 'z', list)            // ['a', 'b', 'c', 'd', 'e', 'z']
+insert(0, 'z', list)            // ['z', 'a', 'b', 'c', 'd', 'e']
+insert(-1, 'z', list)           // ['a', 'b', 'c', 'd', 'e', 'z']
+insert(0)('z')(list)            // ['z', 'a', 'b', 'c', 'd', 'e'])
+```
+
+---
+
+### isEmpty
+
+###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/functions/isEmpty)</span>[[src]][isEmpty]</span>
+
+```typescript
+<T>(x: T) => boolean
+```
+
+Returns `true` if the given value is its type's empty value, `false` otherwise.
+
+```typescript
+Fae.isEmpty(null)       // false
+Fae.isEmpty(undefined)  // false
+Fae.isEmpty(1 / 0)      // false
+Fae.isEmpty(NaN)        // false    
+Fae.isEmpty('')         // true
+Fae.isEmpty(' ')        // false
+Fae.isEmpty([])         // true
+Fae.isEmpty([[]])       // false
+Fae.isEmpty([null])     // false
+Fae.isEmpty({})         // true
+Fae.isEmpty({ x: [] })  // false
+Fae.isEmpty({ x: 0 })   // false
+```
+
+---
+
+### join
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/join)</span>[[src]][join]</span>
+
+```typescript
+<T extends Object>(separator: string | number, functor: FunctorWithArLk<T>) => string
+```
+
+Returns a string made by inserting the `separator` between each element and concatenating all the elements into a single string.
+The functor may be array-like/iterable/iterator.
+
+```typescript
+const tS = {toString: () => 'THE_OBJECT_WITH_TO_STRING'}
+const x = [1, true, '123', tS]
+const y = [...x]
+const a = [1, 2, 3, 4, 5]
+
+const joinUnderScore = Fae.join('_')
+joinUnderScore(a)       // '1_2_3_4_5'
+
+const join99 = Fae.join(99)
+join99(a)               // '1992993994995'
+join99(x)               // '199true9912399THE_OBJECT_WITH_TO_STRING'
+join99(y)               // '199true9912399THE_OBJECT_WITH_TO_STRING'
+
+join(99, _)(y)          // '199true9912399THE_OBJECT_WITH_TO_STRING'
+join(_, x)(99)          // '199true9912399THE_OBJECT_WITH_TO_STRING'
+```
+
+---
 
 ### lens
 
@@ -574,6 +685,28 @@ Fae.max(0, Infinity)  // Infinity
 
 ---
 
+### mean
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/mean)</span>[[src]][mean]</span>
+
+```typescript
+(list: number[]) => number
+```
+
+Returns the mean of the given list of numbers.
+
+```typescript
+Fae.mean([1])                   // 1
+Fae.mean([7, 6])                // 6.5
+Fae.mean([2, 7, 9])             // 6
+Fae.mean([2, 7, 9, 10])         // 7
+Fae.mean([NaN, 2, 3, 5])        // NaN   
+Fae.mean([Infinity, 7, 9, 10])  // Infinity
+Fae.mean([-Infinity, 7, 9, 10]) // -Infinity
+```
+
+---
+
 ### median
 
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/median)</span>[[src]][median]</span>
@@ -631,6 +764,36 @@ Fae.multiply(3, 4) // 12
 const multiply3 = Fae.multiply(3)
 multiply3(6) // 18
 Fae.multiply(6)(7) // 42
+```
+
+---
+
+### not
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/not)</span>[[src]][not]</span>
+
+```typescript
+<T>(fn: T) => boolean
+```
+
+Returns the not(complement) value of the given value.
+
+```typescript
+Fae.not(true)           // false
+Fae.not('')             // true
+Fae.not('asas')         // false
+Fae.not(1)              // false
+Fae.not(0)              // true
+Fae.not(-1)             // false
+Fae.not(undefined)      // true
+Fae.not(not(undefined)) // false
+Fae.not({})             // false
+Fae.not({ x: {} })      // false
+Fae.not(null)           // true
+Fae.not([])             // false
+Fae.not([[]])           // false
+Fae.not(![])            // true
+Fae.not(NaN)            // true
 ```
 
 ---
