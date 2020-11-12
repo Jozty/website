@@ -1,6 +1,6 @@
 ---
-title: FunctorWithArkLk type
-description: type declaration of FunctorWithArkLk
+title: FunctorWithArLk type
+description: type declaration of FunctorWithArLk
 ---
 
 ##  type
