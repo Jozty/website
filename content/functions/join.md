@@ -48,21 +48,19 @@ type Join =
 ```typescript
 import { join, _ } from 'https://deno.land/x/fae/mod.ts'
 
-const joinUnderScore = join('_')
-const join99 = join(99)
 const a = [1, 2, 3, 4, 5]
-
-joinUnderScore(a)       // '1_2_3_4_5'
-join99(a)               // '1992993994995'
-joinUnderScore(a)       // '1_2_3_2_5'
-
 const x = [1, true, '123', tS]
 const y = [...x]
-const tS = {toString: () => 'THE_OBJECT_WITH_TO_STRING',}
+const tS = {toString: () => 'THE_OBJECT_WITH_TO_STRING'}
 
-z(99)                   // '199true9912399THE_OBJECT_WITH_TO_STRING'
-join99(x)               // '199true9912399THE_OBJECT_WITH_TO_STRING'
-join99(y)               // '199true9912399THE_OBJECT_WITH_TO_STRING'
+const joinUnderScore = join('_')
+joinUnderScore(a)       // '1_2_3_4_5'
+
+const join_2 = join(99)
+join_2(a)               // '1992993994995'
+join_2(x)               // '199true9912399THE_OBJECT_WITH_TO_STRING'
+join_2(y)               // '199true9912399THE_OBJECT_WITH_TO_STRING'
+
 
 join(99, _)(y)          // '199true9912399THE_OBJECT_WITH_TO_STRING'
 join(_, x)(99)          // '199true9912399THE_OBJECT_WITH_TO_STRING'

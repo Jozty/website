@@ -580,18 +580,16 @@ Returns a string made by inserting the `separator` between each element and conc
 The functor may be array-like/iterable/iterator.
 
 ```typescript
-const joinUnderScore = Fae.join('_')
-const join99 = Fae.join(99)
-const a = [1, 2, 3, 4, 5]
-
-joinUnderScore(a)       // '1_2_3_4_5'
-join99(a)               // '1992993994995'
-joinUnderScore(a)       // '1_2_3_2_5'
-
 const tS = {toString: () => 'THE_OBJECT_WITH_TO_STRING'}
 const x = [1, true, '123', tS]
 const y = [...x]
+const a = [1, 2, 3, 4, 5]
 
+const joinUnderScore = Fae.join('_')
+joinUnderScore(a)       // '1_2_3_4_5'
+
+const join99 = Fae.join(99)
+join99(a)               // '1992993994995'
 join99(x)               // '199true9912399THE_OBJECT_WITH_TO_STRING'
 join99(y)               // '199true9912399THE_OBJECT_WITH_TO_STRING'
 
