@@ -1,6 +1,7 @@
 ---
-title: add function
-description: a thorough tour of add function
+title: Add function
+description: Add two numbers(It also accept parameters like NaN, Infinity, undefined)
+keywords: Fae, Deno, Ramda, Add, Javascript
 ---
 
 ## Add 

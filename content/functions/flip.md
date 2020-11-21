@@ -1,6 +1,7 @@
 ---
-title: flip function
-description: a thorough tour of flip function
+title: Flip function
+description: Flips the first two parameter of a functions.
+keywords: Fae, Deno, Ramda, Javascript, Flip
 ---
 
 ## Flip

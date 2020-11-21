@@ -1,6 +1,7 @@
 ---
-title: either function
-description: a thorough tour of either function
+title: Either function
+description: Check whether the or of two functions is true or not.
+keywords: Fae, Deno, Javascript, Ramda, Either.
 ---
 
 ## Either

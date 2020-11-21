@@ -1,6 +1,6 @@
 ---
-title:  identity function
-description: a thorough tour of identity function
+title:  Identity function
+description: Gives the parameter that supplied.(Return the first parameter if multiple parameters are supplied)
 ---
 ## Identity
 <br>

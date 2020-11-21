@@ -1,6 +1,7 @@
 ---
-title: eqProps function
-description: a thorough tour of eqProps function
+title: EqProps function
+description: Check whether two objects have same value, for the specific property.
+keywords: Fae, Deno, Javascript, Ramda, EqProps
 ---
 
 ## EqProps

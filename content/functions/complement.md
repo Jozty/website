@@ -1,6 +1,7 @@
 ---
-title:  complement function
-description: a thorough tour of complement function
+title:  Complement function
+description: Gives the complement of the function that pass in the parameter.
+keywords: Fae, Deno, Ramda, Javascript, Complement. 
 ---
 ## Complement 
 <br>
