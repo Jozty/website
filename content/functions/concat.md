@@ -1,7 +1,7 @@
 ---
 title: Concat function
 description: Add two strings, arrays.
-keywords: Fae, Deno, Javascript, Ramda, Concat.
+keywords: Concat
 ---
 
 ## Concat

@@ -1,7 +1,7 @@
 ---
 title: GroupWith function
 description: Creates a new objedt of list of values which are satisfy the given function.
-keywords: Fae, Deno, Ramda, Javascript, GroupWith
+keywords: GroupWith
 ---
 
 ## GroupWith

@@ -1,7 +1,7 @@
 ---
 title: EndsWith function
 description: Check whether a array or string ends with suffix.
-keywords: Fae, Deno, Ramda, Javascript.
+keywords: EndWith
 ---
 
 ## EndsWith

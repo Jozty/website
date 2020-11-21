@@ -1,7 +1,7 @@
 ---
 title: EqProps function
 description: Check whether two objects have same value, for the specific property.
-keywords: Fae, Deno, Javascript, Ramda, EqProps
+keywords: EqProps
 ---
 
 ## EqProps

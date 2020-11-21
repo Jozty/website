@@ -1,7 +1,7 @@
 ---
 title: Flip function
 description: Flips the first two parameter of a functions.
-keywords: Fae, Deno, Ramda, Javascript, Flip
+keywords: Flip
 ---
 
 ## Flip

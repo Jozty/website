@@ -1,7 +1,7 @@
 ---
 title:  Complement function
 description: Gives the complement of the function that pass in the parameter.
-keywords: Fae, Deno, Ramda, Javascript, Complement. 
+keywords: Complement
 ---
 ## Complement 
 <br>

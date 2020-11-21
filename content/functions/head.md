@@ -1,7 +1,7 @@
 ---
 title: Head function
 description: Gives the first element of a given list or string.
-keywords: Fae, Deno, Javascript, Ramda, Head
+keywords: Head
 ---
 ## Head
 

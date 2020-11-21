@@ -52,8 +52,9 @@ export default {
     const title = this.func?.title ? `Fae | ${this.func?.title}` : this.title
     const description = this.func?.description || this.description
     let keywords = this.keywords
-    if (this.func?.keywords)
-      keywords = this.func?.keywords +','+ this.keywords
+    if (this.func?.keywords) {
+      keywords = this.func?.keywords + ',' + this.keywords
+    }
     return {
       title,
       meta: [
