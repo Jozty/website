@@ -54,7 +54,6 @@ export default {
     let keywords = this.keywords
     if (this.func?.keywords)
       keywords = this.func?.keywords +','+ this.keywords
-     
     return {
       title,
       meta: [
