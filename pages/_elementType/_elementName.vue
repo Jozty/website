@@ -53,7 +53,7 @@ export default {
     const description = this.func?.description || this.description
     let keywords = this.keywords
     if (this.func?.keywords)
-      keywords = this.func?.keywords +','+ keywords
+      keywords = this.func?.keywords +','+ this.keywords
      
     return {
       title,

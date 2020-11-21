@@ -1,6 +1,14 @@
 import fs from 'fs'
 import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin'
 
+const description = `
+This module is designed in functional programming style that provides many benefits
+like it never mutates user data and used to create functional pipelines.
+Using this module is very simple just like using the javascript functions.
+Insallation guide is given below.
+Follow simple steps to use the module.
+`
+
 function removeMdExtension(name) {
   return name.replace('.md', '')
 }
@@ -11,14 +19,14 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    title: 'Fae | A functional Library for Deno',
+    title: 'Fae | A functional programming library for Deno',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || '',
+        content: description,
       },
     ],
     link: [

@@ -7,7 +7,11 @@ description: A functional Library for Deno
 
  
 ## Why Choose Fae?
-This module is designed in functional programming style that provides many benefits like it never mutates user data and used to create functional pipelines. Using this module is very simple just like using the javascript functions. Insallation guide is given below. Follow simple steps to use the module.  
+This module is designed in functional programming style that provides many benefits
+like it never mutates user data and used to create functional pipelines.
+Using this module is very simple just like using the javascript functions.
+Insallation guide is given below.
+Follow simple steps to use the module.  
 <br/>
 
 
