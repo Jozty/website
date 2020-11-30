@@ -44,7 +44,7 @@ Function usage and documentation can be found [here](https://fae.jozty.io/)
 
 <br>
 
-### Running tests
+## Running tests
 
 ```typescript
 deno test
@@ -54,12 +54,12 @@ deno test --coverage --unstable
 
 <br>
 
-### Usage
+## Usage
 
 ```typescript
 import * as Fae from 'https://deno.land/x/fae@v0.6.2/mod.ts'
 
-// arithematic functions
+// arithemetic functions
 Fae.add(10, 20)                                     // 30
 Fae.add(10)(20)                                     // 30
 
