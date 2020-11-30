@@ -77,6 +77,9 @@ half(subtract10(add5(double(15))))                  // 12.5
 Fae.compose(half, subtract10, add5, double)(15)     // 12.5
 Fae.pipe(double, add5, subtract10, half)(15)        // 12.5
 ```
+
+<br>
+
 **With lenses**
 ```typescript
 import { lens, view, over, inc, set } from 'https://deno.land/x/fae@v0.6.2/mod.ts'
