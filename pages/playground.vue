@@ -135,7 +135,7 @@ export default {
     resizePanel(e) {
       const dx = this.panel.mousePosition - e.x
       this.panel.mousePosition = e.x
-      console.log(dx, e.x, getComputedStyle(this.panelE, '').width)
+      // console.log(dx, e.x, getComputedStyle(this.panelE, '').width)
       const panelWidth = parseInt(getComputedStyle(this.panelE, '').width) + dx
       this.panelE.classList.add('resized')
 
@@ -209,11 +209,7 @@ export default {
         m.uri.toString().includes(this.version)
       )
 
-      console.log(this.faeModels())
-
       if (model) {
-        console.log(code)
-        console.log(model)
         model.setValue(code)
         this.editor.setModel(model)
       } else {
@@ -256,7 +252,6 @@ export default {
           code,
           version: this.version,
         })
-        console.log(res)
         this.output = res.data
       } catch (e) {
         this.output = (e.response && e.response.data) || e.toString()

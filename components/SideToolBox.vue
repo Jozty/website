@@ -11,7 +11,7 @@
 
       <b-field type="is-secondary">
         <b-select placeholder="version" expanded>
-          <option value="v0.6.2">v0.6.2</option>
+          <option value="v0.6.2" selected>v0.6.2</option>
         </b-select>
       </b-field>
     </div>
@@ -41,6 +41,7 @@ export default {
       windowHeight: null,
       posY: null,
       functions: [],
+      fetchedFunctions: [],
       searchQuery: '',
       listHeight: 'calc(100% - 116px)',
       height: '100%',
@@ -49,7 +50,7 @@ export default {
 
   watch: {
     searchQuery() {
-      this.getFunctions(this.searchQuery)
+      this.onQueryChange()
     },
   },
 
@@ -79,13 +80,19 @@ export default {
   methods: {
     async getFunctions(searchQuery) {
       // @ts-ignore
-      const functionsData = await this.$content('functions').fetch()
-      const functions = functionsData.map((f) => f.slug).sort()
-      if (!searchQuery) {
-        this.functions = functions
+      const entitiesData = await this.$content('entitiesList').fetch()
+      this.fetchedFunctions = entitiesData.functions
+      this.onQueryChange()
+    },
+
+    onQueryChange() {
+      this.searchQuery = this.searchQuery.trim().toLowerCase()
+
+      if (!this.searchQuery) {
+        this.functions = [...this.fetchedFunctions]
       } else {
-        this.functions = functions.filter((f) =>
-          f.includes(searchQuery.toLowerCase())
+        this.functions = this.fetchedFunctions.filter((f) =>
+          f.toLowerCase().includes(this.searchQuery)
         )
       }
     },

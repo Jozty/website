@@ -1,9 +1,6 @@
-import fs from 'fs'
 import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin'
 
-function removeMdExtension(name) {
-  return name.replace('.md', '')
-}
+import { entityPaths } from './buildUtils/build'
 
 export default {
   /*
@@ -26,7 +23,7 @@ export default {
       {
         rel: 'stylesheet',
         href:
-          'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
+          'https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css',
       },
     ],
   },
@@ -41,6 +38,7 @@ export default {
   plugins: [
     { src: '~plugins/monaco-editor', ssr: false },
     '~plugins/global-mixin',
+    '~plugins/buefy',
   ],
   /*
    ** Auto import components
@@ -55,8 +53,6 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    // Doc: https://buefy.github.io/#/documentation
-    'nuxt-buefy',
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
@@ -115,25 +111,12 @@ export default {
     hostname: 'https://fae.jozty.io',
     gzip: true,
     routes() {
-      const functions = fs
-        .readdirSync('./content/functions')
-        .map((name) => 'functions/' + name)
-
-      const types = fs
-        .readdirSync('./content/types')
-        .map((ame) => 'types/' + ame)
-
-      const paths = functions
-        .concat(types)
-        .map(removeMdExtension)
-        .map((url) => ({
-          url,
-          changefreq: 'weekly',
-          priority: 0.8,
-          lastmod: new Date(),
-        }))
-
-      return paths
+      return entityPaths.map((url) => ({
+        url,
+        changefreq: 'weekly',
+        priority: 0.8,
+        lastmod: new Date(),
+      }))
     },
   },
 }
