@@ -83,6 +83,7 @@ export default {
         features: ['!gotoSymbol'],
       }),
     ],
+    extractCSS: true,
   },
 
   serverMiddleware: [
