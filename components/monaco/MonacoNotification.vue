@@ -47,7 +47,6 @@ export default {
 
   methods: {
     open(title, message, timeout = 2000) {
-      console.log('here')
       this.title = title || ''
       this.message = message || ''
       this.isVisible = true
