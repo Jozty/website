@@ -31,7 +31,7 @@ export default {
     return {
       title: 'Fae | A functional Library for Deno',
       description: '',
-      keywords: 'Fae, Deno, Ramda, Javascript'
+      keywords: 'Fae, Deno, Ramda, Javascript',
     }
   },
 

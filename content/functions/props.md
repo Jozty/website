@@ -1,6 +1,7 @@
 ---
-title: props function
-description: a thorough tour of props function
+title: Props function
+description: Gives array of multiple on the object(Order is preserved)
+keywords: Props
 ---
 
 ## Props

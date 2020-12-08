@@ -1,6 +1,7 @@
 ---
-title: tail function
-description: a thorough tour of tail function
+title: Tail function
+description: Returns all but the first element of `functor`. Accepts array-like(including string).
+keywords: Tail
 ---
 
 ## Tail

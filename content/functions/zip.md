@@ -1,6 +1,7 @@
 ---
-title: zip function
-description: a thorough tour of zip function
+title: Zip function
+description: Creates a new list out of two passed lists by pairing up equally-positioned pair in both the lists (length will be truncate to the length of shorter list)
+keywords: Zip
 ---
 
 ## Zip

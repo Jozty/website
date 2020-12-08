@@ -1,6 +1,7 @@
 ---
 title: Fae
 description: A functional Library for Deno
+keywords: Fae
 ---
 # FAE- A functional Library!
 <br/>

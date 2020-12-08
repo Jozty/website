@@ -1,6 +1,7 @@
 ---
-title: not function
-description: a thorough tour of not function
+title: Not function
+description: Complement the given value
+keywords: Not
 ---
 
 ## Not

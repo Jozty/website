@@ -1,6 +1,7 @@
 ---
-title: lensProp function
-description: a thorough tour of lensProp function
+title: LensProp function
+description: Gives the lens whose focus is the specified property
+keywords: Lensprop
 ---
 
 ## LensProp

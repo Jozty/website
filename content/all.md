@@ -1,6 +1,7 @@
 ---
 title: Docs
 description: All functions
+keywords: All
 ---
 
 [add]: https://deno.land/x/fae/add.ts

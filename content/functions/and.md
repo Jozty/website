@@ -1,6 +1,7 @@
 ---
-title: and function
-description: a thorough tour of and function
+title: And function
+description: Gives 'true'  if both parameter are 'true', otherwise 'false'
+keywords: And 
 ---
 
 ## And 

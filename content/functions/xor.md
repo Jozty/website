@@ -1,6 +1,7 @@
 ---
-title: xor function
-description: a thorough tour of xor function
+title: Xor function
+description: Perform XOR of two parameter
+keywords: Xor
 ---
 
 ## Xor 

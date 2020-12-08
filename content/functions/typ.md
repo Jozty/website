@@ -1,6 +1,7 @@
 ---
-title: typ function
-description: a thorough tour of typ function
+title: Typ function
+description: Gives a single-word string description of the (native) type of the value (The returned types are of type `AllTypes`)
+keywords: Typ
 ---
 
 ## Typ
