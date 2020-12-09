@@ -85,4 +85,7 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# custom added
 secrets.json
+content/entitiesList.json

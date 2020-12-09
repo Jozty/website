@@ -20,11 +20,9 @@ function runDeno(data, req, res) {
   const command = `deno run ${file.toString()}`
   exec(command, (error, stdout, stderr) => {
     if (error) {
-      console.error('error')
       console.error(error)
       writeResponse(400, res, error.message || error, true)
     } else if (stderr && !stdout) {
-      console.error('stderr')
       console.error(stderr)
       writeResponse(400, res, stderr, true)
     } else {
