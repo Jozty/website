@@ -1,6 +1,7 @@
 ---
-title: fromPairs function
-description: a thorough tour of fromPairs function
+title: FromPairs function
+description: Creates a new object from a list key-value pairs(If a key appears in multiple pairs the rightmost pair is included in the object)
+keywords: FromPairs.
 ---
 
 ## fromPairs

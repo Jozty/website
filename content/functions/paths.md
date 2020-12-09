@@ -1,6 +1,7 @@
 ---
-title: path function
-description: a thorough tour of path function
+title: Paths function
+description: Retrieves the values at given paths `pathsArr` of `obj`. Each path in the `pathsArr` may be any array of keys or string of keys separated by `/` or `.`
+keywords: Paths
 ---
 
 ## Paths

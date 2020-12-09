@@ -1,6 +1,7 @@
 ---
-title: whereAny function
-description: a thorough tour of whereAny function
+title: WhereAny function
+description: Ckeck whether a specs objects whose property is a predicate function. Each predicate is applied to the value of the corresponding property of the test object. Returns `true` if any of the predicates is satisfied, `false` otherwise (returns false if there is no predicated functions)
+keywords: WhereAny
 ---
 
 ## WhereAny

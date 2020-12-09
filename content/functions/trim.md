@@ -1,6 +1,7 @@
 ---
-title: trim function
-description: a thorough tour of trim function
+title: Trim function
+description: Trim the string from both ends from given value (whitespaces are trim if given value is `''`)
+keywords: Trim
 ---
 
 ## Trim

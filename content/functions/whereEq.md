@@ -1,6 +1,7 @@
 ---
-title: whereEq function
-description: a thorough tour of add function
+title: WhereEq function
+description: Check whether a spec object and a test object, returns true if the test satisfies the spec, false otherwise (whereEq is a specialization of whereAll)
+keywords: WhereEq
 ---
 
 ## WhereEq

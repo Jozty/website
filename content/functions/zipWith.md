@@ -1,6 +1,7 @@
 ---
-title: zipWith function
-description: a thorough tour of zipWith function
+title: ZipWith function
+description: Creates a new list out of two passed lists. Each item of new list is calculated by applying equally-positioned pair in both the list (length will be truncate to the length of shorter list)
+keywords: ZipWith
 ---
 
 ## ZipWith

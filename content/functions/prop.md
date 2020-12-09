@@ -1,6 +1,7 @@
 ---
-title: prop function
-description: a thorough tour of prop function
+title: Prop function
+description: Return property of object( if exists)
+keywords:  Prop
 ---
 
 ## Prop 

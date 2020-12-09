@@ -1,6 +1,7 @@
 ---
-title: propIs function
-description: a thorough tour of propIs function
+title: PropIs function
+description: Check whether the speicified object property is given type
+keywords: Property, PropIs .
 ---
 
 ## PropIs 

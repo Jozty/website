@@ -1,6 +1,7 @@
 ---
-title: indexOf function
-description: a thorough tour of indexOf function
+title: IndexOf function
+description: Gives the position of the first occurrence of `value` in `list`(-1 if item is not in the list)
+keywords: Indexof, Index
 ---
 
 ## IndexOF

@@ -1,6 +1,7 @@
 ---
-title:  head function
-description: a thorough tour of head function
+title: Head function
+description: Gives the first element of a given list or string.
+keywords: Head
 ---
 ## Head
 
