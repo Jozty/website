@@ -1,5 +1,5 @@
-import fs from 'fs'
 import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin'
+import { entityPaths } from './buildUtils/build'
 
 const description = `
 This module is designed in functional programming style that provides many benefits
@@ -8,11 +8,6 @@ Using this module is very simple just like using the javascript functions.
 Insallation guide is given below.
 Follow simple steps to use the module.
 `
-
-function removeMdExtension(name) {
-  return name.replace('.md', '')
-}
-import { entityPaths } from './buildUtils/build'
 
 export default {
   /*
