@@ -50,6 +50,9 @@ export default {
   components: { MonacoNotification },
   data() {
     return {
+      title: 'Fae | Playground',
+      description: 'Try Fae online with our playground.',
+      keywords: 'Fae, Playground',
       width: '100%',
       height: '100%',
       value: '',
@@ -63,6 +66,27 @@ export default {
       },
       isRunning: false,
       version: 'v0.6.2',
+    }
+  },
+
+  head() {
+    const title = this.title
+    const description = this.description
+    const keywords = this.keywords
+    return {
+      title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: description,
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: keywords,
+        },
+      ],
     }
   },
 
