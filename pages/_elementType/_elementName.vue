@@ -53,7 +53,7 @@ export default {
     let description = this.func?.description || this.description
     description = description.replace(/[`']/g, '')
     let keywords = this.keywords
-    if (this.func?.keywords) 
+    if (this.func?.keywords)
       keywords = this.func?.keywords + ', ' + this.keywords
 
     return {
@@ -64,7 +64,7 @@ export default {
           name: 'description',
           content: description,
         },
-         {
+        {
           hid: 'keywords',
           name: 'keywords',
           content: keywords,

@@ -21,6 +21,35 @@
 import SideToolBox from '~/components/SideToolBox.vue'
 export default {
   components: { SideToolBox },
+  data() {
+    return {
+      title: 'Fae | Docs',
+      description: 'Documentation for functions',
+      keywords: 'Fae, Playground, Javascript, Deno, Typescript, Ramda',
+    }
+  },
+
+  head() {
+    const title = this.title
+    const description = this.description
+    const keywords = this.keywords
+    return {
+      title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: description,
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: keywords,
+        },
+      ],
+    }
+  },
+  
   transition() {
     return 'home'
   },
