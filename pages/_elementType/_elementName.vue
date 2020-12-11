@@ -54,7 +54,7 @@ export default {
     description = description.replace(/[`']/g, '')
     let keywords = this.keywords
     if (this.func?.keywords) 
-      keywords = this.func?.keywords + ',' + this.keywords
+      keywords = this.func?.keywords + ', ' + this.keywords
 
     return {
       title,
