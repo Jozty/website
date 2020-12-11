@@ -21,12 +21,24 @@
 import SideToolBox from '~/components/SideToolBox.vue'
 export default {
   components: { SideToolBox },
+
+  async asyncData({ $content, params }) {
+    const article = await $content('all', params.slug).fetch()
+
+    return { article }
+  },
   data() {
     return {
       title: 'Fae | Docs',
       description: 'Documentation for functions',
       keywords: 'Fae, Playground, Javascript, Deno, Typescript, Ramda',
     }
+  },
+
+  mounted() {
+    document.querySelectorAll('.icon').forEach((e) => {
+      e.className = e.className.replace(/icon/g, 'fa')
+    })
   },
 
   head() {
@@ -52,18 +64,6 @@ export default {
 
   transition() {
     return 'home'
-  },
-
-  async asyncData({ $content, params }) {
-    const article = await $content('all', params.slug).fetch()
-
-    return { article }
-  },
-
-  mounted() {
-    document.querySelectorAll('.icon').forEach((e) => {
-      e.className = e.className.replace(/icon/g, 'fa')
-    })
   },
 }
 </script>

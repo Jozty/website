@@ -69,27 +69,6 @@ export default {
     }
   },
 
-  head() {
-    const title = this.title
-    const description = this.description
-    const keywords = this.keywords
-    return {
-      title,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: description,
-        },
-        {
-          hid: 'keywords',
-          name: 'keywords',
-          content: keywords,
-        },
-      ],
-    }
-  },
-
   computed: {
     panelE() {
       return this.$refs.panel
@@ -123,12 +102,6 @@ export default {
     },
   },
 
-  created() {
-    const { code, version } = this.$route.query
-    this.version = version || this.latestVersion
-    this.value = this.getDecodedCode(code || '')
-  },
-
   mounted() {
     this.panelE.addEventListener('mousedown', this.onPanelResize, false)
 
@@ -139,6 +112,12 @@ export default {
       },
       false
     )
+  },
+
+  created() {
+    const { code, version } = this.$route.query
+    this.version = version || this.latestVersion
+    this.value = this.getDecodedCode(code || '')
   },
 
   methods: {
@@ -311,6 +290,27 @@ export default {
     showNotification(title, message, timeout) {
       this.$refs.noti.open(title, message, timeout)
     },
+  },
+
+  head() {
+    const title = this.title
+    const description = this.description
+    const keywords = this.keywords
+    return {
+      title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: description,
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: keywords,
+        },
+      ],
+    }
   },
 }
 </script>
