@@ -1,6 +1,7 @@
 ---
-title: pluck function
-description: a thorough tour of pluck function
+title: Pluck function
+description: Gives a new list by plucking the same named property off all objects in the list supplied
+keywords: Pluck
 ---
 
 ## Pluck 

@@ -1,6 +1,7 @@
 ---
-title: path function
-description: a thorough tour of path function
+title: Path function
+description: Retrieve the value at a given path(path can be of array of key or string of key)
+keywords: Path
 ---
 
 ## Path

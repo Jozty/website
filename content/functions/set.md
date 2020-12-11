@@ -1,6 +1,7 @@
 ---
-title: set function
-description: a thorough tour of set function
+title: Set function
+description: Returns the result of setting the portion of the given data structure target focused by the given len`s to the given value.
+keywords: Set
 ---
 
 ## Set 

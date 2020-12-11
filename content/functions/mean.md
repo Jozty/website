@@ -1,6 +1,7 @@
 ---
-title: mean function
-description: a thorough tour of mean function
+title: Mean function
+description: Gives the mean of the given list
+keywords: Mean
 ---
 
 ## Mean

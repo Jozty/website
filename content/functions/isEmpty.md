@@ -1,6 +1,7 @@
 ---
-title: isEmpty function
-description: a thorough tour of isEmpty function
+title: IsEmpty function
+description: Gives true if given value is empty value
+keywords: IsEmpty, Empty
 ---
 
 ## IsEmpty

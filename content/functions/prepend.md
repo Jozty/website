@@ -1,6 +1,7 @@
 ---
-title: prepend function
-description: a thorough tour of prepend function
+title: Prepend function
+description: Add new element at the start of the list (returns new list without affecting original)
+keywords: Prepend
 ---
 
 ## Prepend 

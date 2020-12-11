@@ -1,6 +1,7 @@
 ---
-title: subtract function
-description: a thorough tour of subtract function
+title: Subtract function
+description: Subtracts two numbers
+keywords: Subtract, Difference
 ---
 
 ## Subtract

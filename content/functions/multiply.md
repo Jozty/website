@@ -1,6 +1,7 @@
 ---
-title: multiply function
-description: a thorough tour of multiply function
+title: Multiply function
+description: Multiply two numbers
+keywords: Multiply
 ---
 
 ## Multiply

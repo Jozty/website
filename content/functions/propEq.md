@@ -1,6 +1,7 @@
 ---
-title: propEq function
-description: a thorough tour of propEq function
+title: PropEq function
+description: Check whether the spcified object property is equal to given value( otherwise false )
+keywords: PropEq, Equal property
 ---
 
 ## PropEq 

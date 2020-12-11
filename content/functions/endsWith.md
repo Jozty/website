@@ -1,6 +1,7 @@
 ---
-title: endsWith function
-description: a thorough tour of endsWith function
+title: EndsWith function
+description: Check whether a array or string ends with suffix.
+keywords: EndWith
 ---
 
 ## EndsWith

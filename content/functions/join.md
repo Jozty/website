@@ -1,6 +1,7 @@
 ---
-title: join function
-description: a thorough tour of join function
+title: Join function
+description: Concatenate all the elements into single string(It can be also array)
+keywords: Join
 ---
 
 ## Join
