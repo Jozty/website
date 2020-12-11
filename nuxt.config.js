@@ -117,7 +117,6 @@ export default {
 
   gtm: {
     id: 'GTM-M2SJFR5',
-    enabled: true,
   },
 
   sitemap: {
