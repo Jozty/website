@@ -91,6 +91,11 @@ export default {
       }),
     ],
     extractCSS: true,
+    babel: {
+      plugins: [
+        '@babel/plugin-proposal-optional-chaining'
+      ]
+    },
   },
 
   serverMiddleware: [
