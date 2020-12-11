@@ -1,6 +1,7 @@
 ---
-title: nth function
-description: a thorough tour of nth function
+title: Nth function
+description: Nth index value of array(index value from right end if index is -ive)
+keywords: Nth
 ---
 
 ## Nth

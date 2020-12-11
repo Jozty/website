@@ -1,6 +1,7 @@
 ---
-title: indexOf function
-description: a thorough tour of indexOf function
+title: IndexOf function
+description: Gives the position of the first occurrence of value in list(-1 if item is not in the list)
+keywords: Indexof, Index
 ---
 
 ## IndexOF
@@ -31,9 +32,9 @@ type IndexOf_2<T> = (list: T[]) => number
 type IndexOf_1<T> = (value: T) => number
 
 type IndexOf =
- & (<T>(value: T, list?: PH) => IndexOf_2<T>)
- & (<T>(value: PH, list: T[]) => IndexOf_1<T>)
- & (<T>(value: T, list: T[]) => number)
+  & (<T>(value: T, list?: PH) => IndexOf_2<T>)
+  & (<T>(value: PH, list: T[]) => IndexOf_1<T>)
+  & (<T>(value: T, list: T[]) => number)
 ```
 
 <br>

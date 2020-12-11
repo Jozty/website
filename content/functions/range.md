@@ -1,6 +1,7 @@
 ---
-title: range function
-description: a thorough tour of range function
+title: Range function
+description: Returns a list of numbers from from to to both inclusive (Returns an empty an array if from > to)
+keywords: Range
 ---
 
 ## Range 

@@ -1,6 +1,7 @@
 ---
-title: divide function
-description: a thorough tour of divide function
+title: Divide function
+description: Divides two numbers
+keywords: Divide
 ---
 
 ## Divide

@@ -1,6 +1,7 @@
 ---
-title: view function
-description: a thorough tour of view function
+title: View function
+description: Retrieve the portion of value which are focused
+Keywords: View
 ---
 
 ## View 

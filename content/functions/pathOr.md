@@ -1,6 +1,7 @@
 ---
-title: pathOr function
-description: a thorough tour of pathOr function
+title: PathOr function
+description: Gives the value of the given path of non-null object(otherwise provide default path)
+keywords: PathOr
 ---
 
 ## PathOr

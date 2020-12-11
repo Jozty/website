@@ -1,6 +1,7 @@
 ---
-title: lensIndex function
-description: a thorough tour of lensIndex function
+title: LensIndex function
+description: Gives the lens at the specified index
+keywords: LenIndex
 ---
 
 ## LensIndex

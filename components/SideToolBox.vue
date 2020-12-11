@@ -60,14 +60,13 @@ export default {
       this.posY = 0
     } else {
       this.onResize()
+      this.$nextTick(() => {
+        window.addEventListener('resize', this.onResize)
+        window.addEventListener('scroll', this.onScroll)
+      })
+      // @ts-ignore
+      this.listHeight = `calc(100% - ${this.$refs.searchBox.scrollHeight}px)`
     }
-
-    this.$nextTick(() => {
-      window.addEventListener('resize', this.onResize)
-      window.addEventListener('scroll', this.onScroll)
-    })
-    // @ts-ignore
-    this.listHeight = `calc(100% - ${this.$refs.searchBox.scrollHeight}px)`
 
     await this.getFunctions('')
   },

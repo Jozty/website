@@ -1,6 +1,7 @@
 ---
-title: reverse function
-description: a thorough tour of reverse function
+title: Reverse function
+description: Reverses given string or array without affecting the original
+keywords: Reverse
 ---
 
 ## Reverse 

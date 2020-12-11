@@ -1,6 +1,7 @@
 ---
-title: or function
-description: a thorough tour of or function
+title: Or function
+description: Gives true if any argument is true
+keywords: Or
 ---
 
 ## Or 

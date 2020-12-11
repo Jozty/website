@@ -1,6 +1,7 @@
 ---
-title: rangeUntil function
-description: a thorough tour of rangeUntil function
+title: RangeUntil function
+description: Returns a list of numbers from (from) (inclusive) to (to) (exclusive).Returns an empty an array if (from >= to).
+keywords: RangeUntil
 ---
 
 ## RangeUntil 
