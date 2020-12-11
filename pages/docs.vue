@@ -49,7 +49,7 @@ export default {
       ],
     }
   },
-  
+
   transition() {
     return 'home'
   },
