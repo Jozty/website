@@ -1,6 +1,7 @@
 ---
-title: min function
-description: a thorough tour of min function
+title: Min function
+description: Gives the smaller of its two arguments.
+keywords: Min, Minimum
 ---
 
 ## Min

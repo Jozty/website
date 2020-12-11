@@ -1,6 +1,7 @@
 ---
-title: sum function
-description: a thorough tour of sum function
+title: Sum function
+description: Adds together all the elements of a list.
+keywords: Sum
 ---
 
 ## Sum

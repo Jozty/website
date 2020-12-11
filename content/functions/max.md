@@ -1,6 +1,7 @@
 ---
-title: max function
-description: a thorough tour of max function
+title: Max function
+description: Gives the larger of its two arguments.
+keywords: Max
 ---
 
 ## Max

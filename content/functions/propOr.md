@@ -1,6 +1,8 @@
 ---
-title: propOr function
-description: a thorough tour of propOr function
+title: PropOr function
+description: Whether non-null object has an own property with the specified name,
+returns the value of that property. Otherwise, returns the provided default value
+keywords: Property, PropOr
 ---
 
 ## PropOr 

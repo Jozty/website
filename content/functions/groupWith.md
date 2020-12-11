@@ -1,6 +1,7 @@
 ---
-title: groupWith function
-description: a thorough tour of groupWith function
+title: GroupWith function
+description: Creates a new objedt of list of values which are satisfy the given function.
+keywords: GroupWith
 ---
 
 ## GroupWith

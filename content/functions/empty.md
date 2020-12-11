@@ -1,6 +1,7 @@
 ---
-title: empty function
-description: a thorough tour of empty function
+title: Empty function
+description: Gives the empty value of its argument's type.
+keywords: Empty
 ---
 
 ## Empty

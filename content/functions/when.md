@@ -1,8 +1,8 @@
 ---
-title: when function
-description: a thorough tour of when function
+title: When function
+description: Applies func on value if the test predicate is true and returns it (returns value otherwise)
+keywords: When
 ---
-
 ## When
 <br>
 

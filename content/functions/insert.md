@@ -1,6 +1,7 @@
 ---
-title: insert function
-description: a thorough tour of insert function
+title: Insert function
+description: Gives a new array with element inserted at index to list (It will not affect the original array)
+keywords: Insert
 ---
 
 ## Insert

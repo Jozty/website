@@ -1,6 +1,7 @@
 ---
-title: whereAll function
-description: a thorough tour of whereAll function
+title: WhereAll function
+description: Check whether  a specs objects whose properties are predicate functions. Each predicate is applied to the value of the corresponding property of the test object. Returns true if all the predicates are satisfied, false otherwise (returns false if there is no predicated functions)
+keywords: WhereAll
 ---
 
 ## WhereAll

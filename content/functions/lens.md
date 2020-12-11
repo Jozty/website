@@ -1,6 +1,7 @@
 ---
-title: lens function
-description: a thorough tour of lens function
+title: Lens function
+description: Gives the lens for the given getter functions
+keywords: Lens
 ---
 
 ## Lens 

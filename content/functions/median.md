@@ -1,6 +1,7 @@
 ---
-title: median function
-description: a thorough tour of median function
+title: Median function
+description: Gives the median of the given list(fliter out NaN, gives Nan is list is empty)
+keywords: Median
 ---
 
 ## Median

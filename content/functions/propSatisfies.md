@@ -1,6 +1,8 @@
 ---
-title: propSatisfies function
-description: a thorough tour of propSatisfies function
+title: PropSatisfies function
+description: Returns true if the specified object property satisfies the given
+predicate, false otherwise.
+keywords: PropSatisfies
 ---
 
 ## PropSatisfies

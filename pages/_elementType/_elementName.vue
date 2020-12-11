@@ -31,6 +31,7 @@ export default {
     return {
       title: 'Fae | A functional Library for Deno',
       description: '',
+      keywords: 'Fae, Deno, Ramda, Javascript',
     }
   },
 
@@ -49,7 +50,11 @@ export default {
 
   head() {
     const title = this.func?.title ? `Fae | ${this.func?.title}` : this.title
-    const description = this.func?.description || this.description
+    let description = this.func?.description || this.description
+    description = description.replace(/[`']/g, '')
+    let keywords = this.keywords
+    if (this.func?.keywords) 
+      keywords = this.func?.keywords + ',' + this.keywords
 
     return {
       title,
@@ -58,6 +63,11 @@ export default {
           hid: 'description',
           name: 'description',
           content: description,
+        },
+         {
+          hid: 'keywords',
+          name: 'keywords',
+          content: keywords,
         },
       ],
     }

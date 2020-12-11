@@ -2,7 +2,9 @@
   <div>
     <div class="columns is-gapless">
       <div class="column is-narrow">
-        <side-tool-box v-if="$device.isDesktop" class="side-bar" />
+        <client-only>
+          <side-tool-box v-if="$device.isDesktop" class="side-bar" />
+        </client-only>
       </div>
       <div class="column">
         <div class="main-card card">

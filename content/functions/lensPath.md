@@ -1,6 +1,7 @@
 ---
-title: lensPath function
-description: a thorough tour of lensPath function
+title: LensPath function
+description: Gives the lens whose focus is the specified path.
+keywords: LensPath
 ---
 
 ## LensPath

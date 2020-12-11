@@ -6,7 +6,9 @@
       :fullheight="true"
     >
       <side-bar-header />
-      <side-tool-box />
+      <client-only>
+        <side-tool-box />
+      </client-only>
     </b-sidebar>
     <b-navbar
       type="is-primary-50"

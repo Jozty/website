@@ -1,6 +1,7 @@
 ---
-title: inc function
-description: a thorough tour of inc function
+title: Inc function
+description: Increases its argument value by 1
+keywords: Inc, Increase
 ---
 
 ## Inc
