@@ -76,15 +76,13 @@ export default {
 
     encodedCodeString() {
       if (Buffer) {
-        return Buffer.from(this.codeWithoutImports).toString('base64')
+        return Buffer.from(this.code).toString('base64')
       }
-      return window.btoa(this.codeWithoutImports)
+      return window.btoa(this.code)
     },
 
-    codeWithoutImports() {
-      let arr = this.value.split('\n')
-      arr = arr.map(this.commentImports)
-      return arr.join('\n')
+    code() {
+      return this.value
     },
 
     shareUrl() {
@@ -205,8 +203,8 @@ export default {
     },
 
     setModel() {
-      let code = `import * as Fae from "fae@${this.version}"`
-      code += this.getDecodedCode(this.encodedCodeString)
+      let code = this.getDecodedCode(this.encodedCodeString)
+      code = this.replaceFaeImport(code, this.version, true)
 
       const model = this.faeModels().find((m) =>
         m.uri.toString().includes(this.version)
@@ -241,7 +239,7 @@ export default {
       this.isRunning = this
       this.output = 'Running...'
       try {
-        const code = this.codeWithoutImports
+        const code = this.code
         if (!code.trim()) {
           this.showNotification(
             'No code',
@@ -262,13 +260,6 @@ export default {
       } finally {
         this.isRunning = false
       }
-    },
-
-    commentImports(line) {
-      if (!line.includes('import') && !line.includes('from')) {
-        return line
-      }
-      return ''
     },
 
     async shareCode() {
