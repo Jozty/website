@@ -1,5 +1,9 @@
 import Vue from 'vue'
-import { replaceFaeImport } from '../utilities/noDep'
+import {
+  replaceFaeImport,
+  updateIcons,
+  updateTryPlaygroundLink,
+} from '../utilities/noDep'
 
 export const globalData = {
   baseUrl: 'https://fae.jozty.io',
@@ -21,5 +25,7 @@ Vue.mixin({
 
   methods: {
     replaceFaeImport,
+    updateIcons,
+    updateTryPlaygroundLink,
   },
 })

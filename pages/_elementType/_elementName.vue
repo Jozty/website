@@ -36,16 +36,7 @@ export default {
   },
 
   mounted() {
-    document.querySelectorAll('.icon').forEach((e) => {
-      e.className = e.className.replace(/icon/g, 'fa')
-    })
-
-    const { elementType, elementName } = this.$route.params
-
-    this.$gtm.push({
-      event: 'page',
-      route: `${elementType}/${elementName}`,
-    })
+    this.updateIcons()
   },
 
   head() {

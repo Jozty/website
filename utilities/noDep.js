@@ -48,3 +48,18 @@ export function replaceFaeImport(
 
   return codeLines.join('\n')
 }
+
+export function updateIcons() {
+  document.querySelectorAll('.icon').forEach((e) => {
+    e.className = e.className.replace(/icon/g, 'mdi')
+  })
+}
+
+export function updateTryPlaygroundLink() {
+  document.querySelectorAll('.try-on-playground').forEach((e) => {
+    e.innerHTML += `<span class="mdi mdi-open-in-new" />`
+    const code = e.getAttribute('data-code')
+    const version = e.getAttribute('data-version') || globalData.latestVersion
+    e.href = `${globalData.baseUrl}/playground?code=${code}&version=${version}`
+  })
+}

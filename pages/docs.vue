@@ -27,6 +27,7 @@ export default {
 
     return { article }
   },
+
   data() {
     return {
       title: 'Fae | Docs',
@@ -36,9 +37,8 @@ export default {
   },
 
   mounted() {
-    document.querySelectorAll('.icon').forEach((e) => {
-      e.className = e.className.replace(/icon/g, 'fa')
-    })
+    this.updateIcons()
+    this.updateTryPlaygroundLink()
   },
 
   head() {
@@ -69,6 +69,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import 'assets/styles/buefy';
 h6 {
   display: flex;
   span {
@@ -77,12 +78,20 @@ h6 {
     font-size: 12px;
     a {
       display: unset;
-      color: #007bff;
+      color: $secondary;
       font-weight: 600;
     }
     .full-docs {
       margin-right: 16px;
     }
+  }
+}
+.try-on-playground {
+  color: $secondary;
+  font-weight: 600;
+  font-size: 12px;
+  &:hover {
+    color: $secondary;
   }
 }
 p {

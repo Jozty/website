@@ -28,9 +28,7 @@ export default {
   },
 
   mounted() {
-    document.querySelectorAll('.icon').forEach((e) => {
-      e.className = e.className.replace(/icon/g, 'fa')
-    })
+    this.updateIcons()
 
     this.$gtm.push({
       event: 'page',
