@@ -63,6 +63,10 @@ description: All functions
 [subtract]: https://deno.land/x/fae/subtract.ts
 [sum]: https://deno.land/x/fae/sum.ts
 [tail]: https://deno.land/x/fae/tail.ts
+[take]: https://deno.land/x/fae/take.ts
+[takeLast]: https://deno.land/x/fae/takeLast.ts
+[tap]: https://deno.land/x/fae/tap.ts
+[transduce]: https://deno.land/x/fae/transduce.ts
 [trim]: https://deno.land/x/fae/trim.ts
 [typ]: https://deno.land/x/fae/typ.ts
 [view]: https://deno.land/x/fae/view.ts
@@ -88,8 +92,12 @@ Adds two numbers
 Fae.add(3, 4) // 7
 const add5 = Fae.add(5)
 add5(4) // 9
-Fae.add(4)(3) // 8
+Fae.add(4)(3) // 7
 ```
+
+<a class="try-on-playground" target="_blank" data-code="Cgpjb25zdCBhbnMxID0gRmFlLmFkZCgzLCA0KSAvLyA3CmNvbnN0IGFkZDUgPSBGYWUuYWRkKDUpCmNvbnN0IGFuczIgPSBhZGQ1KDQpIC8vIDkKY29uc3QgYW5zMyA9IEZhZS5hZGQoNCkoMykgLy8gNwoKY29uc29sZS5sb2coYW5zMSkKY29uc29sZS5sb2coYW5zMikKY29uc29sZS5sb2coYW5zMykK">
+    Try on playground
+</a>
 
 ---
 
@@ -1393,6 +1401,73 @@ const arr = {
 }
 Fae.tail(arr) // [2, 3, 4]
 ```
+
+---
+
+### take
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/take)</span>[[src]][take]</span>
+
+```typescript
+(n, number, functor: ArrayLike<T> | string) => T[] | string
+```
+
+Returns first `n` elements of the array or string.
+
+```typescript
+Fae.take(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g'])  // ['a', 'b', 'c']
+Fae.take(2, 'Functional')                         // 'Fu'
+```
+
+---
+
+### takeLast
+
+###### since v0.2.0 <span> <span class="full-docs">[[full-docs]](/functions/takeLast)</span>[[src]][takeLast]</span>
+
+```typescript
+(n, number, functor: ArrayLike<T> | string) => T[] | string
+```
+
+Returns last `n` elements of the array or string.
+
+```typescript
+Fae.takeLast(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g'])  // ['e', 'f', 'g']
+Fae.takeLast(2, 'Functional')                         // 'al'
+```
+
+---
+
+### tap
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/tap)</span>[[src]][tap]</span>
+
+```typescript
+(func: (obj: T) => any, obj: T) => T
+```
+
+Runs the given function `func` with the supplied object `obj`, then returns `obj`.
+
+---
+
+### transduce
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/transduce)</span>[[src]][transduce]</span>
+
+```typescript
+<T, L = T>(
+  transformer1: Func,
+  transformer2: Func | Transformer,
+  acc: T,
+  functor: L[],
+) => unknown
+```
+
+Initializes a transducer using supplied iterator function `transformer2`.
+Returns a single item by iterating through the list,
+successively calling the transformed `transformer2` and passing it `acc`
+and the current value from the array, and then passing through `transformer1`
+and then passing the result to the next call.
 
 ---
 

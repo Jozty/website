@@ -1,9 +1,14 @@
 import Vue from 'vue'
+import {
+  replaceFaeImport,
+  updateIcons,
+  updateTryPlaygroundLink,
+} from '../utilities/noDep'
 
-const globalData = {
+export const globalData = {
   baseUrl: 'https://fae.jozty.io',
-  latestVersion: 'test',
-  versions: ['v0.6.2', 'test'],
+  latestVersion: 'v0.6.2',
+  versions: ['v0.6.2'],
 }
 
 Vue.mixin({
@@ -16,5 +21,11 @@ Vue.mixin({
     isDev() {
       return process.env.NODE_ENV === 'development'
     },
+  },
+
+  methods: {
+    replaceFaeImport,
+    updateIcons,
+    updateTryPlaygroundLink,
   },
 })

@@ -21,12 +21,24 @@
 import SideToolBox from '~/components/SideToolBox.vue'
 export default {
   components: { SideToolBox },
+
+  async asyncData({ $content, params }) {
+    const article = await $content('all', params.slug).fetch()
+
+    return { article }
+  },
+
   data() {
     return {
       title: 'Fae | Docs',
       description: 'Documentation for functions',
       keywords: 'Fae, Playground, Javascript, Deno, Typescript, Ramda',
     }
+  },
+
+  mounted() {
+    this.updateIcons()
+    this.updateTryPlaygroundLink()
   },
 
   head() {
@@ -49,26 +61,15 @@ export default {
       ],
     }
   },
-  
+
   transition() {
     return 'home'
-  },
-
-  async asyncData({ $content, params }) {
-    const article = await $content('all', params.slug).fetch()
-
-    return { article }
-  },
-
-  mounted() {
-    document.querySelectorAll('.icon').forEach((e) => {
-      e.className = e.className.replace(/icon/g, 'fa')
-    })
   },
 }
 </script>
 
 <style lang="scss">
+@import 'assets/styles/buefy';
 h6 {
   display: flex;
   span {
@@ -77,12 +78,20 @@ h6 {
     font-size: 12px;
     a {
       display: unset;
-      color: #007bff;
+      color: $secondary;
       font-weight: 600;
     }
     .full-docs {
       margin-right: 16px;
     }
+  }
+}
+.try-on-playground {
+  color: $secondary;
+  font-weight: 600;
+  font-size: 12px;
+  &:hover {
+    color: $secondary;
   }
 }
 p {

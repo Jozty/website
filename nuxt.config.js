@@ -91,6 +91,11 @@ export default {
       }),
     ],
     extractCSS: true,
+    babel: {
+      plugins: [
+        '@babel/plugin-proposal-optional-chaining'
+      ]
+    },
   },
 
   serverMiddleware: [
@@ -112,7 +117,6 @@ export default {
 
   gtm: {
     id: 'GTM-M2SJFR5',
-    enabled: true,
   },
 
   sitemap: {

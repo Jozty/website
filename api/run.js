@@ -3,19 +3,15 @@ const path = require('path')
 const fs = require('fs')
 const { v4 } = require('uuid')
 
+const { removeImports, replaceFaeImport } = require('../utilities/noDep')
 const { writeResponse, parseBody } = require('./utilities')
 
 function runDeno(data, req, res) {
   const file = path.join(__dirname, 'tmp', v4() + '.ts')
-  const code = data.code
-  let imp
-  if (!data.version) {
-    imp = `import * as Fae from 'https://deno.land/x/fae/mod.ts'`
-  } else {
-    imp = `import * as Fae from 'https://deno.land/x/fae@${data.version}/mod.ts'`
-  }
+  let code = removeImports(data.code)
+  code = replaceFaeImport(code, data.version)
 
-  fs.writeFileSync(file, imp + '\n' + code)
+  fs.writeFileSync(file, code)
 
   const command = `deno run ${file.toString()}`
   exec(command, (error, stdout, stderr) => {
