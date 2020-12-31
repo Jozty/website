@@ -15,6 +15,12 @@ description: All functions
 [empty]: https://deno.land/x/fae/empty.ts
 [endsWith]: https://deno.land/x/fae/endsWith.ts
 [eqProps]: https://deno.land/x/fae/eqProps.ts
+[equals]: https://deno.land/x/fae/equals.ts
+[filter]: https://deno.land/x/fae/filter.ts
+[find]: https://deno.land/x/fae/find.ts
+[findIndex]: https://deno.land/x/fae/findIndex.ts
+[findLast]: https://deno.land/x/fae/findLast.ts
+[findLastIndex]: https://deno.land/x/fae/findLastIndex.ts
 [flip]: https://deno.land/x/fae/flip.ts
 [fromPairs]: https://deno.land/x/fae/fromPairs.ts
 [groupWith]: https://deno.land/x/fae/groupWith.ts
@@ -346,6 +352,166 @@ Fae.eqProps(
   { name: 'shivam', age: 10 },
   { name: 'shubham', age: 10 },
 )                                      // true
+```
+
+---
+### equals
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/equals)</span>[[src]][equals]</span>
+
+```typescript
+( a: any,
+  b: any,
+  stackA: any[] = [],
+  stackB: any[] = [],
+) => boolean 
+```
+
+Returns the last element of the list which matches the predicate, or `undefined` if no element matches.
+
+```typescript
+Fae.equals('', '')                      // true
+Fae.equals('', 'x')                     // false
+Fae.equals('x', '')                     // false
+Fae.equals('foo', 'foo')                // true
+Fae.equals('foo', 'bar')                // false
+Fae.equals('bar', 'foo')                // false
+Fae.equals(true, new Boolean(true))     // false
+Fae.equals(new Boolean(true), true)     // false
+Fae.equals(false, new Boolean(false))   // false
+Fae.equals(new Boolean(false), false)   // false
+```
+
+---
+
+
+### filter
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/filter)</span>[[src]][filter]</span>
+
+```typescript
+(predicate: Predicate1<T>,functor: FunctorWithArLk<T> | Obj<T>)T[] | Partial<Obj<T>>
+```
+
+Filters the those elements from `functor` that satisfies `predicate`.
+The `functor` may be an array/object/iterable/iterator.
+Acts as a transducer if a transformer is passed in place of `functor`
+
+```typescript
+const positive = (x: number) => x > 0
+const f = Fae.filter(positive)
+
+f({})                                               // {}
+f({ x: 0, y: 0, z: 0 })                             // {}
+f({ x: 1, y: 0, z: 0 })                             // { x: 1 }
+f({ x: 1, y: 2, z: 0 })                             // { x: 1, y: 2 }
+f({ x: 1, y: 2, z: 3 })                             // { x: 1, y: 2, z: 3 }
+f({ x: -1, y: 2, z: -3 })                           // {y: 2}
+```
+
+---
+
+### find
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/find)</span>[[src]][find]</span>
+
+```typescript
+(predicate: Predicate1<T>, list: T[]) => T
+```
+
+Returns the first element of the list which matches the predicate, or `undefined` if no element matches.
+
+```typescript
+const obj1 = { x: 100 }
+const obj2 = { x: 200 }
+const a = [11, 10, 9, 'cow', obj1, 8, 7, 100, 200, 300, obj2, 4, 3, 2, 1, 0]
+const even = (x: any) => typeof x === 'number' && x % 2 === 0
+const gt100 = (x: any) => typeof x === 'number' && x > 100
+const isStr = (x: any) => typeof x === 'string'
+const xGt100 = (o: any) => o && o.x > 100
+
+Fae.find(even, a)        // 10
+Fae.find(gt100, a)       // 200
+Fae.find(isStr, a)       // 'cow'
+Fae.find(xGt100, a)      // obj2
+Fae.find(even, ['zing']) // undefined
+```
+
+---
+
+### findIndex
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/findIndex)</span>[[src]][findIndex]</span>
+
+```typescript
+(arr: Array<any>, element: any) => number
+```
+
+Takes in Array and Element as its 2 parameters. Return the 1st index If element is matched or -1 is unmatched.
+
+```typescript
+const obj1 = { x: 10 }
+const a = [2, 4, obj1, 3, 12, 25, 'Foo', undefined, 21]
+const b = [2, 4, 3, 12, 25, 21]
+
+Fae.findIndex(a, undefined) // 8
+Fae.findIndex(a, 'Foo')     // 7
+Fae.findIndex(a, obj1)      // 2
+```
+
+---
+
+### findLast
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/findLast)</span>[[src]][findLast]</span>
+
+```typescript
+(predicate: Predicate1<T>, list: T[]) => T
+```
+
+Returns the last element of the list which matches the predicate, or `undefined` if no element matches.
+
+```typescript
+const obj1 = { x: 100 }
+const obj2 = { x: 200 }
+const a = [11, 10, 9, 'cow', obj1, 8, 7, 100, 200, 300, obj2, 4, 3, 2, 1, 0]
+const even = (x: any) => typeof x === 'number' && x % 2 === 0
+const gt100 = (x: any) => typeof x === 'number' && x > 100
+const isStr = (x: any) => typeof x === 'string'
+const xGt100 = (o: any) => o && o.x > 100
+
+Fae.findLast(even, a)            // 0
+Fae.findLast(gt100, a)           // 300
+Fae.findLast(isStr, a)           // 'cow'
+Fae.findLast(xGt100, a)          // obj2
+```
+
+---
+
+
+### findLastIndex
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/findLastIndex)</span>[[src]][findLastIndex]</span>
+
+```typescript
+(predicate: Predicate1<T>, list: T[]) => number
+```
+
+Returns index of last element of the list which matches the predicate, or `-1` if no element matches
+
+```typescript
+const obj1 = { x: 100 }
+const obj2 = { x: 200 }
+const a = [11, 10, 9, 'cow', obj1, 8, 7, 100, 200, 300, obj2, 4, 3, 2, 1, 0]
+const even = (x: any) => typeof x === 'number' && x % 2 === 0
+const gt100 = (x: any) => typeof x === 'number' && x > 100
+const isStr = (x: any) => typeof x === 'string'
+const xGt100 = (o: any) => o && o.x > 100
+
+Fae.findLastIndex(even, a)      // 15
+Fae.findLastIndex(gt100, a)     // 9
+Fae.findLastIndex(isStr, a)     // 3
+Fae.findLastIndex(xGt100, a)    // 10
 ```
 
 ---
