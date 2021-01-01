@@ -370,8 +370,6 @@ Fae.eqProps(
 ```typescript
 ( a: any,
   b: any,
-  stackA: any[] = [],
-  stackB: any[] = [],
 ) => boolean 
 ```
 
@@ -398,7 +396,7 @@ Fae.equals(new Boolean(false), false)   // false
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/filter)</span>[[src]][filter]</span>
 
 ```typescript
-(predicate: Predicate1<T>,functor: FunctorWithArLk<T> | Obj<T>)T[] | Partial<Obj<T>>
+(predicate: Predicate1<T>, functor: FunctorWithArLk<T> | Obj<T>) => T[] | Partial<Obj<T>>
 ```
 
 Filters the those elements from `functor` that satisfies `predicate`.
@@ -452,7 +450,7 @@ Fae.find(even, ['zing']) // undefined
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/findIndex)</span>[[src]][findIndex]</span>
 
 ```typescript
-(arr: Array<any>, element: any) => number
+(arr: Array<T>, element: T) => number
 ```
 
 Takes in Array and Element as its 2 parameters. Return the 1st index If element is matched or -1 is unmatched.

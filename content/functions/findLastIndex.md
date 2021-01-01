@@ -1,7 +1,7 @@
 ---
 title: FindLastIndex function
-description: Check whether two objects have same value, for the specific property.
-keywords: FindLastIndex
+description: Gives index of last element of the list which matches the predicate, or `-1` if no element matches
+keywords: FindLastIndex , Find Last Index, Find, Index, Last
 ---
 
 ## FindLastIndex

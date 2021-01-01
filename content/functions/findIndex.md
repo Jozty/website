@@ -1,7 +1,7 @@
 ---
 title: FindIndex function
-description: Check whether two objects have same value, for the specific property.
-keywords: FindIndex
+description: Takes in Array and Element as its 2 parameters. Return the 1st index If element is matched or -1 is unmatched.
+keywords: FindIndex, Find, Index, Find Index
 ---
 
 ## FindIndex
@@ -18,7 +18,7 @@ Takes in Array and Element as its 2 parameters. Return the 1st index If element 
 
 **Non curried type declaration**
 ```typescript
-function _findIndex(arr: Array<any>, element: any): number {
+function _findIndex(arr: Array<T>, element: T): number {
     //..
 }
 ```

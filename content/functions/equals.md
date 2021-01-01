@@ -1,6 +1,6 @@
 ---
 title: Equals function
-description: Check whether two objects have same value, for the specific property.
+description: Gives the last element of the list which matches the predicate, or `undefined` if no element matches.
 keywords: Equals
 ---
 
@@ -21,8 +21,6 @@ Returns the last element of the list which matches the predicate, or `undefined`
 function _equals(
   a: any,
   b: any,
-  stackA: any[] = [],
-  stackB: any[] = [],
 ): boolean {
     //..
 }
