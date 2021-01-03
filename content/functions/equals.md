@@ -1,6 +1,6 @@
 ---
 title: Equals function
-description: Gives the last element of the list which matches the predicate, or `undefined` if no element matches.
+description: Check whether two objects have same value, for the specific property.
 keywords: Equals
 ---
 
@@ -8,7 +8,7 @@ keywords: Equals
 
 <br>
 
-Returns the last element of the list which matches the predicate, or `undefined` if no element matches.
+Returns whether two objects have same value, for the specific property.
 
 <br>
 

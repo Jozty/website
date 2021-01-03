@@ -448,7 +448,7 @@ Fae.find(even, ['zing']) // undefined
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/findIndex)</span>[[src]][findIndex]</span>
 
 ```typescript
-(arr: Array<T>, element: T) => number
+<T>(arr: Array<T>, element: T) => number
 ```
 
 Takes in Array and Element as its 2 parameters. Return the 1st index If element is matched or -1 is unmatched.
