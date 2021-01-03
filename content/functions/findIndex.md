@@ -18,7 +18,7 @@ Takes in Array and Element as its 2 parameters. Return the 1st index If element 
 
 **Non curried type declaration**
 ```typescript
-function _findIndex(arr: Array<T>, element: T): number {
+function _findIndex<T>(arr: Array<T>, element: T): number {
     //..
 }
 ```

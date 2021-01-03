@@ -368,9 +368,7 @@ Fae.eqProps(
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/equals)</span>[[src]][equals]</span>
 
 ```typescript
-( a: any,
-  b: any,
-) => boolean 
+(a: any, b: any) => boolean 
 ```
 
 Returns the last element of the list which matches the predicate, or `undefined` if no element matches.

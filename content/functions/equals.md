@@ -18,10 +18,7 @@ Returns the last element of the list which matches the predicate, or `undefined`
 
 **Type declaration**
 ```typescript
-function _equals(
-  a: any,
-  b: any,
-): boolean {
+function _equals(a: any, b: any): boolean {
     //..
 }
 ```
