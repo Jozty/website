@@ -10,6 +10,8 @@ description: All functions
 [and]: https://deno.land/x/fae/and.ts
 [complement]: https://deno.land/x/fae/complement.ts
 [concat]: https://deno.land/x/fae/concat.ts
+[dissoc]: https://deno.land/x/fae/dissoc.ts
+[dissocPath]: https://deno.land/x/fae/dissocPath.ts
 [divide]: https://deno.land/x/fae/divide.ts
 [either]: https://deno.land/x/fae/either.ts
 [empty]: https://deno.land/x/fae/empty.ts
@@ -77,6 +79,8 @@ description: All functions
 [transduce]: https://deno.land/x/fae/transduce.ts
 [trim]: https://deno.land/x/fae/trim.ts
 [typ]: https://deno.land/x/fae/typ.ts
+[until]: https://deno.land/x/fae/until.ts
+[update]: https://deno.land/x/fae/update.ts
 [view]: https://deno.land/x/fae/view.ts
 [when]: https://deno.land/x/fae/when.ts
 [whereAll]: https://deno.land/x/fae/whereAll.ts
@@ -84,7 +88,8 @@ description: All functions
 [whereEq]: https://deno.land/x/fae/whereEq.ts
 [xor]: https://deno.land/x/fae/xor.ts
 [zip]: https://deno.land/x/fae/zip.ts
-[zipwith]: https://deno.land/x/fae/zipWith.ts
+[zipObj]: https://deno.land/x/fae/zipObj.ts
+[zipWith]: https://deno.land/x/fae/zipWith.ts
 
 ### add
 
@@ -196,7 +201,7 @@ Fae.and(0n, 1) // false
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/complement)</span>[[src]][complement]</span>
 
 ```typescript
-(a: (...args: T) => boolean) => (...args: T) => boolean
+<T>(a: (...args: T) => boolean) => (...args: T) => boolean
 ```
 
 Returns the complement of the function.
@@ -231,6 +236,44 @@ Fae.concat('', 'x')                 // 'x'
 Fae.concat('', '')                  // ''
 Fae.concat(['a', 'b'], ['c', 'd'])  // ['a', 'b', 'c', 'd']
 Fae.concat([], ['c', 'd'])          // ['c', 'd']
+```
+
+---
+
+### dissoc
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/dissoc)</span>[[src]][dissoc]</span>
+
+```typescript
+(prop: string | number, obj: ObjRec) => ObjRec
+```
+
+Makes a shallow clone of `obj`, deleting `prop` from the new object.
+All non-primitive properties are copied by reference.
+
+```typescript
+Fae.dissoc('b', {a: 1, b: 2, c: 3})   // {a: 1, c: 3}
+```
+
+---
+
+### dissocPath
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/dissocPath)</span>[[src]][dissocPath]</span>
+
+```typescript
+(path: Path, obj: ObjRec) => ObjRec
+```
+
+Makes a shallow clone of an object `obj`, deleting value at
+at the given `path`. Note that this copies and flattens prototype properties onto the
+new object as well. All non-primitive properties are copied by reference.
+
+```typescript
+Fae.dissocPath(
+  ['a', 'b', 'c'],
+  {a: {b: {c: 42}}}
+)    // {a: {b: {}}}
 ```
 
 ---
@@ -371,6 +414,7 @@ Fae.eqProps(
 ```
 
 ---
+
 ### equals
 
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/equals)</span>[[src]][equals]</span>
@@ -395,7 +439,6 @@ Fae.equals(new Boolean(false), false)   // false
 ```
 
 ---
-
 
 ### filter
 
@@ -499,7 +542,6 @@ Fae.findLast(xGt100, a)          // obj2
 ```
 
 ---
-
 
 ### findLastIndex
 
@@ -1712,6 +1754,41 @@ Fae.typ(/[A-z]/) // 'RegExp'
 
 ---
 
+### until
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/until)</span>[[src]][until]</span>
+
+```typescript
+<T>(pred: Predicate1<T>, fn: FuncArr1<T, T>, init: T) => T
+```
+
+Takes a predicate, a transformation function, and an initial value,
+and returns a value of the same type as the initial value.
+
+```typescript
+const gt100 = (x: number) => x > 100
+const square = (x: number) => x * x
+Fae.until(gt100, square, 2)   // 256
+```
+
+---
+
+### update
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/update)</span>[[src]][update]</span>
+
+```typescript
+<T>(index: number, value: T, list: T[]) => T[]
+```
+
+Returns a new array with copy of `list` and `value` replaced at `index`.
+
+```typescript
+Fae.update(2, 4, [0, 1, 2, 3])    // [0, 1, 4, 3]
+```
+
+---
+
 ### view
 
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/view)</span>[[src]][view]</span>
@@ -1922,9 +1999,26 @@ Fae.zip([1, 2, 3], [100, 200, 300, 400]) // [[1, 100],[2, 200],[3, 300]]
 
 ---
 
+### zipObj
+
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/zipObj)</span>[[src]][zipObj]</span>
+
+```typescript
+<T>(keys: string[], values: T[]) => Obj<T>
+```
+
+Returns a new object out of given list of `keys` and `values`.
+The returned is truncated to the length of the shorter of the two.
+
+```typescript
+Fae.zipObj(['a', 'b', 'c'], [1, 2, 3]) // {a: 1, b: 2, c: 3}
+```
+
+---
+
 ### zipWith
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/zipWith)</span>[[src]][zipwith]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/zipWith)</span>[[src]][zipWith]</span>
 
 ```typescript
 (fn: (a: T1, b: T2) => R, list1: T1[], list2: T2[]) => R[]
