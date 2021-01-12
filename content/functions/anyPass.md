@@ -34,19 +34,19 @@ type AnyPass = <T>(predicates: Predicate<T>[]) => Func
 ```typescript
 import { anyPass, _ } from 'https://deno.land/x/fae/mod.ts'
 
-  const odd = (n: number) => (n & 1) == 1
-  const gt20 = (n: number) => n > 20
-  const lt5 = (n: number) => n < 5
-  const ok = anyPass([odd, gt20, lt5])
-  const plusEq = (w: number, x: number, y: number, z: number) =>
-    w + x === y + z
+const odd = (n: number) => (n & 1) == 1
+const gt20 = (n: number) => n > 20
+const lt5 = (n: number) => n < 5
+const ok = anyPass([odd, gt20, lt5])
+const plusEq = (w: number, x: number, y: number, z: number) =>
+  w + x === y + z
 
-  ok(7)                                     // true
-  ok(9)                                     // true
-  ok(10)                                    // false
-  ok(18)                                    // false
-  ok(3)                                     // true
-  ok(22)                                    // true
-  anyPass([odd, lt5, plusEq])(6, 7, 8, 9)   // false
-  anyPass([odd, lt5, plusEq])(6)(7)(8)(9)   // false
+ok(7)                                     // true
+ok(9)                                     // true
+ok(10)                                    // false
+ok(18)                                    // false
+ok(3)                                     // true
+ok(22)                                    // true
+anyPass([odd, lt5, plusEq])(6, 7, 8, 9)   // false
+anyPass([odd, lt5, plusEq])(6)(7)(8)(9)   // false
 ```

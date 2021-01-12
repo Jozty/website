@@ -1,13 +1,16 @@
 ---
 title: AddIndex function
-description: Gives a new iteration function from the passed function by adding two more parameters to its callback function
+description: Gives a new iteration function from the passed function by adding two more parameters to its callback function (the current index, the entire list)
 keywords: AddIndex
 ---
 
 ## AddIndex
 <br>
 
-Add two more parameters to their callback function
+Returns a new iteration function from the passed function by adding two more parameters to its callback function
+ 1. the current index
+ 2. the entire list
+The passed function must have first argument as the iteration functions and last arguments as the list
 
 <br>
 
@@ -34,12 +37,12 @@ type AddIndex = (fn: Func) => Func
 ```typescript
 import { map, reduce, addIndex, add, _ } from 'https://deno.land/x/fae/mod.ts'
 
-  const list = [4, 'f', undefined, NaN, 5, Infinity, 10]
-  const indexedMap = addIndex(map)
-  const indexedReduce = addIndex(reduce)
-  const sumArr = (tot: number, num: number, idx: number) => {
-    return tot + num + idx
-  }
+const list = [4, 'f', undefined, NaN, 5, Infinity, 10]
+const indexedMap = addIndex(map)
+const indexedReduce = addIndex(reduce)
+const sumArr = (tot: number, num: number, idx: number) => {
+  return tot + num + idx
+}
 
   indexedMap(add)(list)                     // [4, 'f1', NaN, NaN, 9, Infinity, 16]
   indexedReduce(sumArr, 0, [1, 2, 3, 4, 5]) // 25

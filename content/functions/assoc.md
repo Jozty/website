@@ -57,6 +57,7 @@ type Assoc =
 ```
 
 <br>
+
 **Used types**
 
 - [ObjRec](/types/ObjRec)
@@ -67,32 +68,32 @@ type Assoc =
 ```typescript
 import { assoc, _ } from 'https://deno.land/x/fae/mod.ts'
 
-  const obj1 = { a: 1, b: { c: 2, d: 3 }, e: 4, f: 5 }
-  const obj2 = assoc('z', { x: 42 }, obj1)
-  const functor = { a: 1, b: { c: 2, d: 3 }, e: 4, f: 5 }
-  const val = { x: 42 }
-  const a_2_3 = assoc('z')
-  const a_1_3 = assoc(_, val)
+const obj1 = { a: 1, b: { c: 2, d: 3 }, e: 4, f: 5 }
+const obj2 = assoc('z', { x: 42 }, obj1)
+const functor = { a: 1, b: { c: 2, d: 3 }, e: 4, f: 5 }
+const val = { x: 42 }
+const a_2_3 = assoc('z')
+const a_1_3 = assoc(_, val)
 
 
-  const expected = {
-    a: 1,
-    b: { c: 2, d: 3 },
-    e: 4,
-    f: 5,
-    z: { x: 42 },
-  }
+const expected = {
+  a: 1,
+  b: { c: 2, d: 3 },
+  e: 4,
+  f: 5,
+  z: { x: 42 },
+}
 
-  obj2                    // { a: 1, b: { c: 2, d: 3 }, e: 4, f: 5, z: { x: 42 } }
+obj2                    // { a: 1, b: { c: 2, d: 3 }, e: 4, f: 5, z: { x: 42 } }
 
-  a_2_3(val)(functor)     // expected
-  a_2_3(val, functor)     // expected
-  a_2_3(_, functor)(val)  // expected
-  a_2_3(val, _)(functor)  // expected
+a_2_3(val)(functor)     // expected
+a_2_3(val, functor)     // expected
+a_2_3(_, functor)(val)  // expected
+a_2_3(val, _)(functor)  // expected
 
 
-  a_1_3('z')(functor)     // expected
-  a_1_3('z', functor)     // expected
-  a_1_3(_, functor)('z')  // expected
-  a_1_3('z', _)(functor)  // expected
+a_1_3('z')(functor)     // expected
+a_1_3('z', functor)     // expected
+a_1_3(_, functor)('z')  // expected
+a_1_3('z', _)(functor)  // expected
 ```

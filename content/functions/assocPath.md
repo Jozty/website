@@ -58,6 +58,7 @@ type AssocPath =
 ```
 
 <br>
+
 **Used types**
 
 - [ObjRec](/types/ObjRec)
@@ -68,36 +69,36 @@ type AssocPath =
 ```typescript
 import { assocPath, _ } from 'https://deno.land/x/fae/mod.ts'
 
-    const val = 42
-    const path = ['f', 'g', 'i', 1]
-    const expected = {
-      a: { b: 1, c: 2, d: { e: 3 } },
-      f: { g: { h: 4, i: [5, 42, 7], j: { k: 6, l: 7 } } },
-      m: 8,
-    }
-    const functor = {
-      a: { b: 1, c: 2, d: { e: 3 } },
-      f: { g: { h: 4, i: [5, 6, 7], j: { k: 6, l: 7 } } },
-      m: 8,
-    }
-    const a_2_3 = assocPath(path)
+const val = 42
+const path = ['f', 'g', 'i', 1]
+const expected = {
+  a: { b: 1, c: 2, d: { e: 3 } },
+  f: { g: { h: 4, i: [5, 42, 7], j: { k: 6, l: 7 } } },
+  m: 8,
+}
+const functor = {
+  a: { b: 1, c: 2, d: { e: 3 } },
+  f: { g: { h: 4, i: [5, 6, 7], j: { k: 6, l: 7 } } },
+  m: 8,
+}
+const a_2_3 = assocPath(path)
 
-    a_2_3(val)(functor)                     // expected
-    a_2_3(val, functor)                     // expected
-    a_2_3(_, functor)(val)                  // expected
-    a_2_3(val, _)(functor)                  // expected
+a_2_3(val)(functor)                     // expected
+a_2_3(val, functor)                     // expected
+a_2_3(_, functor)(val)                  // expected
+a_2_3(val, _)(functor)                  // expected
 
-    const a_1_3 = assocPath(_, val)
+const a_1_3 = assocPath(_, val)
 
-    a_1_3(path)(functor)                    // expected
-    a_1_3(path, functor)                    // expected
-    a_1_3(_, functor)(path)                 // expected
-    a_1_3(path, _)(functor)                 // expected
+a_1_3(path)(functor)                    // expected
+a_1_3(path, functor)                    // expected
+a_1_3(_, functor)(path)                 // expected
+a_1_3(path, _)(functor)                 // expected
 
-    const a_1_2 = assocPath(_, _, functor)
+const a_1_2 = assocPath(_, _, functor)
 
-    a_1_2(path)(val)                        // expected
-    a_1_2(path, val)                        // expected
-    a_1_2(_, val)(path)                     // expected
-    a_1_2(path, _)(val)                     // expected
+a_1_2(path)(val)                        // expected
+a_1_2(path, val)                        // expected
+a_1_2(_, val)(path)                     // expected
+a_1_2(path, _)(val)                     // expected
 ```

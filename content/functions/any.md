@@ -42,17 +42,17 @@ type Any =
 ```typescript
 import { any, _ } from 'https://deno.land/x/fae/mod.ts'
 
-  const odd = (a: number) => (a & 1) === 1
-  const T = () => true
-  const a = (a: number) => a % 3 === 0
-  const b = [1, 2, 3, 4, 5, 6, 7, 8]
-  const expected = true
+const odd = (a: number) => (a & 1) === 1
+const T = () => true
+const a = (a: number) => a % 3 === 0
+const b = [1, 2, 3, 4, 5, 6, 7, 8]
+const expected = true
 
-  any(odd, [2, 4, 6, 8, 10, 11, 12])        // true
-  any(odd, [2, 4, 6, 8, 10, 12])            // false
+any(odd, [2, 4, 6, 8, 10, 11, 12])        // true
+any(odd, [2, 4, 6, 8, 10, 12])            // false
 
-  any(a, b)                                 // expected
-  any(a)(b)                                 // expected
-  any(a, _)(b)                              // expected
-  any(_, b)(a)                              // expected 
+any(a, b)                                 // expected
+any(a)(b)                                 // expected
+any(a, _)(b)                              // expected
+any(_, b)(a)                              // expected 
 ```

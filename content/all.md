@@ -148,7 +148,7 @@ Fae.adjust(-3, Fae.add(1), [0, 1, 2, 3]) // [0, 2, 2, 3]
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/always)</span>[[src]][always]</span>
 
 ```typescript
-<T>(value: T): T
+<T>(value: T) => T
 ```
 
 Returns a function which that always returns value.
@@ -227,7 +227,7 @@ Fae.and(0n, 1) // false
 ###### since v0.2.0 <span> <span class="full-docs">[[full-docs]](/functions/any)</span>[[src]][any]</span>
 
 ```typescript
-<T>(predicate: Predicate1<T>, list: T[]): boolean
+<T>(predicate: Predicate1<T>, list: T[]) => boolean
 ```
 
 Return true if any the elements of the list match predicate false otherwise
@@ -251,7 +251,7 @@ Fae.any(a)(b)                                 // expected
 ###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/functions/anyPass)</span>[[src]][anyPass]</span>
 
 ```typescript
-<T>(predicates: Predicate<T>[]): Func
+<T>(predicates: Predicate<T>[]) => Func
 ```
 
 Takes a list of predicates and returns a predicate that returns true for a given list of arguments if at least one of the provided predicates is satisfied by those arguments.
@@ -280,7 +280,7 @@ Fae.anyPass([odd, lt5, plusEq])(6)(7)(8)(9)   // false
 ###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/functions/append)</span>[[src]][append]</span>
 
 ```typescript
-<T>(el: T, list: T[]): T[]
+<T>(el: T, list: T[]) => T[]
 ```
 
 Add the element to the end of list and returns new list without affecting original.
@@ -308,7 +308,7 @@ Fae.append(_, b)(a)      // expected
 ###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/functions/assoc)</span>[[src]][assoc]</span>
 
 ```typescript
-(prop: string | number, val: unknown, obj: ObjRec): ObjRec
+(prop: string | number, val: unknown, obj: ObjRec) => ObjRec
 ```
 
 Makes a shallow clone of object, setting or overriding the specified property with the given value. All non-primitive properties are copied by reference.
@@ -350,7 +350,7 @@ a_1_3('z', _)(functor)  // expected
 ###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/functions/assocPath)</span>[[src]][assocPath]</span>
 
 ```typescript
-(path: Path, val: any, obj: ObjRec): ObjRec
+(path: Path, val: any, obj: ObjRec) => ObjRec
 ```
 
 Makes a shallow clone of an object, setting or overriding the nodes required to create the given path, and placing the specific value at the tail end of that path

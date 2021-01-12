@@ -42,18 +42,18 @@ type Append =
 ```typescript
 import { append, _ } from 'https://deno.land/x/fae/mod.ts'
 
-    const arr = [1, 2, 3, 4, 5]
-    const arr2 = [...arr]
-    const a = 9
-    const b = [1, 2, 3, 4, 5, 6, 7, 8]
-    const expected = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+const arr = [1, 2, 3, 4, 5]
+const arr2 = [...arr]
+const a = 9
+const b = [1, 2, 3, 4, 5, 6, 7, 8]
+const expected = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-    append(6, arr)       // [...arr, 6]
-    append('ads', [])    // ['ads']
-    append(['abc'], [])  // [['abc']]
-    append(1, [1, 1, 1]) // [1, 1, 1, 1]
-    append(a, b)         // expected
-    append(a)(b)         // expected
-    append(a, _)(b)      // expected
-    append(_, b)(a)      // expected
+append(6, arr)       // [...arr, 6]
+append('ads', [])    // ['ads']
+append(['abc'], [])  // [['abc']]
+append(1, [1, 1, 1]) // [1, 1, 1, 1]
+append(a, b)         // expected
+append(a)(b)         // expected
+append(a, _)(b)      // expected
+append(_, b)(a)      // expected
 ```
