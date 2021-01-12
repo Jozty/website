@@ -6,8 +6,14 @@ description: All functions
 [add]: https://deno.land/x/fae/add.ts
 [addindex]: https://deno.land/x/fae/addIndex.ts
 [adjust]: https://deno.land/x/fae/adjust.ts
+[always]: https://deno.land/x/fae/always.ts
 [all]: https://deno.land/x/fae/all.ts
 [and]: https://deno.land/x/fae/and.ts
+[any]: https://deno.land/x/fae/any.ts
+[anyPass]: https://deno.land/x/fae/anyPass.ts
+[append]: https://deno.land/x/fae/append.ts
+[assoc]: https://deno.land/x/fae/assoc.ts
+[assocPath]: https://deno.land/x/fae/assocPath.ts
 [complement]: https://deno.land/x/fae/complement.ts
 [concat]: https://deno.land/x/fae/concat.ts
 [divide]: https://deno.land/x/fae/divide.ts
@@ -125,7 +131,7 @@ indexedMap((val, idx) => idx + '-' + val, ['f', 'o', 'o', 'b', 'a', 'r'])
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/adjust)</span>[[src]][adjust]</span>
 
 ```typescript
-(index: number, fn: Func, list: T[]) => T[]
+<T>(index: number, fn: Func, list: T[]) => T[]
 ```
 
 Applies a given function `fn` at given `index` of `list`, returning a new copy of `list` with element at `index` replaced with return value of `fn`.
@@ -133,6 +139,39 @@ Applies a given function `fn` at given `index` of `list`, returning a new copy o
 ```typescript
 Fae.adjust(2, Fae.add(1), [0, 1, 2, 3]) // [0, 1, 3, 3]
 Fae.adjust(-3, Fae.add(1), [0, 1, 2, 3]) // [0, 2, 2, 3]
+```
+
+---
+
+### always
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/always)</span>[[src]][always]</span>
+
+```typescript
+<T>(value: T): T
+```
+
+Returns a function which that always returns value.
+
+
+```typescript
+const now = new Date(1776, 6, 4)
+const obj = { a: 1, b: 2 }
+const f = Fae.always(42)
+const f2 = Fae.always({ a: 12 })
+
+f()                     // 42
+f(10)                   // 42
+f(false)                // 42
+
+f2()                    // { a: 12 }
+f2(10)                  // { a: 12 }
+f2(false)               // { a: 12 }
+Fae.always(false)()         // false
+Fae.always('abc')()         // 'abc'
+Fae.always(obj)()           // obj
+Fae.always(now)()           // new Date(1776, 6, 4)
+Fae.always(undefined)()     // undefined
 ```
 
 ---
@@ -180,6 +219,175 @@ Fae.and([], true) // true
 Fae.and(NaN, true) // false
 Fae.and("", 1n) // false
 Fae.and(0n, 1) // false
+```
+---
+
+### any
+
+###### since v0.2.0 <span> <span class="full-docs">[[full-docs]](/functions/any)</span>[[src]][any]</span>
+
+```typescript
+<T>(predicate: Predicate1<T>, list: T[]): boolean
+```
+
+Return true if any the elements of the list match predicate false otherwise
+
+```typescript
+const odd = (a: number) => (a & 1) === 1
+const a = (a: number) => a % 3 === 0
+const b = [1, 2, 3, 4, 5, 6, 7, 8]
+const expected = true
+
+Fae.any(odd, [2, 4, 6, 8, 10, 11, 12])        // true
+Fae.any(odd, [2, 4, 6, 8, 10, 12])            // false
+
+Fae.any(a, b)                                 // expected
+Fae.any(a)(b)                                 // expected
+```
+---
+
+### anyPass
+
+###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/functions/anyPass)</span>[[src]][anyPass]</span>
+
+```typescript
+<T>(predicates: Predicate<T>[]): Func
+```
+
+Takes a list of predicates and returns a predicate that returns true for a given list of arguments if at least one of the provided predicates is satisfied by those arguments.
+
+```typescript
+const odd = (n: number) => (n & 1) == 1
+const gt20 = (n: number) => n > 20
+const lt5 = (n: number) => n < 5
+const ok = Fae.anyPass([odd, gt20, lt5])
+const plusEq = (w: number, x: number, y: number, z: number) =>
+  w + x === y + z
+
+ok(7)                                     // true
+ok(9)                                     // true
+ok(10)                                    // false
+ok(18)                                    // false
+ok(3)                                     // true
+ok(22)                                    // true
+Fae.anyPass([odd, lt5, plusEq])(6, 7, 8, 9)   // false
+Fae.anyPass([odd, lt5, plusEq])(6)(7)(8)(9)   // false
+```
+---
+
+### append
+
+###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/functions/append)</span>[[src]][append]</span>
+
+```typescript
+<T>(el: T, list: T[]): T[]
+```
+
+Add the element to the end of list and returns new list without affecting original.
+
+```typescript
+const arr = [1, 2, 3, 4, 5]
+const arr2 = [...arr]
+const a = 9
+const b = [1, 2, 3, 4, 5, 6, 7, 8]
+const expected = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Fae.append(6, arr)       // [...arr, 6]
+Fae.append('ads', [])    // ['ads']
+Fae.append(['abc'], [])  // [['abc']]
+Fae.append(1, [1, 1, 1]) // [1, 1, 1, 1]
+Fae.append(a, b)         // expected
+Fae.append(a)(b)         // expected
+Fae.append(a, _)(b)      // expected
+Fae.append(_, b)(a)      // expected
+```
+---
+
+### assoc
+
+###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/functions/assoc)</span>[[src]][assoc]</span>
+
+```typescript
+(prop: string | number, val: unknown, obj: ObjRec): ObjRec
+```
+
+Makes a shallow clone of object, setting or overriding the specified property with the given value. All non-primitive properties are copied by reference.
+
+```typescript
+const obj1 = { a: 1, b: { c: 2, d: 3 }, e: 4, f: 5 }
+const obj2 = Fae.assoc('z', { x: 42 }, obj1)
+const functor = { a: 1, b: { c: 2, d: 3 }, e: 4, f: 5 }
+const val = { x: 42 }
+const a_2_3 = Fae.assoc('z')
+const a_1_3 = Fae.assoc(_, val)
+
+
+const expected = {
+  a: 1,
+  b: { c: 2, d: 3 },
+  e: 4,
+  f: 5,
+  z: { x: 42 },
+}
+
+obj2                    // { a: 1, b: { c: 2, d: 3 }, e: 4, f: 5, z: { x: 42 } }
+
+a_2_3(val)(functor)     // expected
+a_2_3(val, functor)     // expected
+a_2_3(_, functor)(val)  // expected
+a_2_3(val, _)(functor)  // expected
+
+
+a_1_3('z')(functor)     // expected
+a_1_3('z', functor)     // expected
+a_1_3(_, functor)('z')  // expected
+a_1_3('z', _)(functor)  // expected
+```
+---
+
+### assocPath
+
+###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/functions/assocPath)</span>[[src]][assocPath]</span>
+
+```typescript
+(path: Path, val: any, obj: ObjRec): ObjRec
+```
+
+Makes a shallow clone of an object, setting or overriding the nodes required to create the given path, and placing the specific value at the tail end of that path
+
+```typescript
+const val = 42
+const path = ['f', 'g', 'i', 1]
+const expected = {
+  a: { b: 1, c: 2, d: { e: 3 } },
+  f: { g: { h: 4, i: [5, 42, 7], j: { k: 6, l: 7 } } },
+  m: 8,
+}
+const functor = {
+  a: { b: 1, c: 2, d: { e: 3 } },
+  f: { g: { h: 4, i: [5, 6, 7], j: { k: 6, l: 7 } } },
+  m: 8,
+}
+const a_2_3 = Fae.assocPath(path)
+
+a_2_3(val)(functor)                     // expected
+a_2_3(val, functor)                     // expected
+a_2_3(_, functor)(val)                  // expected
+a_2_3(val, _)(functor)                  // expected
+
+const a_1_3 = Fae.assocPath(_, val)
+
+a_1_3(path)(functor)                    // expected
+a_1_3(path, functor)                    // expected
+a_1_3(_, functor)(path)                 // expected
+a_1_3(path, _)(functor)                 // expected
+
+const a_1_2 = Fae.assocPath(_, _, functor)
+
+a_1_2(path)(val)                        // expected
+a_1_2(path, val)                        // expected
+a_1_2(_, val)(path)                     // expected
+a_1_2(path, _)(val)                     // expected
 ```
 ---
 
