@@ -7,7 +7,7 @@ keywords: Adjust
 ## Adjust
 <br>
 
-Applies a given function fn at given index of list
+Applies a given function fn at given index of list, returning a new copy of list with element at index replaced with return value of fn.
 
 <br>
 
