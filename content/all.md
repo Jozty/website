@@ -148,7 +148,7 @@ Fae.adjust(-3, Fae.add(1), [0, 1, 2, 3]) // [0, 2, 2, 3]
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/always)</span>[[src]][always]</span>
 
 ```typescript
-<T>(value: T) => T
+<T>(value: T) => () => T
 ```
 
 Returns a function which that always returns value.
