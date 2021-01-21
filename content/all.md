@@ -16,6 +16,8 @@ description: All functions
 [assocPath]: https://deno.land/x/fae/assocPath.ts
 [complement]: https://deno.land/x/fae/complement.ts
 [concat]: https://deno.land/x/fae/concat.ts
+[dissoc]: https://deno.land/x/fae/dissoc.ts
+[dissocPath]: https://deno.land/x/fae/dissocPath.ts
 [divide]: https://deno.land/x/fae/divide.ts
 [either]: https://deno.land/x/fae/either.ts
 [empty]: https://deno.land/x/fae/empty.ts
@@ -42,6 +44,9 @@ description: All functions
 [lensPath]: https://deno.land/x/fae/lensPath.ts
 [lensProp]: https://deno.land/x/fae/lensProp.ts
 [lensProp]: https://deno.land/x/fae/lensProp.ts
+[lift]: https://deno.land/x/fae/lift.ts
+[liftN]: https://deno.land/x/fae/liftN.ts
+[map]: https://deno.land/x/fae/map.ts
 [max]: https://deno.land/x/fae/max.ts
 [mean]: https://deno.land/x/fae/mean.ts
 [median]: https://deno.land/x/fae/median.ts
@@ -54,6 +59,7 @@ description: All functions
 [path]: https://deno.land/x/fae/path.ts
 [pathOr]: https://deno.land/x/fae/pathOr.ts
 [paths]: https://deno.land/x/fae/paths.ts
+[pipe]: https://deno.land/x/fae/pipe.ts
 [pluck]: https://deno.land/x/fae/pluck.ts
 [prepend]: https://deno.land/x/fae/prepend.ts
 [prop]: https://deno.land/x/fae/prop.ts
@@ -63,9 +69,13 @@ description: All functions
 [props]: https://deno.land/x/fae/props.ts
 [propSatisfies]: https://deno.land/x/fae/propSatisfies.ts
 [range]: https://deno.land/x/fae/range.ts
+[reduce]: https://deno.land/x/fae/reduce.ts
+[reject]: https://deno.land/x/fae/reject.ts
 [rangeUntil]: https://deno.land/x/fae/rangeUntil.ts
 [reverse]: https://deno.land/x/fae/reverse.ts
 [set]: https://deno.land/x/fae/set.ts
+[slice]: https://deno.land/x/fae/slice.ts
+[sort]: https://deno.land/x/fae/sort.ts
 [subtract]: https://deno.land/x/fae/subtract.ts
 [sum]: https://deno.land/x/fae/sum.ts
 [tail]: https://deno.land/x/fae/tail.ts
@@ -75,6 +85,8 @@ description: All functions
 [transduce]: https://deno.land/x/fae/transduce.ts
 [trim]: https://deno.land/x/fae/trim.ts
 [typ]: https://deno.land/x/fae/typ.ts
+[until]: https://deno.land/x/fae/until.ts
+[update]: https://deno.land/x/fae/update.ts
 [view]: https://deno.land/x/fae/view.ts
 [when]: https://deno.land/x/fae/when.ts
 [whereAll]: https://deno.land/x/fae/whereAll.ts
@@ -82,7 +94,8 @@ description: All functions
 [whereEq]: https://deno.land/x/fae/whereEq.ts
 [xor]: https://deno.land/x/fae/xor.ts
 [zip]: https://deno.land/x/fae/zip.ts
-[zipwith]: https://deno.land/x/fae/zipWith.ts
+[zipObj]: https://deno.land/x/fae/zipObj.ts
+[zipWith]: https://deno.land/x/fae/zipWith.ts
 
 ### add
 
@@ -396,7 +409,7 @@ a_1_2(path, _)(val)                     // expected
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/complement)</span>[[src]][complement]</span>
 
 ```typescript
-(a: (...args: T) => boolean) => (...args: T) => boolean
+<T>(a: (...args: T) => boolean) => (...args: T) => boolean
 ```
 
 Returns the complement of the function.
@@ -431,6 +444,44 @@ Fae.concat('', 'x')                 // 'x'
 Fae.concat('', '')                  // ''
 Fae.concat(['a', 'b'], ['c', 'd'])  // ['a', 'b', 'c', 'd']
 Fae.concat([], ['c', 'd'])          // ['c', 'd']
+```
+
+---
+
+### dissoc
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/dissoc)</span>[[src]][dissoc]</span>
+
+```typescript
+(prop: string | number, obj: ObjRec) => ObjRec
+```
+
+Makes a shallow clone of `obj`, deleting `prop` from the new object.
+All non-primitive properties are copied by reference.
+
+```typescript
+Fae.dissoc('b', {a: 1, b: 2, c: 3})   // {a: 1, c: 3}
+```
+
+---
+
+### dissocPath
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/dissocPath)</span>[[src]][dissocPath]</span>
+
+```typescript
+(path: Path, obj: ObjRec) => ObjRec
+```
+
+Makes a shallow clone of an object `obj`, deleting value at
+at the given `path`. Note that this copies and flattens prototype properties onto the
+new object as well. All non-primitive properties are copied by reference.
+
+```typescript
+Fae.dissocPath(
+  ['a', 'b', 'c'],
+  {a: {b: {c: 42}}}
+)    // {a: {b: {}}}
 ```
 
 ---
@@ -571,6 +622,7 @@ Fae.eqProps(
 ```
 
 ---
+
 ### equals
 
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/equals)</span>[[src]][equals]</span>
@@ -595,7 +647,6 @@ Fae.equals(new Boolean(false), false)   // false
 ```
 
 ---
-
 
 ### filter
 
@@ -699,7 +750,6 @@ Fae.findLast(xGt100, a)          // obj2
 ```
 
 ---
-
 
 ### findLastIndex
 
@@ -1042,6 +1092,69 @@ const xLens = Fae.lensProp('x')
 
 ---
 
+### lift
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/lift)</span>[[src]][lift]</span>
+
+```typescript
+(f: Func) => Func
+```
+
+"lifts" a function of arity > 1 so that it may "map over" a list
+
+```typescript
+const add3 = Fae.curry(3, function (a: number, b: number, c: number) {
+  return a + b + c
+})
+
+const liftedAdd = Fae.lift(add3)
+liftedAdd([1, 2], [3, 4], [5, 6])   // [9, 10, 10, 11, 10, 11, 11, 12]
+```
+
+---
+
+### liftN
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/liftN)</span>[[src]][liftN]</span>
+
+```typescript
+(arity: number, fn: Func) => Func
+```
+
+"lifts" a function to be the specified arity, so that it may "map over" that many lists.
+
+```typescript
+const add3 = (a: number, b: number, c: number) => a + b + c
+
+const liftedAdd = liftN(3, add3)
+liftedAdd([1, 2], [3, 4], [5, 6])   // [9, 10, 10, 11, 10, 11, 11, 12]
+```
+
+---
+
+### map
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/map)</span>[[src]][map]</span>
+
+```typescript
+<F extends Obj<T> | Func | T[], T, R>(
+  fn: FuncArr1<T, R>, functor: F
+) => MapReturnType<F, R>
+```
+
+Applies `fn` to each of `functor`'s value and returns functor of same shape.
+
+Acts as a transducer if a transformer is given in `functor`.
+
+```typescript
+const add3 = Fae.add(3)
+const list = [1, 2, 3, 4, 5, 6, 7, 8]
+
+map(add3, list) // [4, 5, 6, 7, 8, 9, 10, 11]
+```
+
+---
+
 ### max
 
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/max)</span>[[src]][max]</span>
@@ -1309,6 +1422,33 @@ Fae.paths([['a', ''], ['p', 0, 'q']], { a: { b: 2 }, p: [{ q: 3 }]})  // [undefi
 
 ---
 
+### pipe
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/pipe)</span>[[src]][pipe]</span>
+
+```typescript
+(f: Func, g: Func) => Func
+```
+
+Performs a left-to-right function composition.
+The first function may have any number of arguments;
+the remaining must have single argument.
+
+**Note:** The returned function is automatically curried.
+
+```typescript
+const add3 = Fae.add(3)
+const mul5 = Fae.multiply(5)
+
+const piped1 = Fae.pipe(mul5, add3)     // x * 5 + 3
+const piped2 = Fae.pipe(add3, mul5)     // (x + 3) * 5
+
+piped1(2)                               // 13
+piped2(2)                               // 25
+```
+
+---
+
 ### pluck
 
 ###### since v0.4.0 <span> <span class="full-docs">[[full-docs]](/functions/pluck)</span>[[src]][pluck]</span>
@@ -1502,6 +1642,53 @@ Fae.rangeUntil(1, _)(5) // [1, 2, 3, 4]
 
 ---
 
+### reduce
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/reduce)</span>[[src]][reduce]</span>
+
+```typescript
+<T, R, P>(func: Reducer<R, P>, acc: R, functor: FunctorWithArLk<T>) => R
+```
+
+Returns a single value by iterating though `functor`
+calling the iterator function `func`. `func` takes two arguments.
+First - `acc`, Second - `value`.
+
+<br>
+
+It may stop the reduction in between by means of `ReducedTransformer`.
+
+Acts as a transducer if a transformer is given in `functor`.
+
+Works on array-like/iterable/iterator
+
+```typescript
+type AddF = (a: number, b: number) => number
+
+Fae.reduce(Fae.add as AddF, 0, [1, 2, 3, 4])   // 10
+```
+
+---
+
+### reject
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/reject)</span>[[src]][reject]</span>
+
+```typescript
+<F extends T[] | Obj<T>, T>(predicate: Predicate1<T>, filterable: F) => F
+```
+
+Works as the complement of [filter](#filter)
+
+```typescript
+const isOdd = n => (n & 1) === 1
+
+const f = Fae.reject(isOdd, [1, 2, 3, 4])
+f()   // [2, 4]
+```
+
+---
+
 ### reverse
 
 ###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/reverse)</span>[[src]][reverse]</span>
@@ -1536,6 +1723,64 @@ const obj = { x: 1, y: 2 }
 
 Fae.set(xLens, 4, {x: 1, y: 2})  // {x: 4, y: 2}
 Fae.set(xLens, 8, {x: 1, y: 2})  // {x: 8, y: 2}
+```
+---
+
+### slice
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/slice)</span>[[src]][slice]</span>
+
+```typescript
+<L extends ArrayLike<any> | string>(
+  fromIndex: number,
+  toIndex: number,
+  list: L
+) => InferType<L>
+```
+
+Returns the elements of the given list or string `fromIndex` (inclusive) to `toIndex` (exclusive).
+
+```typescript
+const list = [8, 6, 7, 5, 3, 0, 9]
+
+Fae.slice(2, 5, list)  // [7, 5, 3]
+```
+---
+
+### sort
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/sort)</span>[[src]][sort]</span>
+
+```typescript
+<T>(comparator: Comparator<T>, list: T[]) => T[]
+```
+
+Returns a copy of the list, sorted according to the comparator function,
+which should accept two values at a time and return a negative number if the
+first value is smaller, a positive number if it's larger, and zero if they
+are equal.
+
+It does not modify the original.
+
+```typescript
+const greater = (a: number, b: number) => a < b
+const comp = Fae.comparator(greater)
+const list = [3, 1, 8, 1, 2, 5]
+
+// consider all odd number smaller than even in the total ordering
+const haveDifferentParity = (a: number, b: number) => {
+  const isAOdd = (a & 1) === 1
+  const isBOdd = (b & 1) === 1
+  
+  if (isAOdd && !isBOdd) return true
+  if (!isAOdd && isBOdd) return false
+
+  return a < b
+}
+const oddEven = Fae.comparator(haveDifferentParity)
+
+Fae.sort(comp, list)      // [1, 1, 2, 3, 5, 8]
+Fae.sort(oddEven, list)   // [1, 1, 3, 5, 2, 8]
 ```
 ---
 
@@ -1713,6 +1958,41 @@ Fae.typ('s') // 'String'
 Fae.typ(null) // 'Null'
 Fae.typ([]) // 'Array'
 Fae.typ(/[A-z]/) // 'RegExp'
+```
+
+---
+
+### until
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/until)</span>[[src]][until]</span>
+
+```typescript
+<T>(pred: Predicate1<T>, fn: FuncArr1<T, T>, init: T) => T
+```
+
+Takes a predicate, a transformation function, and an initial value,
+and returns a value of the same type as the initial value.
+
+```typescript
+const gt100 = (x: number) => x > 100
+const square = (x: number) => x * x
+Fae.until(gt100, square, 2)   // 256
+```
+
+---
+
+### update
+
+###### since v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/update)</span>[[src]][update]</span>
+
+```typescript
+<T>(index: number, value: T, list: T[]) => T[]
+```
+
+Returns a new array with copy of `list` and `value` replaced at `index`.
+
+```typescript
+Fae.update(2, 4, [0, 1, 2, 3])    // [0, 1, 4, 3]
 ```
 
 ---
@@ -1927,9 +2207,26 @@ Fae.zip([1, 2, 3], [100, 200, 300, 400]) // [[1, 100],[2, 200],[3, 300]]
 
 ---
 
+### zipObj
+
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/zipObj)</span>[[src]][zipObj]</span>
+
+```typescript
+<T>(keys: string[], values: T[]) => Obj<T>
+```
+
+Returns a new object out of given list of `keys` and `values`.
+The returned is truncated to the length of the shorter of the two.
+
+```typescript
+Fae.zipObj(['a', 'b', 'c'], [1, 2, 3]) // {a: 1, b: 2, c: 3}
+```
+
+---
+
 ### zipWith
 
-###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/zipWith)</span>[[src]][zipwith]</span>
+###### Since - v0.1.0 <span> <span class="full-docs">[[full-docs]](/functions/zipWith)</span>[[src]][zipWith]</span>
 
 ```typescript
 (fn: (a: T1, b: T2) => R, list1: T1[], list2: T2[]) => R[]
