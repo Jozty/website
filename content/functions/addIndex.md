@@ -8,8 +8,8 @@ keywords: AddIndex
 <br>
 
 Returns a new iteration function from the passed function by adding two more parameters to its callback function
- 1. the current index
- 2. the entire list
+* the current index
+* the entire list
 The passed function must have first argument as the iteration functions and last arguments as the list
 
 <br>
@@ -44,6 +44,6 @@ const sumArr = (tot: number, num: number, idx: number) => {
   return tot + num + idx
 }
 
-  indexedMap(add)(list)                     // [4, 'f1', NaN, NaN, 9, Infinity, 16]
-  indexedReduce(sumArr, 0, [1, 2, 3, 4, 5]) // 25
+indexedMap(add)(list)                     // [4, 'f1', NaN, NaN, 9, Infinity, 16]
+indexedReduce(sumArr, 0, [1, 2, 3, 4, 5]) // 25
 ```
