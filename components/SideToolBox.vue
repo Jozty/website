@@ -11,7 +11,7 @@
 
       <b-field type="is-secondary">
         <b-select placeholder="version" expanded>
-          <option value="v0.6.2" selected>v0.6.2</option>
+          <option value="v1.0.0" selected>v1.0.0</option>
         </b-select>
       </b-field>
     </div>

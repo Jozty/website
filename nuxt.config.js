@@ -102,6 +102,7 @@ export default {
     { path: '/api/run', handler: '~/api/run.js' },
     { path: '/api/createDl', handler: '~/api/createDL.js' },
     { path: '/api/health', handler: '~/api/health.js' },
+    { path: '/api/declaration', handler: '~/api/declaration.js' },
   ],
 
   server: {
