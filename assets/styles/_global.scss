@@ -140,3 +140,10 @@ code {
     margin-left: 24px;
   }
 }
+
+.container {
+  &.is-tablet {
+    max-width: 40rem;
+    margin: auto;
+  }
+}
