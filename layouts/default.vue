@@ -7,7 +7,7 @@
     >
       <side-bar-header />
       <client-only>
-        <side-tool-box />
+        <side-tool-box :is-sticky="false" />
       </client-only>
     </b-sidebar>
     <b-navbar
@@ -48,15 +48,17 @@
       </template>
     </b-navbar>
     <nuxt />
+    <app-footer />
   </div>
 </template>
 
 <script>
+import AppFooter from '@/components/layout/AppFooter'
 import SideToolBox from '~/components/SideToolBox.vue'
 import SideBarHeader from '~/components/SideBarHeader.vue'
 
 export default {
-  components: { SideBarHeader, SideToolBox },
+  components: { AppFooter, SideBarHeader, SideToolBox },
 
   data() {
     return {

@@ -1,19 +1,15 @@
 <template>
-  <div
-    class="side-bar is-primary-50"
-    :class="{ sticky: isSticky }"
-    :style="{ height }"
-  >
+  <div v-sticky="isSticky" class="side-bar is-primary-50" :style="{ height }">
     <div ref="searchBox" class="search-box">
       <b-field label="Search" type="is-secondary">
         <b-input v-model="searchQuery"></b-input>
       </b-field>
 
-      <b-field type="is-secondary">
-        <b-select placeholder="version" expanded>
-          <option value="v0.6.2" selected>v0.6.2</option>
-        </b-select>
-      </b-field>
+      <!--      <b-field type="is-secondary">-->
+      <!--        <b-select placeholder="version" expanded>-->
+      <!--          <option value="v1.0.0" selected>v1.0.0</option>-->
+      <!--        </b-select>-->
+      <!--      </b-field>-->
     </div>
 
     <ul class="functions-list" :style="{ height: listHeight }">
@@ -43,7 +39,7 @@ export default {
       functions: [],
       fetchedFunctions: [],
       searchQuery: '',
-      listHeight: 'calc(100% - 116px)',
+      listHeight: 'calc(100% - 72px)',
       height: '100%',
     }
   },
@@ -55,7 +51,7 @@ export default {
   },
 
   async mounted() {
-    if (process) {
+    if (process && !process.browser) {
       this.windowHeight = 0
       this.posY = 0
     } else {
@@ -64,8 +60,6 @@ export default {
         window.addEventListener('resize', this.onResize)
         window.addEventListener('scroll', this.onScroll)
       })
-      // @ts-ignore
-      this.listHeight = `calc(100% - ${this.$refs.searchBox.scrollHeight}px)`
     }
 
     await this.getFunctions('')
@@ -77,7 +71,7 @@ export default {
   },
 
   methods: {
-    async getFunctions(searchQuery) {
+    async getFunctions() {
       // @ts-ignore
       const entitiesData = await this.$content('entitiesList').fetch()
       this.fetchedFunctions = entitiesData.functions
@@ -99,8 +93,9 @@ export default {
     onResize() {
       this.windowHeight = window && window.innerHeight
       this.posY =
-        document.querySelector('.side-bar')?.getBoundingClientRect().y || 0
-      this.height = this.windowHeight - this.posY + 'px'
+        document.querySelector('.functions-list')?.getBoundingClientRect().y ||
+        0
+      this.listHeight = this.windowHeight - this.posY + 'px'
     },
 
     onScroll() {

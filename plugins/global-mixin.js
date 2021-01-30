@@ -7,8 +7,8 @@ import {
 
 export const globalData = {
   baseUrl: 'https://fae.jozty.io',
-  latestVersion: 'v0.6.2',
-  versions: ['v0.6.2'],
+  latestVersion: 'v1.0.0',
+  versions: ['v1.0.0'],
 }
 
 Vue.mixin({

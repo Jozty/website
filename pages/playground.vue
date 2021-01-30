@@ -65,7 +65,7 @@ export default {
         mousePosition: null,
       },
       isRunning: false,
-      version: 'v0.6.2',
+      version: 'v1.0.0',
     }
   },
 
@@ -82,7 +82,7 @@ export default {
     },
 
     code() {
-      return this.value
+      return this.value || `import * as Fae from 'fae@${this.version}'`
     },
 
     shareUrl() {
@@ -102,6 +102,7 @@ export default {
 
   mounted() {
     this.panelE.addEventListener('mousedown', this.onPanelResize, false)
+    this.setUrl()
 
     document.addEventListener(
       'mouseup',
@@ -214,8 +215,11 @@ export default {
         model.setValue(code)
         this.editor.setModel(model)
       } else {
-        fetch(`/declarations/${this.version}/mod.d.ts`)
-          .then((res) => res.text())
+        this.$axios
+          .post('/api/declaration', {
+            version: this.version,
+          })
+          .then((res) => res.data)
           .then((declarationCode) => {
             this.monaco.languages.typescript.typescriptDefaults.addExtraLib(
               declarationCode,
