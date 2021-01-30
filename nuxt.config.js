@@ -44,6 +44,7 @@ export default {
    */
   plugins: [
     { src: '~plugins/monaco-editor', ssr: false },
+    { src: '~plugins/client', ssr: false },
     '~plugins/global-mixin',
     '~plugins/buefy',
   ],

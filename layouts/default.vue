@@ -7,7 +7,7 @@
     >
       <side-bar-header />
       <client-only>
-        <side-tool-box />
+        <side-tool-box :is-sticky="false" />
       </client-only>
     </b-sidebar>
     <b-navbar

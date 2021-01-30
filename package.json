@@ -32,7 +32,8 @@
     "node-fetch": "^2.6.1",
     "nuxt": "^2.14.5",
     "nuxt-clipboard2": "^0.2.1",
-    "uuid": "^8.3.0"
+    "uuid": "^8.3.0",
+    "vue-sticky-directive": "^0.0.10"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.12.7",

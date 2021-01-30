@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="columns is-gapless">
-      <div class="column is-narrow">
+      <div class="column is-narrow side-bar">
         <client-only>
-          <side-tool-box v-if="$device.isDesktop" class="side-bar" />
+          <side-tool-box v-if="$device.isDesktop" class="" />
         </client-only>
       </div>
       <div class="column">
