@@ -1,8 +1,6 @@
 ---
 title: Over function
-description: Gives the setting the portion of the given data structure target
-focused by the given lens to the result of applying the given function fn to
-the focused value.
+description: Gives the setting the portion of the given data structure target focused by the given lens to the result of applying the given function fn to the focused value.
 keywords: Over
 ---
 
