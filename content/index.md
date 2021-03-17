@@ -13,6 +13,7 @@ description: A functional Library for Deno
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/jozty/fae)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jozty/fae/Tests?label=tests)
 ![GitHub](https://img.shields.io/github/license/jozty/fae)
+[![codecov](https://codecov.io/gh/Jozty/Fae/branch/master/graph/badge.svg)](https://codecov.io/gh/Jozty/Fae)
 
 <br>
 
