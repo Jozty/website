@@ -114,7 +114,7 @@ add5(4) // 9
 Fae.add(4)(3) // 7
 ```
 
-<a class="try-on-playground" target="_blank" data-code="Cgpjb25zdCBhbnMxID0gRmFlLmFkZCgzLCA0KSAvLyA3CmNvbnN0IGFkZDUgPSBGYWUuYWRkKDUpCmNvbnN0IGFuczIgPSBhZGQ1KDQpIC8vIDkKY29uc3QgYW5zMyA9IEZhZS5hZGQoNCkoMykgLy8gNwoKY29uc29sZS5sb2coYW5zMSkKY29uc29sZS5sb2coYW5zMikKY29uc29sZS5sb2coYW5zMykK">
+<a class="try-on-playground" target="_blank" data-code="aW1wb3J0ICogYXMgRmFlIGZyb20gJ2ZhZUB2MS4wLjAnCgpjb25zdCBhbnMxID0gRmFlLmFkZCgzLCA0KSAvLyA3CmNvbnN0IGFkZDUgPSBGYWUuYWRkKDUpCmNvbnN0IGFuczIgPSBhZGQ1KDQpIC8vIDkKY29uc3QgYW5zMyA9IEZhZS5hZGQoNCkoMykgLy8gNwoKY29uc29sZS5sb2coYW5zMSkKY29uc29sZS5sb2coYW5zMikKY29uc29sZS5sb2coYW5zMykK">
     Try on playground
 </a>
 
