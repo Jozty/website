@@ -1,4 +1,9 @@
 {
   "editor.formatOnSave": false,
-  "prettier.disableLanguages": ["md", "vue", "scss"]
+  "prettier.disableLanguages": [
+    "md",
+    "vue",
+    "scss"
+  ],
+  "nuxt.isNuxtApp": true
 }
