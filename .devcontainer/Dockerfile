@@ -14,3 +14,12 @@ FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
 
 # [Optional] Uncomment if you want to install more global node modules
 # RUN su node -c "npm install -g <your-package-list-here>"
+
+ENV DENO_INSTALL=/deno
+RUN mkdir -p /deno \
+    && curl -fsSL https://deno.land/x/install/install.sh | sh \
+    && chown -R node /deno
+
+ENV PATH=${DENO_INSTALL}/bin:${PATH} \
+    DENO_DIR=${DENO_INSTALL}/.cache/deno
+
