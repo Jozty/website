@@ -1,33 +1,41 @@
-const { exec } = require('child_process')
-const path = require('path')
-const fs = require('fs')
-const { v4 } = require('uuid')
+import path from 'path'
+import fs from 'fs'
+import { v4 } from 'uuid'
 
-const { removeImports, replaceFaeImport } = require('../utilities/noDep')
-const { writeResponse, parseBody } = require('./utilities')
+import express from 'express'
+import { execCommand } from '../utilities/exec'
+import { globalData } from '../plugins/global-data'
 
-function runDeno(data, req, res) {
-  const file = path.join(__dirname, 'tmp', v4() + '.ts')
-  let code = removeImports(data.code)
-  code = replaceFaeImport(code, data.version)
+import { removeImports, addFaeDenoUrlImport } from '../utilities/noDep'
+import { covertToHtml } from './utilities'
 
-  fs.writeFileSync(file, code)
+const app = express()
 
-  const command = `deno run ${file.toString()}`
-  exec(command, (error, stdout, stderr) => {
-    if (error) {
-      console.error(error)
-      writeResponse(400, res, error.message || error, true)
-    } else if (stderr && !stdout) {
-      console.error(stderr)
-      writeResponse(400, res, stderr, true)
-    } else {
-      writeResponse(200, res, stdout, true)
-    }
-    fs.unlinkSync(file)
-  })
-}
+app.use(express.json())
 
-export default function (req, res, next) {
-  parseBody(req, res, runDeno)
-}
+app.all('/', async (req, res) => {
+  const filePath = path.join(__dirname, 'tmp', v4() + '.ts')
+  let { code, version } = req.body
+
+  version = version || globalData.latestVersion
+
+  code = removeImports(code)
+  code = addFaeDenoUrlImport(code, version)
+
+  fs.writeFileSync(filePath, code)
+
+  const command = `deno run ${filePath.toString()}`
+
+  try {
+    const stdout = await execCommand(command)
+    res.write(covertToHtml(stdout))
+    res.end()
+  } catch (e) {
+    res.status(400)
+    res.send(e)
+  } finally {
+    fs.unlinkSync(filePath)
+  }
+})
+
+export default app

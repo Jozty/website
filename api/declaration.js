@@ -1,15 +1,16 @@
-const fetch = require('node-fetch')
-const { writeResponse, parseBody } = require('./utilities')
+import fetch from 'node-fetch'
+import express from 'express'
+import { globalData } from '../plugins/global-data'
+const app = express()
 
-async function fetchDeclaration(reqBody, req, res) {
-  const version = reqBody.version
+app.use(express.json())
+app.all('/', async (req, res) => {
+  const version = req.body.version || globalData.latestVersion
   const response = await fetch(
     `https://github.com/Jozty/Fae/releases/download/${version}/declarations.d.ts`
   )
   const txtFile = await response.text()
-  writeResponse(200, res, txtFile)
-}
+  res.send(txtFile)
+})
 
-export default function (req, res, next) {
-  parseBody(req, res, fetchDeclaration)
-}
+export default app

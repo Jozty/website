@@ -1,5 +1,10 @@
-const { writeResponse } = require('./utilities')
+import express from 'express'
 
-export default function (req, res, next) {
-  writeResponse(200, res, 'OK')
-}
+const app = express()
+app.use(express.json())
+
+app.all('/', (req, res) => {
+  res.send('OK')
+})
+
+export default app

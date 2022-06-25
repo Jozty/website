@@ -46,6 +46,13 @@
 
 <script>
 import MonacoNotification from '@/components/monaco/MonacoNotification'
+import {
+  getEncodedCodeString,
+  getDecodedCodeString,
+  removeImports,
+  addFaePlaygroundImport,
+} from '../utilities/noDep'
+
 export default {
   components: { MonacoNotification },
   data() {
@@ -75,10 +82,7 @@ export default {
     },
 
     encodedCodeString() {
-      if (Buffer) {
-        return Buffer.from(this.code).toString('base64')
-      }
-      return window.btoa(this.code)
+      return getEncodedCodeString(this.code)
     },
 
     code() {
@@ -116,7 +120,7 @@ export default {
   created() {
     const { code, version } = this.$route.query
     this.version = version || this.latestVersion
-    this.value = this.getDecodedCode(code || '')
+    this.value = getDecodedCodeString(code || '')
   },
 
   methods: {
@@ -194,18 +198,10 @@ export default {
       // })
     },
 
-    getDecodedCode(encodedCodeString) {
-      encodedCodeString = encodedCodeString || ''
-      if (Buffer) {
-        return Buffer.from(encodedCodeString, 'base64').toString('utf-8')
-      } else {
-        return window.atob(encodedCodeString)
-      }
-    },
-
     setModel() {
-      let code = this.getDecodedCode(this.encodedCodeString)
-      code = this.replaceFaeImport(code, this.version, true)
+      let code = getDecodedCodeString(this.encodedCodeString)
+      code = removeImports(code)
+      code = addFaePlaygroundImport(code, this.version)
 
       const model = this.faeModels().find((m) =>
         m.uri.toString().includes(this.version)
