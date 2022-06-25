@@ -89,3 +89,5 @@ sw.*
 # custom added
 secrets.json
 content/entitiesList.json
+temp
+api/tmp/**/**.ts

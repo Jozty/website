@@ -1,15 +1,6 @@
 import Vue from 'vue'
-import {
-  replaceFaeImport,
-  updateIcons,
-  updateTryPlaygroundLink,
-} from '../utilities/noDep'
-
-export const globalData = {
-  baseUrl: 'https://fae.jozty.io',
-  latestVersion: 'v1.0.0',
-  versions: ['v1.0.0'],
-}
+import { updateIcons, updateTryPlaygroundLink } from '../utilities/noDep'
+import { globalData } from './global-data'
 
 Vue.mixin({
   data() {
@@ -24,7 +15,6 @@ Vue.mixin({
   },
 
   methods: {
-    replaceFaeImport,
     updateIcons,
     updateTryPlaygroundLink,
   },

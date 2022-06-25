@@ -93,9 +93,7 @@ export default {
     ],
     extractCSS: true,
     babel: {
-      plugins: [
-        '@babel/plugin-proposal-optional-chaining'
-      ]
+      plugins: ['@babel/plugin-proposal-optional-chaining'],
     },
   },
 
@@ -104,6 +102,7 @@ export default {
     { path: '/api/createDl', handler: '~/api/createDL.js' },
     { path: '/api/health', handler: '~/api/health.js' },
     { path: '/api/declaration', handler: '~/api/declaration.js' },
+    { path: '/api/download-example', handler: '~/api/download-example.js' },
   ],
 
   server: {
@@ -133,4 +132,6 @@ export default {
       }))
     },
   },
+
+  testDir: '~/tests',
 }
