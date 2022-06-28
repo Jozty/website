@@ -16,8 +16,16 @@
 		"vscode": {
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
-				"dbaeumer.vscode-eslint"
-			]
+				"dbaeumer.vscode-eslint",
+				"streetsidesoftware.code-spell-checker",
+				"PKief.material-icon-theme"
+			],
+			"settings": {
+				"workbench.iconTheme": "material-icon-theme",
+				"material-icon-theme.activeIconPack": "vue",
+				"material-icon-theme.folders.theme": "classic",
+				"terminal.integrated.defaultProfile.linux": "zsh"
+			}
 		}
 	},
 
