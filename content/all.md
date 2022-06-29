@@ -114,6 +114,10 @@ add5(4) // 9
 Fae.add(4)(3) // 7
 ```
 
+<a class="try-on-playground" data-function-name="add">
+    Try on playground
+</a>
+
 ---
 
 ### addIndex
@@ -229,6 +233,11 @@ Fae.and(NaN, true) // false
 Fae.and("", 1n) // false
 Fae.and(0n, 1) // false
 ```
+
+<a class="try-on-playground" data-function-name="and">
+    Try on playground
+</a>
+
 ---
 
 ### any
@@ -529,6 +538,9 @@ g(8)    // true
 g(13)   // true
 g(7)    // false
 ```
+<a class="try-on-playground" data-function-name="either">
+    Try on playground
+</a>
 
 ---
 
@@ -1283,6 +1295,10 @@ Fae.not(![])            // true
 Fae.not(NaN)            // true
 ```
 
+<a class="try-on-playground" data-function-name="not">
+    Try on playground
+</a>
+
 ---
 
 ### nth
@@ -1337,6 +1353,11 @@ Fae.or("", 0n) // false
 Fae.or(null, NaN) // false
 Fae.or(undefined, false) // false
 ```
+
+<a class="try-on-playground" data-function-name="or">
+    Try on playground
+</a>
+
 ---
 
 ### over
