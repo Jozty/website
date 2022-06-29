@@ -1,6 +1,5 @@
 export const globalData = {
-  baseUrl:
-    'https://singla-shivam-jozty-website-rxj6rwrjf5xrp-8080.githubpreview.dev',
+  baseUrl: 'https://fae.jozty.io',
   latestVersion: 'v1.1.0',
   versions: ['v1.1.0', 'v1.0.0'],
 }
