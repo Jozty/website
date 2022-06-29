@@ -35,7 +35,7 @@ app.all('/', async (req, res) => {
     mkdirSync(directory, { recursive: true })
     fileData = readFileSync(destFilePath, { encoding: 'utf-8' })
   } catch (e) {
-    const functionUrl = `https://raw.githubusercontent.com/Jozty/Fae/${version}/${functionName}.ts`
+    const functionUrl = `https://raw.githubusercontent.com/Jozty/Fae/${version}/examples/${functionName}.ts`
 
     mkdirSync(path.join('api', 'tmp'), { recursive: true })
     const response = await fetch(functionUrl)
