@@ -24,7 +24,7 @@ app.all('/', async (req, res) => {
 
   fs.writeFileSync(filePath, code)
 
-  const command = `deno run ${filePath.toString()}`
+  const command = `deno run --check=all ${filePath.toString()}`
 
   try {
     const stdout = await execCommand(command)
@@ -32,7 +32,7 @@ app.all('/', async (req, res) => {
     res.end()
   } catch (e) {
     res.status(400)
-    res.send(e)
+    res.send(covertToHtml(e.message || e))
   } finally {
     fs.unlinkSync(filePath)
   }
