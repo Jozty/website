@@ -27,8 +27,22 @@ app.all('/', async (req, res) => {
   const command = `deno run --check=all ${filePath.toString()}`
 
   try {
-    const stdout = await execCommand(command)
-    res.write(covertToHtml(stdout))
+    let { stdout, stderr } = await execCommand(command)
+    stdout = (stdout || '').trim()
+    stderr = (stderr || '').trim()
+
+    stderr = stderr
+      .split('\n')
+      .filter((a) => !!a)
+      .filter((l) => !l.includes('\u001B'))
+      .join('\n')
+
+    let output = ''
+
+    if (stderr) output += covertToHtml(stderr + '\n')
+    if (stdout) output += covertToHtml(stdout + '\n')
+
+    res.write(output)
     res.end()
   } catch (e) {
     res.status(400)
