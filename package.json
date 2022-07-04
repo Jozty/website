@@ -32,6 +32,7 @@
     "node-fetch": "^2.6.7",
     "nuxt": "^2.14.5",
     "nuxt-clipboard2": "^0.2.1",
+    "tmp": "^0.2.1",
     "uuid": "^8.3.0",
     "vue-sticky-directive": "^0.0.10"
   },

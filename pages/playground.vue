@@ -28,6 +28,11 @@
             </select>
             <div class="icon-actions">
               <b-icon
+                class="icon-clear"
+                icon="cancel"
+                @click.native="outputs = []"
+              />
+              <b-icon
                 class="icon-share"
                 icon="share-variant"
                 @click.native="shareCode"
@@ -36,7 +41,15 @@
             </div>
           </div>
           <div class="panel__output-title">Output:</div>
-          <div class="panel__output-dump" v-html="output"></div>
+          <div class="panel__output-dump">
+            <div
+              v-for="output in outputs"
+              :key="output"
+              class="panel__output-dump-iteration"
+            >
+              <div v-html="output"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -63,10 +76,12 @@ export default {
       width: '100%',
       height: '100%',
       value: '',
-      options: {},
+      options: {
+        fontSize: '16px',
+      },
       editor: null,
       monaco: null,
-      output: ``,
+      outputs: [],
       panel: {
         BORDER_SIZE: 8,
         mousePosition: null,
@@ -236,8 +251,8 @@ export default {
 
     async runCode() {
       if (this.isRunning) return
-      this.isRunning = this
-      this.output = 'Running...'
+      this.isRunning = true
+      this.outputs.push('Running ...')
       try {
         const code = this.code
         if (!code.trim()) {
@@ -245,7 +260,7 @@ export default {
             'No code',
             'You forgot to add some honey to your code!'
           )
-          this.output = ''
+          this.outputs.pop()
           return
         }
 
@@ -253,9 +268,14 @@ export default {
           code,
           version: this.version,
         })
-        this.output = res.data
+
+        this.outputs.pop()
+        this.outputs.push(res.data)
+
+        this.showNotification('Successful', 'Script ran successfully')
       } catch (e) {
-        this.output = (e.response && e.response.data) || e.toString()
+        this.outputs.pop()
+        this.outputs.push((e.response && e.response.data) || e.toString())
         console.error(e)
       } finally {
         this.isRunning = false
@@ -360,6 +380,8 @@ $editor-background: #1e1e1e;
     overflow: auto;
     flex: 1;
     word-break: break-all;
+    font-family: monospace;
+
     &::-webkit-scrollbar {
       width: 8px;
     }
@@ -375,6 +397,12 @@ $editor-background: #1e1e1e;
     &::-webkit-scrollbar-thumb:hover {
       background: #444;
     }
+  }
+
+  &__output-dump-iteration {
+    border-bottom: white solid 1px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
   }
 }
 .select {
@@ -394,20 +422,31 @@ $editor-background: #1e1e1e;
   border: none;
   height: unset;
 }
-.icon-run {
-  color: green;
-  cursor: pointer;
-}
-.icon-share {
-  color: deepskyblue;
-  cursor: pointer;
-  margin-right: 4px;
-}
 .icon-actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   flex: 1;
+
+  .icon {
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 6px;
+    }
+
+    &-run {
+      color: green;
+    }
+
+    &-share {
+      color: deepskyblue;
+    }
+
+    &-clear {
+      color: #dddddd;
+    }
+  }
 }
 </style>
 <style lang="scss">

@@ -1,6 +1,5 @@
-import path from 'path'
 import fs from 'fs'
-import { v4 } from 'uuid'
+import tmp from 'tmp'
 
 import express from 'express'
 import { execCommand } from '../utilities/exec'
@@ -14,13 +13,15 @@ const app = express()
 app.use(express.json())
 
 app.all('/', async (req, res) => {
-  const filePath = path.join(__dirname, 'tmp', v4() + '.ts')
   let { code, version } = req.body
 
   version = version || globalData.latestVersion
 
   code = removeImports(code)
   code = addFaeDenoUrlImport(code, version)
+
+  const tmpFile = tmp.fileSync({ postfix: '.ts' })
+  const filePath = tmpFile.name
 
   fs.writeFileSync(filePath, code)
 
@@ -48,7 +49,7 @@ app.all('/', async (req, res) => {
     res.status(400)
     res.send(covertToHtml(e.message || e))
   } finally {
-    fs.unlinkSync(filePath)
+    tmpFile.removeCallback()
   }
 })
 
