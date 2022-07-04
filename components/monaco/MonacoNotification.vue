@@ -60,14 +60,15 @@ export default {
 .notifications-center {
   position: fixed;
   z-index: 1000;
-  right: 8px;
+  right: 20px;
   bottom: -100%;
   overflow: hidden;
   width: 240px;
   color: #f8f8f2;
-  box-shadow: rgb(0, 0, 0) 0px 0px 8px;
+  box-shadow: rgb(0, 0, 0) 2px 2px 20px;
   transition: all 0.34s;
   display: block;
+  border-radius: 4px;
 
   &.visible {
     bottom: 32px;
