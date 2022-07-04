@@ -9,13 +9,12 @@ ENV DENO_INSTALL="/root/.deno"
 ENV PATH="$DENO_INSTALL/bin:$PATH"
 
 COPY package*.json ./
-COPY yarn.lock ./
 
-RUN yarn install
+RUN npm install
 
 COPY . .
-RUN yarn build
+RUN npm run build
 
 EXPOSE 8080
 
-CMD yarn start
+CMD npm run start
